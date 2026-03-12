@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { id } from '@payloadcms/translations/languages/id'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -64,6 +65,9 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
+  i18n: {
+    supportedLanguages: { id },
+  },
   globals: [Header, Footer],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
