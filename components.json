@@ -10,13 +10,13 @@
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "hugeicons",
+  "iconLibrary": "phosphor",
   "rtl": false,
   "aliases": {
     "components": "@/components",
     "utils": "@/utilities/ui"
   },
-  "menuColor": "default",
+  "menuColor": "default-translucent",
   "menuAccent": "subtle",
   "registries": {}
 }
