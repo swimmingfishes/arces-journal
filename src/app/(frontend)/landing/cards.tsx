@@ -54,17 +54,18 @@ export function LandingCards() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {staticCards.map((card) => (
-            <Card key={card.id} className="flex flex-col h-full hover:shadow-lg transition-shadow">
+            <Card
+              key={card.id}
+              className="flex flex-col min-h-[280px] hover:shadow-lg transition-shadow"
+            >
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg md:text-xl line-clamp-2">{card.title}</CardTitle>
+                <CardTitle className="text-lg md:text-xl">{card.title}</CardTitle>
               </CardHeader>
-
-              <CardContent className="flex flex-col flex-grow gap-4">
-                <CardDescription className="text-sm md:text-base flex-grow line-clamp-3">
+              <CardContent className="flex flex-col flex-grow gap-4 justify-between">
+                <CardDescription className="text-sm md:text-base">
                   {card.description}
                 </CardDescription>
-
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                <Button size="card" variant="branded" className="w-24">
                   See more
                 </Button>
               </CardContent>
