@@ -1,5 +1,6 @@
-import PageTemplate, { generateMetadata } from './[slug]/page'
+import { metadata as landingMetadata } from './landing/page'
+import LandingPage from './landing/page'
 
-export default PageTemplate
+export const metadata = landingMetadata
 
-export { generateMetadata }
+export default LandingPage
