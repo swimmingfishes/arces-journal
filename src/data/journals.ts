@@ -33,10 +33,10 @@ export const journals: Journal[] = [
       'Setiap artikel yang dikirimkan harus merupakan karya orisinal yang belum pernah dipublikasikan sebelumnya. Artikel harus mengikuti panduan penulisan yang telah ditetapkan dan melalui proses review oleh minimal dua reviewer yang kompeten di bidangnya.',
     editors: [
       {
-        name: 'Dr. Ahmad Fauzi',
+        name: 'Eko Hari Rachmawanto, M.Kom',
         role: 'Chief Editor',
-        institution: 'Universitas ARCES',
-        photo: '/placeholder-avatar.png',
+        institution: 'Universitas Dian Nuswantoro',
+        photo: '/foto1.png',
       },
       {
         name: 'Prof. Siti Rahayu',

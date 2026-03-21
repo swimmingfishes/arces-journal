@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { Journal } from '@/data/journals'
+import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
 
 export function JournalDetailClient({ journal }: { journal: Journal }) {
   return (
@@ -9,22 +11,20 @@ export function JournalDetailClient({ journal }: { journal: Journal }) {
       {/* Hero section jurnal */}
       <section className="w-full px-6 lg:px-32 pt-16 pb-12">
         <div className="px-8">
-          <div className="grid grid-cols-3 gap-6 items-start">
-            <h1 className="col-span-2 text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-gray-900 dark:text-white">
+          {/* Mobile: stack vertikal, md+: grid 3 kolom */}
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-6 md:items-end">
+            <h1 className="md:col-span-2 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white">
               {journal.title}
             </h1>
-            <div className="flex justify-end self-end">
-              <a
-                href={journal.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 inline-flex items-center justify-center h-10 px-6 rounded-md bg-[#007BFF] text-white text-sm font-medium hover:bg-[#0062cc] transition-colors"
-              >
-                See more
-              </a>
+            <div className="flex md:justify-end">
+              <Button asChild size="lg">
+                <a href={journal.websiteUrl} target="_blank" rel="noopener noreferrer">
+                  See more
+                </a>
+              </Button>
             </div>
           </div>
-          <p className="mt-8 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
+          <p className="mt-6 lg:mt-20 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
             {journal.fullDescription}
           </p>
         </div>
@@ -32,34 +32,43 @@ export function JournalDetailClient({ journal }: { journal: Journal }) {
 
       {/* Tabs */}
       <section className="w-full px-6 lg:px-32 pb-24">
-        <Tabs defaultValue="penanggung-jawab" className="px-8">
-          <TabsList className="w-full justify-start rounded-none border-b border-gray-200 dark:border-gray-800 bg-transparent h-auto p-0 mb-12">
+        <Tabs defaultValue="penanggung-jawab" className="px-8 flex flex-col gap-0">
+          <TabsList className="w-auto md:w-fit justify-start bg-transparent h-auto p-0 md:gap-1 lg:gap-2 ">
             <TabsTrigger
               value="penanggung-jawab"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#007BFF] data-[state=active]:text-[#007BFF] bg-transparent px-6 pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 transition-all"
+              className="rounded-none data-[state=active]:text-primary-foreground data-[state=active]:bg-[#007BFF] bg-transparent text-md font-medium text-gray-900 dark:text-gray-400 transition-all"
             >
               Penanggung Jawab
             </TabsTrigger>
             <TabsTrigger
               value="keterangan"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#007BFF] data-[state=active]:text-[#007BFF] bg-transparent px-6 pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 transition-all"
+              className="rounded-none data-[state=active]:text-primary-foreground data-[state=active]:bg-[#007BFF] bg-transparent text-md font-medium text-gray-900 dark:text-gray-400 transition-all"
             >
               Keterangan
             </TabsTrigger>
           </TabsList>
+          <Separator className="mb-12 -mt-px" />
 
           {/* Tab Penanggung Jawab */}
           <TabsContent value="penanggung-jawab">
             <div className="space-y-12">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-8">
+                <h2 className="text-xl font-extrabold text-gray-900 dark:text-white mb-8">
                   Chief Editor
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {journal.editors.map((editor, i) => (
                     <div key={i} className="flex flex-col gap-3">
-                      <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
-                        <Image src={editor.photo} alt={editor.name} fill className="object-cover" />
+                      <div className="relative w-full aspect-3/4 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                        <Image
+                          src={editor.photo}
+                          alt={editor.name}
+                          fill
+                          className="object-cover object-top"
+                          unoptimized
+                        />
+                        {/* Vignette dari bawah */}
+                        <div className="absolute inset-0 bg-linier-to-t from-black/60 via-transparent to-transparent" />
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-gray-900 dark:text-white">

@@ -3,7 +3,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
 
 // Static data - will be replaced with Payload CRUD later
 const staticCards = [
@@ -75,7 +74,8 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
             {filtered.map((card) => (
               <Card
                 key={card.id}
-                className="flex flex-col min-h-70 hover:shadow-lg transition-shadow"
+                className="flex flex-col min-h-70 hover:shadow-lg transition-shadow cursor-pointer"
+                onClick={() => (window.location.href = `/jurnal/${card.id}`)}
               >
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg md:text-xl">{card.title}</CardTitle>
@@ -84,11 +84,14 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
                   <CardDescription className="text-sm md:text-base">
                     {card.description}
                   </CardDescription>
-                  <Link href={`/jurnal/${card.id}`}>
-                    <Button size="lg" variant="default" className="w-24 h-10">
-                      See more
-                    </Button>
-                  </Link>
+                  <Button
+                    size="lg"
+                    variant="default"
+                    className="w-24 h-10"
+                    onClick={() => (window.location.href = `/jurnal/${card.id}`)}
+                  >
+                    See more
+                  </Button>
                 </CardContent>
               </Card>
             ))}
