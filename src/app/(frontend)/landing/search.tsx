@@ -1,38 +1,36 @@
 'use client'
-
-import React, { useState } from 'react'
+import React from 'react'
 import { Search } from 'lucide-react'
+import { InputGroup, InputGroupInput, InputGroupText } from '@/components/ui/input-group'
 
-export function LandingSearch() {
-  const [searchQuery, setSearchQuery] = useState('')
+interface LandingSearchProps {
+  searchQuery: string
+  onSearchChange: (value: string) => void
+}
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (searchQuery.trim()) {
-      // TODO: Implement search functionality
-      console.log('Search:', searchQuery)
-    }
-  }
-
+export function LandingSearch({ searchQuery, onSearchChange }: LandingSearchProps) {
   return (
-    <section className="w-full md:py-16">
-      <div className="container mx-auto px-4">
-        <form onSubmit={handleSearch} className="max-w-2xl mx-auto">
-          <div className="relative">
-            <input
+    <section className="w-full px-6 lg:px-32 pt-6 md:pt-8 pb-0 relative">
+      {/* Siluet dari bawah */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none overflow-hidden">
+        <div className="absolute -bottom-10 left-10 w-75 h-37.5 rounded-full bg-[#28A745]/15 dark:bg-[#28A745]/8 blur-[60px]" />
+        <div className="absolute -bottom-10 right-10 w-75 h-37.5 rounded-full bg-[#007BFF]/15 dark:bg-[#007BFF]/8 blur-[60px]" />
+      </div>
+
+      <div className="mx-auto px-8 relative z-10">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <InputGroup className="h-10 md:h-20 backdrop-blur-md bg-white/40 dark:bg-white/5 border-0 border-b border-gray-200/60 dark:border-white/10 shadow-sm rounded-xl">
+            <InputGroupText className="pl-2 md:pl-8 bg-transparent border-0">
+              <Search className="w-5 h-5 text-muted-foreground" />
+            </InputGroupText>
+            <InputGroupInput
               type="text"
               placeholder="Search journals and research..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-6 py-4 md:py-5 text-base md:text-lg border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="h-full text-base md:text-lg bg-transparent border-0 focus:ring-0 focus-visible:ring-0"
             />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 md:p-3 text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <Search className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-          </div>
+          </InputGroup>
         </form>
       </div>
     </section>

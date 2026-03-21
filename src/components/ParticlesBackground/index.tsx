@@ -2,8 +2,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
+import { memo } from 'react'
 
-export function ParticlesBackground() {
+export const ParticlesBackground = memo(function ParticlesBackground() {
   const [init, setInit] = useState(false)
 
   useEffect(() => {
@@ -96,4 +97,4 @@ export function ParticlesBackground() {
       style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
     />
   )
-}
+})

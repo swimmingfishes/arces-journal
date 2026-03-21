@@ -1,20 +1,16 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import { LandingHero } from './hero'
 import { LandingSearch } from './search'
 import { LandingCards } from './cards'
 
-export const metadata = {
-  title: 'Home | Arces Journal',
-  description:
-    'Serving the global research community with quality journals and research platforms.',
-}
-
 export default function LandingPage() {
+  const [searchQuery, setSearchQuery] = useState('')
   return (
     <main className="w-full">
       <LandingHero />
-      <LandingSearch />
-      <LandingCards />
+      <LandingSearch searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      <LandingCards searchQuery={searchQuery} />
     </main>
   )
 }

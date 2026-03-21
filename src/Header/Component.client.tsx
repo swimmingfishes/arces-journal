@@ -43,9 +43,14 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
         <div className="absolute -top-10 right-10 w-[250px] h-[120px] rounded-full bg-[#007BFF]/20 dark:bg-[#007BFF]/10 blur-[50px]" />
       </div> */}
 
-      <div className="relative py-3 flex justify-between items-center">
-        <Link href="/">
+      <div className="relative py-3 flex justify-between items-center px-8">
+        <Link href="/" className="flex items-center gap-3">
           <Logo loading="eager" priority="high" />
+          <div className="hidden md:flex flex-col leading-tight">
+            <span className="text-sm font-bold text-red-800 dark:text-white">Arces</span>
+            <span className="text-sm font-bold text-red-800 dark:text-white">Open Journal</span>
+            <span className="text-sm font-bold text-red-800 dark:text-white">System</span>
+          </div>
         </Link>
         <HeaderNav data={data} />
       </div>

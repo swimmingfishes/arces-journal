@@ -20,7 +20,9 @@ const buttonVariants = cva(
           'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
         branded:
-          'relative overflow-hidden rounded-lg border border-[#007BFF]/30 font-medium shadow-sm hover:from-[#007BFF]/20 hover:to-[#28A745]/20 hover:border-[#007BFF]/50 hover:shadow-[0_2px_12px_rgba(0,123,255,0.15)] transition-all duration-300 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500 before:pointer-events-none',
+          'relative overflow-hidden rounded-lg border border-[#007BFF]/30 text-[#007BFF] font-medium shadow-sm hover:from-[#007BFF]/20 hover:to-[#28A745]/20 hover:border-[#007BFF]/50 hover:shadow-[0_2px_12px_rgba(0,123,255,0.15)] transition-all duration-300 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500 before:pointer-events-none',
+        academic:
+          'text-[#007BFF] bg-[#007BFF]/8 hover:bg-[#007BFF]/15 font-medium transition-all duration-200',
       },
       size: {
         default:
@@ -28,7 +30,6 @@ const buttonVariants = cva(
         xs: "h-5 gap-1 rounded-sm px-2 text-[0.625rem] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-2.5",
         sm: "h-6 gap-1 px-2 text-xs/relaxed has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         lg: "h-8 gap-1 px-2.5 text-xs/relaxed has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-4",
-        card: 'h-9 gap-1.5 px-5 text-sm has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4',
         icon: "size-7 [&_svg:not([class*='size-'])]:size-3.5",
         'icon-xs': "size-5 rounded-sm [&_svg:not([class*='size-'])]:size-2.5",
         'icon-sm': "size-6 [&_svg:not([class*='size-'])]:size-3",
