@@ -1,0 +1,25 @@
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import { Plugin } from 'payload'
+import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+
+import { Page, News } from '@/payload-types'
+import { getServerSideURL } from '@/utilities/getURL'
+
+const generateTitle: GenerateTitle<News | Page> = ({ doc }) => {
+  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+}
+
+const generateURL: GenerateURL<News | Page> = ({ doc }) => {
+  const url = getServerSideURL()
+
+  return doc?.slug ? `${url}/${doc.slug}` : url
+}
+
+export const plugins: Plugin[] = [
+  seoPlugin({
+    collections: ['pages'],
+    generateTitle,
+    generateURL,
+  }),
+]

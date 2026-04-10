@@ -11,6 +11,7 @@ import { Peoples } from './collections/People'
 import { Journals } from './collections/Journals'
 import { News } from './collections/News'
 import { Roles } from './collections/Roles'
+import { plugins } from './plugins'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,5 +35,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins,
 })
