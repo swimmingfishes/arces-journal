@@ -15,11 +15,7 @@ export default function NewsDetailPage() {
           {/* 1. Top Bar: Back Button */}
           <div className="pt-10 pb-10 lg:mx-36">
             <Link href="/news">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="pl-0 mx-0 flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-zinc-800"
-              >
+              <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
                 <ArrowLeft className="h-4 w-4" /> Back to News
               </Button>
             </Link>

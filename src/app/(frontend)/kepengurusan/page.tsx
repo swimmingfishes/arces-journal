@@ -142,11 +142,7 @@ export default function KepengurusanPage() {
           {/* 1. TOP BAR: Back Button */}
           <div className="px-8 pt-10">
             <Link href="/">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="flex items-center gap-2 -ml-4 rounded-full"
-              >
+              <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
                 <ArrowLeft className="h-4 w-4" /> Back to home
               </Button>
             </Link>

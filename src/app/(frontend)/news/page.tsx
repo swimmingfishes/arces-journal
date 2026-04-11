@@ -82,7 +82,7 @@ const allNews = [
 
 export default function NewsPage() {
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 6
+  const itemsPerPage = 15
 
   const featuredNews = allNews[0]
   const otherNews = allNews.slice(1)
@@ -99,11 +99,7 @@ export default function NewsPage() {
           {/* 1. TOP BAR: Back Button */}
           <div className="px-8 pt-10">
             <Link href="/">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-zinc-800 -ml-4"
-              >
+              <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
                 <ArrowLeft className="h-4 w-4" /> Back to home
               </Button>
             </Link>
@@ -130,9 +126,7 @@ export default function NewsPage() {
             {/* Sisi Teks */}
             <div className="p-8 lg:p-12 flex flex-col justify-center space-y-6">
               <div className="space-y-2">
-                <span className="text-blue-500 font-bold uppercase tracking-widest text-xs">
-                  Berita Utama
-                </span>
+                <span className="text-blue-500 font-bold uppercase text-xs">Berita Utama</span>
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight group-hover:text-blue-500 transition-colors">
                   {featuredNews.title}
                 </h2>
@@ -163,9 +157,7 @@ export default function NewsPage() {
                 <div className="p-8 flex flex-col grow">
                   {/* Metadata Header */}
                   <div className="flex justify-between items-end mb-4">
-                    <span className="text-[10px] text-blue-500 font-extrabold uppercase tracking-[0.2em]">
-                      News
-                    </span>
+                    <span className="text-[10px] text-blue-500 font-extrabold uppercase">News</span>
                     <span className="text-[10px] text-gray-400 font-medium">{news.date}</span>
                   </div>
 
@@ -203,7 +195,7 @@ export default function NewsPage() {
           </div>
 
           {/* 5. PAGINATION SECTION */}
-          <div className="py-4 border-b border-gray-200 dark:border-white/10 flex justify-center bg-zinc-50/30 dark:bg-transparent">
+          <div className="py-4 flex justify-center bg-zinc-50/30 dark:bg-transparent">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
