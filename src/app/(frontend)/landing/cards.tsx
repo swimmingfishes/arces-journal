@@ -3,6 +3,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ArrowRight } from 'lucide-react'
 
 // Static data - will be replaced with Payload CRUD later
 const staticCards = [
@@ -65,38 +66,52 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
   })
 
   return (
-    <section className="w-full px-6 lg:px-32 pt-8 md:pt-10 pb-16 md:pb-24 lg:pb-32">
-      <div className="container mx-auto px-8">
-        {filtered.length === 0 ? (
-          <p className="text-center text-muted-foreground">No results found.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {filtered.map((card) => (
-              <Card
-                key={card.id}
-                className="flex flex-col min-h-70 hover:shadow-lg transition-shadow cursor-pointer"
-                onClick={() => (window.location.href = `/jurnal/${card.id}`)}
-              >
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg md:text-xl">{card.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-col grow gap-4 justify-between">
-                  <CardDescription className="text-sm md:text-base">
-                    {card.description}
-                  </CardDescription>
-                  <Button
-                    size="lg"
-                    variant="default"
-                    className="w-24 h-10"
-                    onClick={() => (window.location.href = `/jurnal/${card.id}`)}
-                  >
+    <section className="w-full px-6 lg:px-46 bg-background">
+      {/* Container utama dengan border-x sejajar navbar/hero */}
+      <div className="mx-auto md:border-x">
+        {/* Judul Section (Dokumen dan Publikasi) */}
+        <div className="px-8 py-10 border-b">
+          <h2 className="text-2xl font-bold text-blue-500">Dokumen dan Publikasi</h2>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((card) => (
+            <div
+              key={card.id}
+              className="flex flex-col border-b border-l border-r md:border-l-0 lg:[&:nth-child(3n)]:border-r-0 border-gray-200 dark:border-white/10 hover:bg-gray-50/50 dark:hover:bg-white/5 transition-colors cursor-pointer group"
+              onClick={() => (window.location.href = `/jurnal/${card.id}`)}
+            >
+              {/* 1. Kotak Abu-abu (Image Placeholder) */}
+              <div className="relative w-full aspect-video bg-gray-300 dark:bg-gray-700 overflow-hidden">
+                {/* <img src={card.image} className="object-cover w-full h-full" /> */}
+
+                {/* 2. Tiga Kotak Kecil Berwarna (Floating) */}
+                <div className="absolute bottom-4 left-6 flex gap-1">
+                  <div className="w-8 h-8 bg-blue-500 shadow-sm" />
+                  <div className="w-8 h-8 bg-yellow-400 shadow-sm" />
+                  <div className="w-8 h-8 bg-slate-800 shadow-sm" />
+                </div>
+              </div>
+
+              {/* 3. Konten Teks */}
+              <div className="p-6 flex flex-col grow space-y-4">
+                <h3 className="text-lg font-bold leading-snug transition-colors">{card.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                  {card.description}
+                </p>
+
+                {/* 4. Button */}
+                <div className="pt-2">
+                  <Button size="lg">
                     See more
+                    <ArrowRight />
                   </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

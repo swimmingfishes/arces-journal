@@ -15,7 +15,7 @@ export function LandingHero() {
 
   return (
     <section className="w-full relative overflow-hidden bg-background">
-      <div className="relative z-10 mx-auto px-6 lg:px-32">
+      <div className="relative z-10 mx-auto px-6 lg:px-46">
         <div className="relative md:border-x md:border-b border-gray-200 dark:border-white/10 px-8">
           {/* particles */}
           <div className="absolute inset-0 -z-1">
@@ -24,7 +24,7 @@ export function LandingHero() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <div className="flex flex-col justify-center space-y-6 pt-8 lg:pt-32 mb-16">
-              <p>By arces.journals.id</p>
+              <p className="text-base text-gray-600 dark:text-gray-300">By arces.journals.id</p>
               <h1 className="text-xl md:text-2xl lg:text-6xl text-center md:text-left font-extrabold leading-tight text-gray-900 dark:text-white">
                 Serving the global research Community
               </h1>

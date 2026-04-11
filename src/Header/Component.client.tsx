@@ -27,7 +27,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
 
   return (
     <header
-      className={`w-full sticky top-0 z-50 transition-all duration-500 px-6 lg:px-32
+      className={`w-full sticky top-0 z-50 transition-all duration-500 px-6 lg:px-46
     ${
       scrolled
         ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md'
@@ -37,7 +37,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
     >
       <div className="relative py-3 flex justify-between items-center px-8 md:border-x md:border-b">
         <Link href="/" className="flex items-center gap-3">
-          <p className="font-mono font-bold text-stone-600 dark:text-stone-200 text-2xl">ARCES</p>
+          <p className="font-mono font-bold text-gray-600 dark:text-stone-200 text-2xl">ARCES</p>
         </Link>
         <HeaderNav data={data} />
       </div>

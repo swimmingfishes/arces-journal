@@ -15,74 +15,99 @@ export const ParticlesBackground = memo(function ParticlesBackground() {
 
   const options = useCallback(
     () => ({
-      fullScreen: { enable: false },
-      background: { color: { value: 'transparent' } },
-      fpsLimit: 60,
+      autoPlay: true,
+      background: {
+        color: { value: 'transparent' }, // Biar ikut tema website
+      },
+      fullScreen: { enable: false }, // Penting: Biar gak nutupin seluruh page
+      detectRetina: true,
+      fpsLimit: 120,
       interactivity: {
         detectsOn: 'window' as const,
         events: {
+          onClick: {
+            enable: true,
+            mode: 'push',
+          },
           onHover: {
             enable: true,
-            mode: 'repulse',
+            mode: 'grab', // Efek narik garis saat kursor mendekat
+            parallax: {
+              enable: true,
+              force: 60,
+              smooth: 10,
+            },
           },
-          onClick: {
-            enable: false,
+          resize: {
+            delay: 0.5,
+            enable: true,
           },
         },
         modes: {
-          repulse: {
-            distance: 120,
-            duration: 0.4,
-            speed: 1,
+          grab: {
+            distance: 400,
+            links: {
+              blink: false,
+              consent: false,
+              opacity: 1,
+            },
+          },
+          push: {
+            quantity: 4,
           },
         },
       },
       particles: {
-        number: { value: 60 },
-        color: { value: ['#007BFF', '#28A745'] },
+        bounce: {
+          horizontal: { value: 1 },
+          vertical: { value: 1 },
+        },
+        color: {
+          value: '#3b82f6', // Warna biru shadcn/tailwind
+        },
         links: {
+          color: { value: '#3b82f6' },
+          distance: 150,
           enable: true,
-          color: '#007BFF',
-          distance: 120,
+          frequency: 1,
           opacity: 0.4,
-          width: 0.8,
+          width: 1,
         },
         move: {
           enable: true,
-          speed: 0.8,
+          speed: 1.5,
           direction: 'none' as const,
-          random: true,
-          outModes: { default: 'bounce' as const },
+          outModes: { default: 'bounce' as const }, // Biar mantul di border kotak hero
         },
-        opacity: { value: 0.8 },
-        size: { value: { min: 2, max: 4 } },
+        number: {
+          density: {
+            enable: true,
+            width: 1920,
+            height: 1080,
+          },
+          value: 100,
+        },
+        opacity: {
+          value: { min: 0.1, max: 0.5 },
+          animation: {
+            enable: true,
+            speed: 3,
+            sync: false,
+          },
+        },
         shape: { type: 'circle' },
+        size: {
+          value: { min: 1, max: 5 },
+          animation: {
+            enable: true,
+            speed: 20,
+            sync: false,
+          },
+        },
       },
-      responsive: [
-        {
-          maxWidth: 768,
-          options: {
-            particles: {
-              number: { value: 20 },
-              links: {
-                distance: 100,
-                opacity: 0.3,
-                width: 0.5,
-              },
-              size: { value: { min: 1, max: 2 } },
-            },
-          },
-        },
-        {
-          maxWidth: 1024,
-          options: {
-            particles: {
-              number: { value: 40 },
-            },
-          },
-        },
-      ],
-      detectRetina: true,
+      pauseOnBlur: true,
+      pauseOnOutsideViewport: true,
+      zLayers: 1,
     }),
     [],
   )
