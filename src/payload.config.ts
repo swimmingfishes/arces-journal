@@ -1,5 +1,6 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { id } from '@payloadcms/translations/languages/id'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -37,6 +38,9 @@ export default buildConfig({
       url: process.env.DATABASE_URL || '',
     },
   }),
+  i18n: {
+    supportedLanguages: { id },
+  },
   sharp,
   plugins,
 })

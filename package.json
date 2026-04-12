@@ -23,6 +23,7 @@
     "@payloadcms/next": "3.81.0",
     "@payloadcms/plugin-seo": "^3.81.0",
     "@payloadcms/richtext-lexical": "3.81.0",
+    "@payloadcms/translations": "^3.82.1",
     "@payloadcms/ui": "3.81.0",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-visually-hidden": "^1.2.4",
