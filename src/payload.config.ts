@@ -38,9 +38,10 @@ export default buildConfig({
       url: process.env.DATABASE_URL || '',
     },
   }),
-  i18n: {
-    supportedLanguages: { id },
-  },
+  // plugin SEO tidak support bahasa Indonesia
+  // i18n: {
+  //   supportedLanguages: { id},
+  // },
   sharp,
   plugins,
 })

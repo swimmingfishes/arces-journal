@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/public-sans':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@payloadcms/admin-bar':
         specifier: ^3.82.1
         version: 3.82.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -976,6 +979,9 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@fontsource/public-sans@5.2.7':
+    resolution: {integrity: sha512-pVttDr3HvhVIt2x6sZJfZKksNEpq23C1JCHTQwT9KWJdmFRdNeRM8gQftq8uP72sPW+p3Ku9x8HPk2E392DFvg==}
 
   '@hono/node-server@1.19.13':
     resolution: {integrity: sha512-TsQLe4i2gvoTtrHje625ngThGBySOgSK3Xo2XRYOdqGN1teR8+I7vchQC46uLJi8OF62YTYA3AhSpumtkhsaKQ==}
@@ -6992,6 +6998,8 @@ snapshots:
       tabbable: 6.4.0
 
   '@floating-ui/utils@0.2.11': {}
+
+  '@fontsource/public-sans@5.2.7': {}
 
   '@hono/node-server@1.19.13(hono@4.12.12)':
     dependencies:
