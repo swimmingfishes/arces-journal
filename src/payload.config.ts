@@ -12,6 +12,8 @@ import { Journals } from './collections/Journals'
 import { News } from './collections/News'
 import { Roles } from './collections/Roles'
 import { plugins } from './plugins'
+import { Footer } from './Footer/config'
+import { Header } from './Header/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,6 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  globals: [Header, Footer],
   collections: [Users, Media, Roles, Peoples, Journals, News],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

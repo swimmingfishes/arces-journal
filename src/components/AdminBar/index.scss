@@ -1,0 +1,7 @@
+/* Can't resolve @payloadcms/ui scss imports, styling in inline CSS instead */
+
+.admin-bar {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
