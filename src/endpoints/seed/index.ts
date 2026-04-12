@@ -1,28 +1,16 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
 
-import { contactForm as contactFormData } from './contact-form'
-import { contact as contactPageData } from './contact-page'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
-import { post1 } from './post-1'
-import { post2 } from './post-2'
-import { post3 } from './post-3'
+import { post1 as news1 } from './post-1'
+import { post2 as news2 } from './post-2'
+import { post3 as news3 } from './post-3'
 
-const collections: CollectionSlug[] = [
-  'categories',
-  'media',
-  'pages',
-  'posts',
-  'forms',
-  'form-submissions',
-  'search',
-]
+const collections: CollectionSlug[] = ['media', 'pages', 'news', 'search']
 
 const globals: GlobalSlug[] = ['header', 'footer']
-
-const categories = ['Technology', 'News', 'Finance', 'Design', 'Software', 'Engineering']
 
 // Next.js revalidation errors are normal when seeding the database without a server running
 // i.e. running `yarn seed` locally instead of using the admin UI within an active app
@@ -127,93 +115,69 @@ export const seed = async ({
       data: imageHero1,
       file: hero1Buffer,
     }),
-    categories.map((category) =>
-      payload.create({
-        collection: 'categories',
-        data: {
-          title: category,
-          slug: category,
-        },
-      }),
-    ),
   ])
 
-  payload.logger.info(`— Seeding posts...`)
+  payload.logger.info(`— Seeding news...`)
 
-  // Do not create posts with `Promise.all` because we want the posts to be created in order
+  // Do not create news with `Promise.all` because we want the news to be created in order
   // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
-  const post1Doc = await payload.create({
-    collection: 'posts',
+  const news1Doc = await payload.create({
+    collection: 'news',
     depth: 0,
     context: {
       disableRevalidate: true,
     },
-    data: post1({ heroImage: image1Doc, blockImage: image2Doc, author: demoAuthor }),
+    data: news1({ heroImage: image1Doc, blockImage: image2Doc, author: demoAuthor }),
   })
 
-  const post2Doc = await payload.create({
-    collection: 'posts',
+  const news2Doc = await payload.create({
+    collection: 'news',
     depth: 0,
     context: {
       disableRevalidate: true,
     },
-    data: post2({ heroImage: image2Doc, blockImage: image3Doc, author: demoAuthor }),
+    data: news2({ heroImage: image2Doc, blockImage: image3Doc, author: demoAuthor }),
   })
 
-  const post3Doc = await payload.create({
-    collection: 'posts',
+  const news3Doc = await payload.create({
+    collection: 'news',
     depth: 0,
     context: {
       disableRevalidate: true,
     },
-    data: post3({ heroImage: image3Doc, blockImage: image1Doc, author: demoAuthor }),
+    data: news3({ heroImage: image3Doc, blockImage: image1Doc, author: demoAuthor }),
   })
 
-  // update each post with related posts
+  // update each news item with related news
   await payload.update({
-    id: post1Doc.id,
-    collection: 'posts',
+    id: news1Doc.id,
+    collection: 'news',
     data: {
-      relatedPosts: [post2Doc.id, post3Doc.id],
+      relatedNews: [news2Doc.id, news3Doc.id],
     },
   })
   await payload.update({
-    id: post2Doc.id,
-    collection: 'posts',
+    id: news2Doc.id,
+    collection: 'news',
     data: {
-      relatedPosts: [post1Doc.id, post3Doc.id],
+      relatedNews: [news1Doc.id, news3Doc.id],
     },
   })
   await payload.update({
-    id: post3Doc.id,
-    collection: 'posts',
+    id: news3Doc.id,
+    collection: 'news',
     data: {
-      relatedPosts: [post1Doc.id, post2Doc.id],
+      relatedNews: [news1Doc.id, news2Doc.id],
     },
-  })
-
-  payload.logger.info(`— Seeding contact form...`)
-
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    data: contactFormData,
   })
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
-    }),
-  ])
+  await payload.create({
+    collection: 'pages',
+    depth: 0,
+    data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
+  })
 
   payload.logger.info(`— Seeding globals...`)
 
@@ -225,18 +189,8 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Posts',
-              url: '/posts',
-            },
-          },
-          {
-            link: {
-              type: 'reference',
-              label: 'Contact',
-              reference: {
-                relationTo: 'pages',
-                value: contactPage.id,
-              },
+              label: 'News',
+              url: '/news',
             },
           },
         ],

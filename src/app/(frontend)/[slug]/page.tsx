@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
-import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
+import { notFound } from 'next/navigation'
+import { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
@@ -48,7 +48,6 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
   // Decode to support slugs with special characters
   const decodedSlug = decodeURIComponent(slug)
-  const url = '/' + decodedSlug
   let page: RequiredDataFromCollectionSlug<'pages'> | null
 
   page = await queryPageBySlug({
@@ -61,7 +60,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   if (!page) {
-    return <PayloadRedirects url={url} />
+    notFound()
   }
 
   const { hero, layout } = page
@@ -69,9 +68,6 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <article className="pt-16 pb-24">
       <PageClient />
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
-
       {draft && <LivePreviewListener />}
 
       <RenderHero {...hero} />
