@@ -1,4 +1,4 @@
-@import '@fontsource/public-sans/index.css';
+@import '@fontsource/public-sans';
 
 :root {
   --font-body:
@@ -9,34 +9,10 @@
     sans-serif;
 }
 
-html,
-body,
-#__next {
-  font-family: var(--font-body) !important;
+body {
+  font-family: var(--font-body);
 }
 
-.payload,
-.template-default,
-[class*='payload-'] {
-  --font-body:
-    'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
-  --font-sans:
-    'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
-}
-
-.payload *,
-.template-default *,
-[class*='payload-'] * {
-  font-family: var(--font-body) !important;
-}
-
-code,
-pre,
-kbd,
-samp {
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace !important;
+* {
+  font-family: var(--font-sans);
 }

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRightIcon } from '@phosphor-icons/react'
+import { ArrowRight } from 'lucide-react'
 
 export function LandingCTA() {
   return (
@@ -25,7 +25,7 @@ export function LandingCTA() {
             className="rounded-full bg-blue-500 hover:bg-blue-600 px-8 h-12 text-base font-medium transition-all group"
           >
             Get Started
-            <ArrowRightIcon />
+            <ArrowRight />
           </Button>
         </div>
       </div>

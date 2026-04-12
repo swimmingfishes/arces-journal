@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftIcon, ArrowSquareOutIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
+import { ArrowLeft, ExternalLink, Mail, Search, User } from 'lucide-react'
 import Link from 'next/link'
 import {
   Dialog,
@@ -143,7 +143,7 @@ export default function KepengurusanPage() {
           <div className="px-8 pt-10">
             <Link href="/">
               <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
-                <ArrowLeftIcon className="h-4 w-4" /> Back to home
+                <ArrowLeft className="h-4 w-4" /> Back to home
               </Button>
             </Link>
           </div>
@@ -154,7 +154,7 @@ export default function KepengurusanPage() {
 
             <div className="relative w-full max-w-xs">
               <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                   placeholder="Cari nama kepengurusan..."
                   className="pl-12 h-12 rounded-lg border-gray-200 focus-visible:ring-blue-500 text-base"
@@ -302,7 +302,7 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
                 target="_blank"
                 className="text-sm font-semibold text-blue-500 hover:text-blue-600 flex items-center gap-1.5 transition-colors"
               >
-                Web of Science <ArrowSquareOutIcon className="h-3.5 w-3.5" />
+                Web of Science <ExternalLink className="h-3.5 w-3.5" />
               </Link>
 
               {/* Separator Garis Vertikal (Opsional sesuai gambar) */}
@@ -313,7 +313,7 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
                 target="_blank"
                 className="text-sm font-semibold text-blue-500 hover:text-blue-600 flex items-center gap-1.5 transition-colors"
               >
-                SCOPUS ID <ArrowSquareOutIcon className="h-3.5 w-3.5" />
+                SCOPUS ID <ExternalLink className="h-3.5 w-3.5" />
               </Link>
 
               <div className="h-4 w-[1px] bg-gray-200 dark:bg-white/10 hidden sm:block" />
@@ -323,7 +323,7 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
                 target="_blank"
                 className="text-sm font-semibold text-blue-500 hover:text-blue-600 flex items-center gap-1.5 transition-colors"
               >
-                Scholar ID <ArrowSquareOutIcon className="h-3.5 w-3.5" />
+                Scholar ID <ExternalLink className="h-3.5 w-3.5" />
               </Link>
             </div>
           </div>

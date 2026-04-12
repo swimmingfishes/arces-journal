@@ -1,8 +1,6 @@
 'use client'
-
-import React from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRightIcon } from '@phosphor-icons/react'
+import { ArrowRight } from 'lucide-react'
 
 const newsData = [
   {
@@ -82,7 +80,7 @@ export function LandingNews() {
             {/* See More Link */}
             <div className="p-8 pt-10 border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
               <Button size="lg">
-                See more news <ArrowRightIcon className="ml-2 h-4 w-4" />
+                See more news <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>

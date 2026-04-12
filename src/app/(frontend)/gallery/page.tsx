@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftIcon } from '@phosphor-icons/react'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import {
   Pagination,
@@ -47,7 +47,7 @@ export default function GalleryPage() {
           <div className="px-8 pt-10 ">
             <Link href="/">
               <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2 ">
-                <ArrowLeftIcon className="h-4 w-4" /> Back to home
+                <ArrowLeft className="h-4 w-4" /> Back to home
               </Button>
             </Link>
           </div>

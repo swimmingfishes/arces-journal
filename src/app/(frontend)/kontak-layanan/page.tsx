@@ -3,14 +3,15 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import {
-  ArrowLeftIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-  PhoneIcon,
-  ChatIcon,
-  ShieldCheckIcon,
-  LightningIcon,
-} from '@phosphor-icons/react'
+  ArrowLeft,
+  Mail,
+  MapPin,
+  Phone,
+  Globe,
+  MessageSquare,
+  ShieldCheck,
+  Zap,
+} from 'lucide-react'
 import Link from 'next/link'
 
 export default function ContactServicePage() {
@@ -22,7 +23,7 @@ export default function ContactServicePage() {
           <div className="px-8 pt-10">
             <Link href="/">
               <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
-                <ArrowLeftIcon className="h-4 w-4" /> Back to home
+                <ArrowLeft className="h-4 w-4" /> Back to home
               </Button>
             </Link>
           </div>
@@ -43,19 +44,19 @@ export default function ContactServicePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3">
               <ServiceCard
-                icon={<LightningIcon className="h-6 w-6 text-blue-500" />}
+                icon={<Zap className="h-6 w-6 text-blue-500" />}
                 title="Fast-Track Publication"
                 desc="Proses review kilat untuk artikel berkualitas tinggi dengan standar internasional."
                 isLast={false}
               />
               <ServiceCard
-                icon={<ShieldCheckIcon className="h-6 w-6 text-blue-500" />}
+                icon={<ShieldCheck className="h-6 w-6 text-blue-500" />}
                 title="Proofreading & Editing"
                 desc="Bantuan teknis penulisan dan sitasi sesuai template standar ARCES Journal."
                 isLast={false}
               />
               <ServiceCard
-                icon={<ChatIcon className="h-6 w-6 text-blue-500" />}
+                icon={<MessageSquare className="h-6 w-6 text-blue-500" />}
                 title="Academic Consultation"
                 desc="Konsultasi mengenai topik penelitian Informatics dan System Information."
                 isLast={true}
@@ -71,17 +72,17 @@ export default function ContactServicePage() {
             <div className="flex-1 p-8 space-y-10 lg:border-r border-gray-200 dark:border-white/10">
               <div className="space-y-8">
                 <ContactItem
-                  icon={<EnvelopeIcon className="h-5 w-5" />}
+                  icon={<Mail className="h-5 w-5" />}
                   label="Email Editorial"
                   value="editorial@arces.udinus.ac.id"
                 />
                 <ContactItem
-                  icon={<MapPinIcon className="h-5 w-5" />}
+                  icon={<MapPin className="h-5 w-5" />}
                   label="Office Location"
                   value="Gedung H, Universitas Dian Nuswantoro, Semarang, Indonesia"
                 />
                 <ContactItem
-                  icon={<PhoneIcon className="h-5 w-5" />}
+                  icon={<Phone className="h-5 w-5" />}
                   label="WhatsApp Support"
                   value="+62 812-XXXX-XXXX"
                 />

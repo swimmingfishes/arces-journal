@@ -1,7 +1,7 @@
-/* Can't resolve @payloadcms/ui scss imports, styling in inline CSS instead */
+@import '~@payloadcms/ui/scss';
 
 .admin-bar {
-  @media (max-width: 768px) {
+  @include small-break {
     display: none;
   }
 }

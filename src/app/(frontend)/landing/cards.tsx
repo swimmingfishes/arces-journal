@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowRightIcon } from '@phosphor-icons/react'
+import { ArrowRight } from 'lucide-react'
 
 // Static data - will be replaced with Payload CRUD later
 const staticCards = [
@@ -105,7 +105,7 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
                 <div className="pt-2">
                   <Button size="lg">
                     See more
-                    <ArrowRightIcon />
+                    <ArrowRight />
                   </Button>
                 </div>
               </div>

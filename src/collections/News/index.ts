@@ -1,12 +1,22 @@
-import { slugField, type CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload'
 
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   HorizontalRuleFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+
+import { authenticated } from '../../access/authenticated'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { Banner } from '../../blocks/Banner/config'
+import { Code } from '../../blocks/Code/config'
+import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { populateAuthors } from './hooks/populateAuthors'
+import { revalidateDelete, revalidateNews } from './hooks/revalidateNews'
 
 import {
   MetaDescriptionField,
@@ -15,11 +25,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { slugField } from 'payload'
 
 export const News: CollectionConfig<'news'> = {
   slug: 'news',
@@ -29,9 +35,16 @@ export const News: CollectionConfig<'news'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
+  // This config controls what's populated by default when a news item is referenced
+  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
+  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'news'>
   defaultPopulate: {
     title: true,
     slug: true,
+    meta: {
+      image: true,
+      description: true,
+    },
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -75,7 +88,7 @@ export const News: CollectionConfig<'news'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    // BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
@@ -88,6 +101,27 @@ export const News: CollectionConfig<'news'> = {
           ],
           label: 'Content',
         },
+        // {
+        //   fields: [
+        //     {
+        //       name: 'relatedNews',
+        //       type: 'relationship',
+        //       admin: {
+        //         position: 'sidebar',
+        //       },
+        //       filterOptions: ({ id }) => {
+        //         return {
+        //           id: {
+        //             not_in: [id],
+        //           },
+        //         }
+        //       },
+        //       hasMany: true,
+        //       relationTo: 'news',
+        //     },
+        //   ],
+        //   label: 'Meta',
+        // },
         {
           name: 'meta',
           label: 'SEO',
@@ -103,9 +137,13 @@ export const News: CollectionConfig<'news'> = {
             MetaImageField({
               relationTo: 'media',
             }),
+
             MetaDescriptionField({}),
             PreviewField({
+              // if the `generateUrl` function is configured
               hasGenerateFn: true,
+
+              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -133,10 +171,44 @@ export const News: CollectionConfig<'news'> = {
         ],
       },
     },
+    {
+      name: 'authors',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+      },
+      hasMany: true,
+      relationTo: 'users',
+    },
+    // This field is only used to populate the user data via the `populateAuthors` hook
+    // This is because the `user` collection has access control locked to protect user privacy
+    // GraphQL will also not return mutated user data that differs from the underlying schema
+    {
+      name: 'populatedAuthors',
+      type: 'array',
+      access: {
+        update: () => false,
+      },
+      admin: {
+        disabled: true,
+        readOnly: true,
+      },
+      fields: [
+        {
+          name: 'id',
+          type: 'text',
+        },
+        {
+          name: 'name',
+          type: 'text',
+        },
+      ],
+    },
     slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost],
+    afterChange: [revalidateNews],
+    afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
   },
   versions: {

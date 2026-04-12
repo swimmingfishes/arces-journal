@@ -2,7 +2,7 @@
 // import React, { useEffect, useState } from 'react'
 import { ParticlesBackground } from '@/components/ParticlesBackground'
 import { Button } from '@/components/ui/button'
-import { ArrowRightIcon } from '@phosphor-icons/react'
+import { ArrowRight } from 'lucide-react'
 
 export function LandingHero() {
   // const [scrolled, setScrolled] = useState(false)
@@ -36,7 +36,7 @@ export function LandingHero() {
 
               <div className="flex justify-center md:justify-start mt-14">
                 <Button size="lg">
-                  Explore journals <ArrowRightIcon />
+                  Explore journals <ArrowRight></ArrowRight>
                 </Button>
               </div>
             </div>

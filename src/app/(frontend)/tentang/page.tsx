@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftIcon } from '@phosphor-icons/react'
+import { ArrowLeft, Target, Eye, Award } from 'lucide-react'
 import Link from 'next/link'
 
 export default function TentangPage() {
@@ -14,7 +14,7 @@ export default function TentangPage() {
           <div className="px-8 pt-10">
             <Link href="/">
               <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
-                <ArrowLeftIcon className="h-4 w-4" /> Back to home
+                <ArrowLeft className="h-4 w-4" /> Back to home
               </Button>
             </Link>
           </div>

@@ -1,8 +1,9 @@
 import { PayloadRequest, CollectionSlug } from 'payload'
 
-const collectionPrefixMap = {
+const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
   news: '/news',
-} satisfies Partial<Record<CollectionSlug, string>>
+  pages: '',
+}
 
 type Props = {
   collection: keyof typeof collectionPrefixMap
@@ -16,12 +17,13 @@ export const generatePreviewPath = ({ collection, slug }: Props) => {
     return null
   }
 
-  const normalizedPath = `${collectionPrefixMap[collection]}/${slug}`.replace(/\/+/g, '/')
+  // Encode to support slugs with special characters
+  const encodedSlug = encodeURIComponent(slug)
 
   const encodedParams = new URLSearchParams({
-    slug,
+    slug: encodedSlug,
     collection,
-    path: normalizedPath,
+    path: `${collectionPrefixMap[collection]}/${encodedSlug}`,
     previewSecret: process.env.PREVIEW_SECRET || '',
   })
 
