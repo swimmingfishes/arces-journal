@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { Public_Sans } from 'next/font/google'
-import React from 'react'
 
 const publicSans = Public_Sans({
   subsets: ['latin'],

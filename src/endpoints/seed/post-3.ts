@@ -4,12 +4,10 @@ import type { PostArgs } from './post-1'
 export const post3: (args: PostArgs) => RequiredDataFromCollectionSlug<'news'> = ({
   heroImage,
   blockImage,
-  author,
 }) => {
   return {
     slug: 'dollar-and-sense-the-financial-forecast',
     _status: 'published',
-    authors: [author],
     content: {
       root: {
         type: 'root',

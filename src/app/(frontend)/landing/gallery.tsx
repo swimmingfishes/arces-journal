@@ -1,17 +1,56 @@
 'use client'
 
-import React from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { Media } from '@/components/Media'
+import type { Media as PayloadMedia } from '@/payload-types'
 
-const galleryImages = [
-  { id: 1, src: '/path-to-image-1.jpg' },
-  { id: 2, src: '/path-to-image-2.jpg' },
-  { id: 3, src: '/path-to-image-3.jpg' },
-  { id: 4, src: '/path-to-image-4.jpg' },
-  { id: 5, src: '/path-to-image-5.jpg' },
-  { id: 6, src: '/path-to-image-6.jpg' },
-]
+type MediaResponse = {
+  docs?: PayloadMedia[]
+}
 
 export function LandingGallery() {
+  const [galleryImages, setGalleryImages] = useState<PayloadMedia[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let active = true
+
+    const fetchGalleryImages = async () => {
+      try {
+        const response = await fetch(
+          '/api/media?depth=1&limit=30&sort=-createdAt&where[folder.name][equals]=gallery',
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch gallery media')
+        }
+
+        const data: MediaResponse = await response.json()
+
+        if (active) {
+          setGalleryImages(data.docs ?? [])
+        }
+      } catch {
+        if (active) {
+          setGalleryImages([])
+        }
+      } finally {
+        if (active) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchGalleryImages()
+
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const mainImage = galleryImages[0]
+  const sideImages = useMemo(() => galleryImages.slice(1, 7), [galleryImages])
+
   return (
     <section className="w-full px-6 lg:px-46 bg-background">
       <div className="mx-auto md:border-x border-gray-200 dark:border-white/10">
@@ -22,36 +61,55 @@ export function LandingGallery() {
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
+          {loading && (
+            <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+              Loading gallery...
+            </div>
+          )}
+
+          {!loading && !mainImage && (
+            <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+              No media found in gallery folder.
+            </div>
+          )}
+
           {/* LEFT: Featured Image & Description */}
-          <div className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-gray-200 dark:border-white/10 group">
-            <div className="w-full aspect-video bg-gray-200 overflow-hidden">
-              <img
-                src="/path-to-main-gallery.jpg" // Gambar Gedung Udinus Besar
-                alt="Main Gallery"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+          {mainImage && (
+            <div className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-gray-200 dark:border-white/10 group">
+              <div className="relative w-full aspect-video bg-gray-200 dark:bg-zinc-900 overflow-hidden">
+                <Media
+                  resource={mainImage}
+                  fill
+                  size="50vw"
+                  className="w-full h-full"
+                  pictureClassName="relative block w-full h-full"
+                  imgClassName="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {mainImage.alt || 'Featured gallery image from ARCES media collection.'}
+                </p>
+              </div>
             </div>
-            <div className="p-8">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                With a portfolio of over 2,700 journals and over 220,000 books, Springer is a global
-                leader in academic and scientific publishing.
-              </p>
-            </div>
-          </div>
+          )}
 
           {/* RIGHT: 6 Small Images Grid (3x2) */}
           <div className="grid grid-cols-2 lg:grid-cols-2 border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
-            {galleryImages.map((img, index) => (
+            {sideImages.map((img, index) => (
               <div
                 key={img.id}
                 className={`aspect-video bg-gray-300 overflow-hidden border-b border-gray-200 dark:border-white/10 
                 ${index % 2 === 0 ? 'border-r' : ''} 
                 hover:opacity-80 transition-opacity cursor-pointer`}
               >
-                <img
-                  src={img.src}
-                  alt={`Gallery ${img.id}`}
-                  className="w-full h-full object-cover"
+                <Media
+                  resource={img}
+                  fill
+                  size="25vw"
+                  className="w-full h-full"
+                  pictureClassName="relative block w-full h-full"
+                  imgClassName="object-cover"
                 />
               </div>
             ))}

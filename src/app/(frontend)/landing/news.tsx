@@ -1,33 +1,67 @@
 'use client'
+import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import type { News } from '@/payload-types'
+import { Media } from '@/components/Media'
 
-const newsData = [
-  {
-    id: 1,
-    title: 'Intelligent Systems: Pioneering Industry 4.0 with Aluminum Technologies',
-    date: '4 September 2026',
-    description:
-      'With a portfolio of over 2,700 journals and over 220,000 books, Springer is a global leader in academic and scientific publishing.',
-    image: '/path-to-your-image.jpg', // Ganti dengan path image asli (Gedung Udinus)
-  },
-  {
-    id: 2,
-    title: 'Intelligent Systems: Pioneering Industry 4.0 with Aluminum Technologies',
-    date: '4 September 2026',
-    description: 'With a portfolio of over 2,700 journals and over 220,000 books.',
-  },
-  {
-    id: 3,
-    title: 'Intelligent Systems: Pioneering Industry 4.0 with Aluminum Technologies',
-    date: '4 September 2026',
-    description: 'With a portfolio of over 2,700 journals and over 220,000 books.',
-  },
-]
+type NewsResponse = {
+  docs?: News[]
+}
 
 export function LandingNews() {
+  const [newsData, setNewsData] = useState<News[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let active = true
+
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          '/api/news?depth=1&limit=3&sort=-createdAt&where[_status][equals]=published',
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch news')
+        }
+
+        const data: NewsResponse = await response.json()
+
+        if (active) {
+          setNewsData(data.docs ?? [])
+        }
+      } catch {
+        if (active) {
+          setNewsData([])
+        }
+      } finally {
+        if (active) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchNews()
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   const mainNews = newsData[0]
-  const sideNews = newsData.slice(1)
+  const sideNews = useMemo(() => newsData.slice(1), [newsData])
+
+  const formatDate = (date?: string) => {
+    if (!date) return ''
+
+    return new Date(date).toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+  }
 
   return (
     <section className="w-full px-6 lg:px-46 bg-background">
@@ -40,48 +74,81 @@ export function LandingNews() {
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          {/* LEFT: Main News */}
-          <div className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-gray-200 dark:border-white/10 group cursor-pointer">
-            <div className="w-full aspect-video bg-gray-200 overflow-hidden">
-              <img
-                src={mainNews.image}
-                alt="Main News"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+          {loading && (
+            <div className="col-span-full p-8 text-sm text-muted-foreground border-l border-r border-b border-gray-200 dark:border-white/10 md:border-l-0 md:border-r-0">
+              Loading news...
             </div>
+          )}
 
-            <div className="p-8 space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-2xl font-bold leading-tight group-hover:text-blue-500 transition-colors">
-                  {mainNews.title}
-                </h3>
-                <p className="text-sm text-gray-500">{mainNews.date}</p>
-                <p className="text-muted-foreground leading-relaxed">{mainNews.description}</p>
-              </div>
+          {!loading && !mainNews && (
+            <div className="col-span-full p-8 text-sm text-muted-foreground border-l border-r border-b border-gray-200 dark:border-white/10 md:border-l-0 md:border-r-0">
+              No news available.
             </div>
-          </div>
+          )}
+
+          {/* LEFT: Main News */}
+          {mainNews && (
+            <Link
+              href={mainNews.slug ? `/news/${mainNews.slug}` : '/news'}
+              className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-gray-200 dark:border-white/10 group cursor-pointer"
+            >
+              <div className="w-full aspect-video bg-gray-200 dark:bg-zinc-900 overflow-hidden">
+                {typeof mainNews.heroImage === 'object' && mainNews.heroImage ? (
+                  <Media
+                    resource={mainNews.heroImage}
+                    fill
+                    size="50vw"
+                    className="w-full h-full"
+                    pictureClassName="relative block w-full h-full"
+                    imgClassName="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-sm text-muted-foreground">
+                    No image
+                  </div>
+                )}
+              </div>
+
+              <div className="p-8 space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold leading-tight group-hover:text-blue-500 transition-colors">
+                    {mainNews.title}
+                  </h3>
+                  <p className="text-sm text-gray-500">{formatDate(mainNews.createdAt)}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {mainNews.meta?.description || 'No description available'}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          )}
 
           {/* RIGHT: Side News List */}
           <div className="flex flex-col">
-            {sideNews.map((news, index) => (
-              <div
+            {sideNews.map((news) => (
+              <Link
                 key={news.id}
+                href={news.slug ? `/news/${news.slug}` : '/news'}
                 // md:border-r-0 dipasang agar tidak double dengan border container utama di desktop
                 className="p-8 space-y-2 group cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10"
               >
                 <h4 className="text-lg font-bold leading-snug group-hover:text-blue-500 transition-colors">
                   {news.title}
                 </h4>
-                <p className="text-sm text-gray-500">{news.date}</p>
-                <p className="text-sm text-muted-foreground line-clamp-2">{news.description}</p>
-              </div>
+                <p className="text-sm text-gray-500">{formatDate(news.createdAt)}</p>
+                <p className="text-sm text-muted-foreground line-clamp-2">
+                  {news.meta?.description || 'No description available'}
+                </p>
+              </Link>
             ))}
 
             {/* See More Link */}
             <div className="p-8 pt-10 border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
-              <Button size="lg">
-                See more news <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Link href="/news">
+                <Button size="lg">
+                  See more news <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

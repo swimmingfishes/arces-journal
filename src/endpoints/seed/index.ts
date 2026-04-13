@@ -1,12 +1,15 @@
-import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest } from 'payload'
 
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
+import { image3 } from './image-3'
 import { imageHero1 } from './image-hero-1'
 import { post1 as news1 } from './post-1'
 import { post2 as news2 } from './post-2'
 import { post3 as news3 } from './post-3'
+import { fetchFileByURL } from '../../db/utils'
+import { getKontakLayananSeedData, getTentangSeedData } from '../../db/data/tentang'
 
 const collections: CollectionSlug[] = ['media', 'pages', 'news', 'search']
 
@@ -38,7 +41,7 @@ export const seed = async ({
         slug: global,
         data: {
           navItems: [],
-        },
+        } as any,
         depth: 0,
         context: {
           disableRevalidate: true,
@@ -57,18 +60,6 @@ export const seed = async ({
       .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
   )
 
-  payload.logger.info(`— Seeding demo author and user...`)
-
-  await payload.delete({
-    collection: 'users',
-    depth: 0,
-    where: {
-      email: {
-        equals: 'demo-author@example.com',
-      },
-    },
-  })
-
   payload.logger.info(`— Seeding media...`)
 
   const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
@@ -86,15 +77,7 @@ export const seed = async ({
     ),
   ])
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
-    payload.create({
-      collection: 'users',
-      data: {
-        name: 'Demo Author',
-        email: 'demo-author@example.com',
-        password: 'password',
-      },
-    }),
+  const [image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
     payload.create({
       collection: 'media',
       data: image1,
@@ -107,7 +90,7 @@ export const seed = async ({
     }),
     payload.create({
       collection: 'media',
-      data: image2,
+      data: image3,
       file: image3Buffer,
     }),
     payload.create({
@@ -121,54 +104,31 @@ export const seed = async ({
 
   // Do not create news with `Promise.all` because we want the news to be created in order
   // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
-  const news1Doc = await payload.create({
+  await payload.create({
     collection: 'news',
     depth: 0,
     context: {
       disableRevalidate: true,
     },
-    data: news1({ heroImage: image1Doc, blockImage: image2Doc, author: demoAuthor }),
+    data: news1({ heroImage: image1Doc, blockImage: image2Doc }),
   })
 
-  const news2Doc = await payload.create({
+  await payload.create({
     collection: 'news',
     depth: 0,
     context: {
       disableRevalidate: true,
     },
-    data: news2({ heroImage: image2Doc, blockImage: image3Doc, author: demoAuthor }),
+    data: news2({ heroImage: image2Doc, blockImage: image3Doc }),
   })
 
-  const news3Doc = await payload.create({
+  await payload.create({
     collection: 'news',
     depth: 0,
     context: {
       disableRevalidate: true,
     },
-    data: news3({ heroImage: image3Doc, blockImage: image1Doc, author: demoAuthor }),
-  })
-
-  // update each news item with related news
-  await payload.update({
-    id: news1Doc.id,
-    collection: 'news',
-    data: {
-      relatedNews: [news2Doc.id, news3Doc.id],
-    },
-  })
-  await payload.update({
-    id: news2Doc.id,
-    collection: 'news',
-    data: {
-      relatedNews: [news1Doc.id, news3Doc.id],
-    },
-  })
-  await payload.update({
-    id: news3Doc.id,
-    collection: 'news',
-    data: {
-      relatedNews: [news1Doc.id, news2Doc.id],
-    },
+    data: news3({ heroImage: image3Doc, blockImage: image1Doc }),
   })
 
   payload.logger.info(`— Seeding pages...`)
@@ -176,6 +136,9 @@ export const seed = async ({
   await payload.create({
     collection: 'pages',
     depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
     data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
   })
 
@@ -184,6 +147,9 @@ export const seed = async ({
   await Promise.all([
     payload.updateGlobal({
       slug: 'header',
+      context: {
+        disableRevalidate: true,
+      },
       data: {
         navItems: [
           {
@@ -198,6 +164,9 @@ export const seed = async ({
     }),
     payload.updateGlobal({
       slug: 'footer',
+      context: {
+        disableRevalidate: true,
+      },
       data: {
         navItems: [
           {
@@ -228,25 +197,25 @@ export const seed = async ({
     }),
   ])
 
-  payload.logger.info('Seeded database successfully!')
-}
-
-async function fetchFileByURL(url: string): Promise<File> {
-  const res = await fetch(url, {
-    credentials: 'include',
-    method: 'GET',
+  // Seed tentang (about) global with comprehensive content
+  await payload.updateGlobal({
+    slug: 'tentang',
+    data: getTentangSeedData() as any,
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
   })
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch file from ${url}, status: ${res.status}`)
-  }
+  // Seed kontak & layanan (contact & services) global
+  await payload.updateGlobal({
+    slug: 'kontakLayanan',
+    data: getKontakLayananSeedData() as any,
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+  })
 
-  const data = await res.arrayBuffer()
-
-  return {
-    name: url.split('/').pop() || `file-${Date.now()}`,
-    data: Buffer.from(data),
-    mimetype: `image/${url.split('.').pop()}`,
-    size: data.byteLength,
-  }
+  payload.logger.info('Seeded database successfully!')
 }

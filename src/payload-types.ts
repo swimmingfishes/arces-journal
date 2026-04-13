@@ -110,10 +110,14 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    tentang: Tentang;
+    kontakLayanan: KontakLayanan;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    tentang: TentangSelect<false> | TentangSelect<true>;
+    kontakLayanan: KontakLayananSelect<false> | KontakLayananSelect<true>;
   };
   locale: null;
   widgets: {
@@ -250,13 +254,6 @@ export interface News {
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (number | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -384,32 +381,6 @@ export interface FolderInterface {
   folderType?: 'media'[] | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  name?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -569,6 +540,7 @@ export interface Role {
  */
 export interface People {
   id: number;
+  image?: (number | null) | Media;
   name: string;
   instation: string;
   country:
@@ -858,6 +830,31 @@ export interface Journal {
   };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
@@ -1214,13 +1211,6 @@ export interface NewsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
-  authors?: T;
-  populatedAuthors?:
-    | T
-    | {
-        id?: T;
-        name?: T;
-      };
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
@@ -1336,6 +1326,7 @@ export interface RolesSelect<T extends boolean = true> {
  * via the `definition` "peoples_select".
  */
 export interface PeoplesSelect<T extends boolean = true> {
+  image?: T;
   name?: T;
   instation?: T;
   country?: T;
@@ -1373,7 +1364,6 @@ export interface JournalsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1553,6 +1543,167 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tentang".
+ */
+export interface Tentang {
+  id: number;
+  sejarah: {
+    image?: (number | null) | Media;
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  visiMisi: {
+    visi: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    misions: {
+      text: string;
+      id?: string | null;
+    }[];
+  };
+  peranStrategis: {
+    cards: {
+      title: string;
+      description: string;
+      id?: string | null;
+    }[];
+    image?: (number | null) | Media;
+  };
+  website: {
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  physicalAddress: {
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Paste the embed URL from Google Maps iframe src attribute
+     */
+    mapsEmbedUrl?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kontakLayanan".
+ */
+export interface KontakLayanan {
+  id: number;
+  header: {
+    title: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  layanan: {
+    title: string;
+    services: {
+      title: string;
+      description: string;
+      iconType: 'Zap' | 'ShieldCheck' | 'MessageSquare';
+      id?: string | null;
+    }[];
+  };
+  kontak: {
+    title: string;
+    email: string;
+    emailLabel?: string | null;
+    address: string;
+    addressLabel?: string | null;
+    phone: string;
+    phoneLabel?: string | null;
+    /**
+     * Paste the embed URL from Google Maps iframe src attribute
+     */
+    mapsEmbedUrl?: string | null;
+    /**
+     * Optional content for the right column of contact section
+     */
+    rightContent?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1592,6 +1743,96 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tentang_select".
+ */
+export interface TentangSelect<T extends boolean = true> {
+  sejarah?:
+    | T
+    | {
+        image?: T;
+        content?: T;
+      };
+  visiMisi?:
+    | T
+    | {
+        visi?: T;
+        misions?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  peranStrategis?:
+    | T
+    | {
+        cards?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        image?: T;
+      };
+  website?:
+    | T
+    | {
+        content?: T;
+      };
+  physicalAddress?:
+    | T
+    | {
+        content?: T;
+        mapsEmbedUrl?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kontakLayanan_select".
+ */
+export interface KontakLayananSelect<T extends boolean = true> {
+  header?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  layanan?:
+    | T
+    | {
+        title?: T;
+        services?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              iconType?: T;
+              id?: T;
+            };
+      };
+  kontak?:
+    | T
+    | {
+        title?: T;
+        email?: T;
+        emailLabel?: T;
+        address?: T;
+        addressLabel?: T;
+        phone?: T;
+        phoneLabel?: T;
+        mapsEmbedUrl?: T;
+        rightContent?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -1,9 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import type { Media as PayloadMedia } from '@/payload-types'
+import { Media } from '@/components/Media'
 import {
   Pagination,
   PaginationContent,
@@ -13,31 +15,65 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 
-// Data Statis Gallery (Nanti dari Database)
-const galleryItems = [
-  { id: 1, title: 'Workshop AI Industry', image: '/udinus.jpg', size: 'large' },
-  { id: 2, title: 'Editorial Meeting', image: '/flood-news.jpg', size: 'small' },
-  { id: 3, title: 'International Seminar', image: '/dev-news.jpg', size: 'small' },
-  { id: 4, title: 'Research Collaboration', image: '/rag-news.jpg', size: 'medium' },
-  { id: 5, title: 'Community Service', image: '/udin.jpg', size: 'small' },
-  { id: 6, title: 'Tech Exhibition', image: '/crypto-news.jpg', size: 'large' },
-  { id: 7, title: 'Team Building', image: '/toy-news.jpg', size: 'medium' },
-  { id: 8, title: 'Team Building', image: '/toy-news.jpg', size: 'medium' },
-  { id: 9, title: 'Team Building', image: '/toy-news.jpg', size: 'medium' },
-  { id: 10, title: 'Team Building', image: '/toy-news.jpg', size: 'medium' },
-  { id: 11, title: 'Team Building', image: '/toy-news.jpg', size: 'medium' },
-  { id: 12, title: 'Team Building', image: '/toy-news.jpg', size: 'medium' },
-]
+type MediaResponse = {
+  docs?: PayloadMedia[]
+}
 
 export default function GalleryPage() {
+  const [galleryItems, setGalleryItems] = useState<PayloadMedia[]>([])
+  const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 15 // 9 item agar pas dengan grid 3 kolom (3 baris)
+  const itemsPerPage = 15
 
-  // Hitung index data
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = galleryItems.slice(indexOfFirstItem, indexOfLastItem)
-  const totalPages = Math.ceil(galleryItems.length / itemsPerPage)
+  useEffect(() => {
+    let active = true
+
+    const fetchGalleryItems = async () => {
+      try {
+        const response = await fetch(
+          '/api/media?depth=1&limit=200&sort=-createdAt&where[folder.name][equals]=gallery',
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch gallery media')
+        }
+
+        const data: MediaResponse = await response.json()
+
+        if (active) {
+          setGalleryItems(data.docs ?? [])
+        }
+      } catch {
+        if (active) {
+          setGalleryItems([])
+        }
+      } finally {
+        if (active) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchGalleryItems()
+
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const totalPages = Math.max(1, Math.ceil(galleryItems.length / itemsPerPage))
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
+  const currentItems = useMemo(() => {
+    const indexOfLastItem = currentPage * itemsPerPage
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage
+    return galleryItems.slice(indexOfFirstItem, indexOfLastItem)
+  }, [currentPage, galleryItems])
 
   return (
     <main className="w-full bg-background min-h-screen">
@@ -59,6 +95,18 @@ export default function GalleryPage() {
 
           {/* 4. GALLERY GRID (3 Kolom, Inset 3/4, dengan Pagination) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {loading && (
+              <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+                Loading gallery...
+              </div>
+            )}
+
+            {!loading && currentItems.length === 0 && (
+              <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+                No media found in gallery folder.
+              </div>
+            )}
+
             {currentItems.map((item, index) => {
               return (
                 <div
@@ -71,18 +119,22 @@ export default function GalleryPage() {
                   {/* Wrapper Konten dengan Padding p-8 */}
                   <div className="p-8 flex flex-col h-full">
                     {/* Image: Inset Style dengan Rasio 3/4 */}
-                    <div className="w-full aspect-video bg-gray-100 overflow-hidden mb-6 ">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    <div className="relative w-full aspect-video bg-gray-100 dark:bg-zinc-900 overflow-hidden mb-6 ">
+                      <Media
+                        resource={item}
+                        fill
+                        size="33vw"
+                        className="w-full h-full"
+                        pictureClassName="relative block w-full h-full"
+                        imgClassName="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
 
                     {/* Caption: Di bawah gambar, Center Aligned sesuai keinginanmu */}
                     <div className="space-y-2 mt-auto px-2">
                       <p className="text-sm text-center text-muted-foreground line-clamp-3 italic leading-relaxed">
-                        {item.title ||
+                        {item.alt ||
+                          item.filename ||
                           'Aktivitas penelitian atau pengabdian masyarakat di lapangan.'}
                       </p>
                     </div>

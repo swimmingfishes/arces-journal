@@ -5,6 +5,11 @@ export const Peoples: CollectionConfig = {
   slug: 'peoples',
   fields: [
     {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       name: 'name',
       type: 'text',
       required: true,

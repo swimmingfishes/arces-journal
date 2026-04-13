@@ -10,16 +10,13 @@ import {
 } from '@/components/ui/pagination'
 import { cn } from '@/utilities/ui'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
-export const Pagination: React.FC<{
+export const Pagination = ({className, page, totalPages}: {
   className?: string
   page: number
   totalPages: number
-}> = (props) => {
+}) => {
   const router = useRouter()
-
-  const { className, page, totalPages } = props
   const hasNextPage = page < totalPages
   const hasPrevPage = page > 1
 
@@ -30,14 +27,15 @@ export const Pagination: React.FC<{
     <div className={cn('my-12', className)}>
       <PaginationComponent>
         <PaginationContent>
+        {hasPrevPage && (
           <PaginationItem>
             <PaginationPrevious
-              disabled={!hasPrevPage}
               onClick={() => {
                 router.push(`/news/page/${page - 1}`)
               }}
             />
           </PaginationItem>
+        )}
 
           {hasExtraPrevPages && (
             <PaginationItem>
@@ -86,14 +84,15 @@ export const Pagination: React.FC<{
             </PaginationItem>
           )}
 
+        {hasNextPage && (
           <PaginationItem>
             <PaginationNext
-              disabled={!hasNextPage}
               onClick={() => {
                 router.push(`/news/page/${page + 1}`)
               }}
             />
           </PaginationItem>
+        )}
         </PaginationContent>
       </PaginationComponent>
     </div>

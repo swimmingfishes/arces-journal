@@ -1,0 +1,109 @@
+{
+  "tentang": {
+    "sejarah": {
+      "content": "Association Research Computing Engineering Science (ARCES) bermula dari inisiatif sekelompok akademisi, peneliti, dan praktisi teknologi yang memiliki kepedulian terhadap pesatnya perkembangan ilmu komputasi, rekayasa, dan sains di era digital. Pada awal pembentukannya, sekitar dekade 2020-an, para pendiri melihat adanya kebutuhan akan sebuah wadah kolaboratif yang mampu mengintegrasikan berbagai disiplin ilmu untuk menghasilkan inovasi yang tidak hanya bersifat teoritis, tetapi juga aplikatif dan berdampak langsung bagi masyarakat.\n\nGagasan pembentukan ARCES muncul dari berbagai forum diskusi ilmiah, seminar, dan kegiatan penelitian bersama yang mempertemukan para ahli dari bidang teknologi informasi, teknik, dan sains terapan. Dari interaksi tersebut, muncul kesadaran bahwa kolaborasi lintas disiplin merupakan kunci utama dalam menjawab tantangan global seperti transformasi digital, keamanan data, efisiensi energi, serta pengembangan sistem cerdas berbasis data.\n\nSecara resmi, ARCES kemudian dibentuk sebagai organisasi yang berfokus pada penguatan riset dan inovasi berbasis teknologi. Pada tahap awal, kegiatan ARCES lebih banyak berfokus pada penyelenggaraan seminar ilmiah, workshop, serta kolaborasi penelitian skala kecil. Seiring berjalannya waktu, organisasi ini mulai berkembang dengan memperluas jaringan ke berbagai perguruan tinggi, lembaga penelitian, dan mitra industri, baik di tingkat nasional maupun internasional.\n\nMemasuki fase pengembangan, ARCES mulai aktif dalam publikasi ilmiah, pengembangan proyek penelitian terapan, serta pelaksanaan program pelatihan untuk meningkatkan kompetensi sumber daya manusia di bidang komputasi dan rekayasa. Selain itu, ARCES juga mulai berperan dalam mendukung implementasi teknologi di berbagai sektor, seperti pertanian berbasis IoT, sistem kesehatan digital, serta pengembangan aplikasi berbasis kecerdasan buatan.\n\nHingga saat ini, ARCES terus berkembang sebagai organisasi yang adaptif terhadap perubahan teknologi dan kebutuhan masyarakat. Dengan semangat kolaborasi dan inovasi, ARCES berupaya menjadi pusat pengembangan riset unggulan yang mampu memberikan kontribusi nyata dalam kemajuan ilmu pengetahuan, teknologi, dan pembangunan berkelanjutan."
+    },
+    "visiMisi": {
+      "visi": "Menjadi organisasi unggulan dalam pengembangan riset, inovasi, dan kolaborasi di bidang komputasi, rekayasa, dan sains yang berkontribusi nyata terhadap kemajuan teknologi serta peningkatan kualitas hidup masyarakat di tingkat nasional maupun global.",
+      "misions": [
+        {
+          "text": "Menyelenggarakan penelitian kolaboratif lintas disiplin di bidang komputasi, rekayasa, dan sains."
+        },
+        {
+          "text": "Mendorong publikasi ilmiah mahasiswa dan akademisi pada tingkat nasional maupun internasional."
+        },
+        {
+          "text": "Menyelenggarakan seminar, workshop, dan pelatihan teknologi secara berkala."
+        },
+        {
+          "text": "Membangun jaringan kerjasama dengan institusi pendidikan, lembaga riset, dan mitra industri."
+        },
+        {
+          "text": "Mengembangkan proyek teknologi terapan yang solutif bagi permasalahan di masyarakat."
+        },
+        {
+          "text": "Meningkatkan kompetensi sumber daya manusia dalam penguasaan teknologi mutakhir."
+        },
+        {
+          "text": "Menjadi pusat informasi dan rujukan pengembangan inovasi berbasis kecerdasan buatan dan sistem cerdas."
+        }
+      ]
+    },
+    "peranStrategis": {
+      "cards": [
+        {
+          "title": "Sebagai Pusat Kolaborasi Riset Multidisiplin",
+          "description": "Menjadi organisasi unggulan dalam pengembangan riset, inovasi, dan kolaborasi di bidang komputasi, rekayasa, dan sains yang berkontribusi nyata terhadap kemajuan teknologi serta peningkatan kualitas hidup masyarakat di tingkat nasional maupun global."
+        },
+        {
+          "title": "Penggerak Inovasi Teknologi",
+          "description": "ARCES menjadi motor pengembangan dan penerapan teknologi modern seperti kecerdasan buatan (AI), Internet of Things (IoT), big data, dan keamanan siber guna mendukung transformasi digital di berbagai sektor."
+        },
+        {
+          "title": "Peningkatan Kualitas Sumber Daya Manusia (SDM)",
+          "description": "Melalui pelatihan, workshop, seminar, dan program edukasi, ARCES berkontribusi dalam meningkatkan kompetensi dan daya saing SDM di bidang teknologi dan sains."
+        },
+        {
+          "title": "Fasilitator Diseminasi Ilmu Pengetahuan",
+          "description": "ARCES berperan aktif dalam publikasi ilmiah, penyelenggaraan konferensi, serta penyebarluasan hasil penelitian agar dapat dimanfaatkan secara luas oleh akademisi, industri, dan masyarakat."
+        },
+        {
+          "title": "Mitra Strategis bagi Pemerintah dan Industri",
+          "description": "ARCES dapat menjadi mitra dalam perumusan kebijakan berbasis riset serta pengembangan solusi teknologi yang sesuai dengan kebutuhan industri dan pembangunan nasional."
+        },
+        {
+          "title": "Pengembang Solusi Berbasis Teknologi",
+          "description": "ARCES berperan dalam merancang dan mengimplementasikan sistem serta aplikasi yang dapat menyelesaikan berbagai permasalahan, seperti di bidang pertanian cerdas, kesehatan digital, pendidikan, dan lingkungan."
+        },
+        {
+          "title": "Penguat Ekosistem Riset dan Inovasi Berkelanjutan",
+          "description": "ARCES mendukung terciptanya ekosistem riset yang berkelanjutan melalui kolaborasi lintas institusi, pengembangan jejaring, serta peningkatan kapasitas penelitian secara berkesinambungan."
+        }
+      ]
+    },
+    "website": {
+      "content": "Website resmi ARCES yang beralamat di www.arces.org merupakan platform digital yang digunakan sebagai media utama dalam penyebaran informasi, publikasi ilmiah, serta komunikasi organisasi. Website ini berfungsi sebagai pusat informasi yang menyediakan berbagai konten terkait kegiatan ARCES, seperti program penelitian, seminar, workshop, pelatihan, serta kolaborasi ilmiah di bidang komputasi, rekayasa, dan sains.\n\nMelalui website tersebut, pengguna dapat mengakses berbagai layanan, termasuk publikasi jurnal ilmiah berbasis sistem manajemen penerbitan digital yang mendukung proses editorial dan diseminasi penelitian secara terbuka dan terstruktur. Selain itu, website ini juga menjadi sarana untuk memperluas jejaring kolaborasi antara akademisi, peneliti, dan praktisi industri baik di tingkat nasional maupun internasional.\n\nDengan tampilan yang informatif dan terintegrasi, www.arces.org tidak hanya berfungsi sebagai media informasi, tetapi juga sebagai representasi identitas digital ARCES dalam mendukung pengembangan riset, inovasi, dan transformasi teknologi berbasis ilmu pengetahuan."
+    },
+    "physicalAddress": {
+      "content": "Kantor pusat Association Research Computing Engineering Science (ARCES) beralamat di Jl. Dempel Berlian V Nomor 69, Kelurahan Muktiharjo Kidul, Kecamatan Pedurungan, Kota Semarang, Provinsi Jawa Tengah, Kode Pos 50197. Lokasi ini berada di kawasan permukiman yang berkembang serta memiliki akses yang cukup strategis karena terhubung dengan jalur utama di wilayah timur Kota Semarang, sehingga memudahkan mobilitas anggota, mitra, maupun tamu yang berkunjung.\n\nSecara geografis, wilayah Pedurungan dikenal sebagai salah satu kawasan penyangga Kota Semarang yang dekat dengan pusat aktivitas pendidikan, perdagangan, dan industri. Hal ini menjadikan kantor ARCES memiliki posisi yang potensial untuk menjalin kerja sama dengan berbagai institusi, seperti perguruan tinggi, lembaga penelitian, serta sektor industri yang berada di sekitar wilayah Semarang dan sekitarnya.\n\nFasilitas kantor ARCES dirancang untuk mendukung berbagai aktivitas organisasi, antara lain ruang kerja administratif, ruang diskusi dan rapat, serta area yang digunakan untuk kegiatan ilmiah seperti workshop, pelatihan teknis, dan forum kajian riset. Lingkungan kerja yang kondusif ini memungkinkan terjadinya interaksi yang produktif antara peneliti, akademisi, dan praktisi dalam mengembangkan ide, melakukan eksperimen, serta merancang solusi berbasis teknologi.\n\nSelain sebagai pusat operasional, kantor ini juga berfungsi sebagai pusat koordinasi program dan kegiatan ARCES, termasuk pengelolaan penelitian kolaboratif, publikasi ilmiah, serta pengembangan jejaring kemitraan. Dengan dukungan infrastruktur yang memadai dan lokasi yang strategis, kantor ARCES diharapkan mampu menjadi hub inovasi dan pengembangan ilmu pengetahuan yang berkontribusi secara nyata terhadap kemajuan teknologi dan pembangunan berkelanjutan di tingkat lokal, nasional, hingga internasional.",
+      "mapsEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0!2d110.455669!3d-6.9761394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708ccb7bdb1753%3A0x435506b778686f3!2sJl.+Dempel+Berlian+V%2C+Muktiharjo+Kidul%2C+Kec.+Pedurungan%2C+Kota+Semarang%2C+Jawa+Tengah+50197!5e0!3m2!1sid!2sid!4v1715421234567!5m2!1sid!2sid"
+    }
+  },
+  "kontakLayanan": {
+    "header": {
+      "title": "Kontak & Layanan",
+      "description": "Hubungi tim editorial kami atau jelajahi layanan publikasi ARCES."
+    },
+    "layanan": {
+      "title": "Our Services",
+      "services": [
+        {
+          "title": "Fast-Track Publication",
+          "description": "Proses review kilat untuk artikel berkualitas tinggi dengan standar internasional.",
+          "iconType": "Zap"
+        },
+        {
+          "title": "Proofreading & Editing",
+          "description": "Bantuan teknis penulisan dan sitasi sesuai template standar ARCES Journal.",
+          "iconType": "ShieldCheck"
+        },
+        {
+          "title": "Academic Consultation",
+          "description": "Konsultasi mengenai topik penelitian Informatics dan System Information.",
+          "iconType": "MessageSquare"
+        }
+      ]
+    },
+    "kontak": {
+      "title": "Contact Information",
+      "email": "editorial@arces.udinus.ac.id",
+      "emailLabel": "Email Editorial",
+      "address": "Gedung H, Universitas Dian Nuswantoro, Semarang, Indonesia",
+      "addressLabel": "Office Location",
+      "phone": "+62 812-XXXX-XXXX",
+      "phoneLabel": "WhatsApp Support",
+      "mapsEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019453564147!2d-122.42254229999998!3d37.7749295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c7ec6ad3%3A0x1c4b6aa8a8a8a8a8!2sArces!5e0!3m2!1sen!2sus!4v1234567890",
+      "rightContent": "Jangan ragu untuk menghubungi kami untuk informasi lebih lanjut tentang layanan publikasi kami."
+    }
+  }
+}

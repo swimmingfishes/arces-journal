@@ -1,18 +1,11 @@
 import { formatDateTime } from 'src/utilities/formatDateTime'
-import React from 'react'
 
 import type { News } from '@/payload-types'
 
 import { Media } from '@/components/Media'
-import { formatAuthors } from '@/utilities/formatAuthors'
 
-export const NewsHero: React.FC<{
-  news: News
-}> = ({ news }) => {
-  const { heroImage, populatedAuthors, publishedAt, title } = news
-
-  const hasAuthors =
-    populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
+export const NewsHero = ({ news }: { news: News }) => {
+  const { heroImage, publishedAt, title } = news
 
   return (
     <div className="relative -mt-[10.4rem] flex items-end">
@@ -23,15 +16,6 @@ export const NewsHero: React.FC<{
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 md:gap-16">
-            {hasAuthors && (
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                  <p className="text-sm">Author</p>
-
-                  <p>{formatAuthors(populatedAuthors)}</p>
-                </div>
-              </div>
-            )}
             {publishedAt && (
               <div className="flex flex-col gap-1">
                 <p className="text-sm">Date Published</p>

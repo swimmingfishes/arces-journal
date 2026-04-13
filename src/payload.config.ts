@@ -17,6 +17,8 @@ import { Roles } from './collections/Roles'
 
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { Tentang } from './globals/Tentang'
+import { KontakLayanan } from './globals/KontakLayanan'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -78,7 +80,7 @@ export default buildConfig({
   // i18n: {
   //   supportedLanguages: { id },
   // },
-  globals: [Header, Footer],
+  globals: [Header, Footer, Tentang, KontakLayanan],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,
