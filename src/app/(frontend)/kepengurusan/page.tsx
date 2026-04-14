@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import PageClientContent from './page.client'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 countries.registerLocale(enLocale)
 
@@ -20,7 +21,7 @@ export default async function KepengurusanPage() {
         instation: true,
         country: true,
         role: true,
-        heroImage: true,
+        image: true,
         links: true,
       },
     })
@@ -30,7 +31,7 @@ export default async function KepengurusanPage() {
       name: person.name,
       university: person.instation,
       country: countries.getName(person.country, 'en') || person.country,
-      image: typeof person.heroImage === 'object' ? person.heroImage.url : '/placeholder.jpg',
+      image: typeof person.image === 'object' ? getMediaUrl(person.image.url) : '/placeholder.jpg',
       role: typeof person.role === 'object' ? person.role.slug : person.role,
       links: person.links || [],
     }))
