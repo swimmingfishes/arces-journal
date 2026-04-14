@@ -8,7 +8,7 @@ export async function Footer() {
   // const footerData: Footer = await getCachedGlobal('footer', 1)()
 
   return (
-    <footer className="w-full px-6 lg:px-46 bg-background mt-auto">
+    <footer className="w-full page-gutter bg-background mt-auto">
       {/* Container Utama dengan Border Kiri-Kanan yang sejajar */}
       <div className="mx-auto md:border-x border-gray-200 dark:border-white/10">
         {/* Menggunakan Grid Cols 2 untuk membagi ruang sama rata (Equal) */}
@@ -112,3 +112,5 @@ export async function Footer() {
     </footer>
   )
 }
+
+

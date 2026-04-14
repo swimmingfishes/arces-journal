@@ -9,7 +9,7 @@ export function JournalDetailClient({ journal }: { journal: Journal }) {
   return (
     <main className="w-full">
       {/* Hero section jurnal */}
-      <section className="w-full px-6 lg:px-32 pt-16 pb-12">
+      <section className="w-full page-gutter-narrow pt-16 pb-12">
         <div className="px-8">
           {/* Mobile: stack vertikal, md+: grid 3 kolom */}
           <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-6 md:items-end">
@@ -31,7 +31,7 @@ export function JournalDetailClient({ journal }: { journal: Journal }) {
       </section>
 
       {/* Tabs */}
-      <section className="w-full px-6 lg:px-32 pb-24">
+      <section className="w-full page-gutter-narrow pb-24">
         <Tabs defaultValue="penanggung-jawab" className="px-8 flex flex-col gap-0">
           <TabsList className="w-auto md:w-fit justify-start bg-transparent h-auto p-0 md:gap-1 lg:gap-2 ">
             <TabsTrigger
@@ -112,3 +112,5 @@ export function JournalDetailClient({ journal }: { journal: Journal }) {
     </main>
   )
 }
+
+

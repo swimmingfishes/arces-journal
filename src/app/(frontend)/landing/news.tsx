@@ -64,24 +64,24 @@ export function LandingNews() {
   }
 
   return (
-    <section className="w-full px-6 lg:px-46 bg-background">
+    <section className="w-full page-gutter bg-background">
       {/* Container utama sejajar dengan Cards */}
-      <div className="mx-auto md:border-x border-b border-gray-200 dark:border-white/10">
+      <div className="mx-auto md:border-x border-b border-border">
         {/* Header Section */}
-        <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+        <div className="px-8 py-10 border-b border-border">
           <h2 className="text-2xl font-bold text-blue-500">Berita dan Aktifitas</h2>
         </div>
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {loading && (
-            <div className="col-span-full p-8 text-sm text-muted-foreground border-l border-r border-b border-gray-200 dark:border-white/10 md:border-l-0 md:border-r-0">
+            <div className="col-span-full p-8 text-sm text-muted-foreground border-l border-r border-b border-border md:border-l-0 md:border-r-0">
               Loading news...
             </div>
           )}
 
           {!loading && !mainNews && (
-            <div className="col-span-full p-8 text-sm text-muted-foreground border-l border-r border-b border-gray-200 dark:border-white/10 md:border-l-0 md:border-r-0">
+            <div className="col-span-full p-8 text-sm text-muted-foreground border-l border-r border-b border-border md:border-l-0 md:border-r-0">
               No news available.
             </div>
           )}
@@ -90,7 +90,7 @@ export function LandingNews() {
           {mainNews && (
             <Link
               href={mainNews.slug ? `/news/${mainNews.slug}` : '/news'}
-              className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-gray-200 dark:border-white/10 group cursor-pointer"
+              className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-border group cursor-pointer"
             >
               <div className="w-full aspect-video bg-gray-200 dark:bg-zinc-900 overflow-hidden">
                 {typeof mainNews.heroImage === 'object' && mainNews.heroImage ? (
@@ -130,7 +130,7 @@ export function LandingNews() {
                 key={news.id}
                 href={news.slug ? `/news/${news.slug}` : '/news'}
                 // md:border-r-0 dipasang agar tidak double dengan border container utama di desktop
-                className="p-8 space-y-2 group cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10"
+                className="p-8 space-y-2 group cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b border-l border-r md:border-l-0 md:border-r-0 border-border"
               >
                 <h4 className="text-lg font-bold leading-snug group-hover:text-blue-500 transition-colors">
                   {news.title}
@@ -143,7 +143,7 @@ export function LandingNews() {
             ))}
 
             {/* See More Link */}
-            <div className="p-8 pt-10 border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+            <div className="p-8 pt-10 border-l border-r md:border-l-0 md:border-r-0 border-border">
               <Link href="/news">
                 <Button size="lg">
                   See more news <ArrowRight className="ml-2 h-4 w-4" />
@@ -156,3 +156,5 @@ export function LandingNews() {
     </section>
   )
 }
+
+

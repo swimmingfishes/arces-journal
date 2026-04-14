@@ -6,10 +6,10 @@ import { ArrowRight } from 'lucide-react'
 
 export function LandingCTA() {
   return (
-    <section className="w-full px-6 lg:px-46 bg-background">
-      <div className="mx-auto md:border-x border-gray-200 dark:border-white/10">
+    <section className="w-full page-gutter bg-background">
+      <div className="mx-auto md:border-x border-border">
         {/* Konten CTA dengan border-t untuk memisahkan dari Gallery */}
-        <div className="flex flex-col items-center justify-center py-24 md:py-32 space-y-8 border-t border-gray-200 dark:border-white/10 text-center px-6">
+        <div className="flex flex-col items-center justify-center py-24 md:py-32 space-y-8 border-t border-border text-center px-6">
           <div className="space-y-4 max-w-3xl">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
               Start publish with us
@@ -32,3 +32,5 @@ export function LandingCTA() {
     </section>
   )
 }
+
+

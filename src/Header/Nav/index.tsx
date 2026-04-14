@@ -24,7 +24,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
       <div className="flex items-center gap-2">
         <ThemeToggle />
         <button
-          className="md:hidden p-2 rounded-md text-gray-600 dark:text-stone-200 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+          className="md:hidden p-2 rounded-md text-foreground/80 hover:bg-foreground/5 transition-colors"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -33,18 +33,19 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
 
         {/* Mobile dropdown */}
         {open && (
-          <div className="absolute top-full left-0 right-0 bg-white dark:bg-black border-b border-gray-200 dark:border-white/10 shadow-lg md:hidden z-50">
+          <div className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-lg md:hidden z-50">
             <nav className="flex flex-col px-8 py-4 gap-1">
               {navLinks.map(({ label, href }) => (
                 <Link
                   key={href}
                   href={href}
+                  scroll={false}
                   onClick={() => setOpen(false)}
                   className={`py-2 px-3 rounded-md text-sm font-medium transition-colors
                     ${
                       pathname === href
-                        ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10'
-                        : 'text-gray-600 dark:text-stone-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5'
+                        ? 'text-blue-600 bg-blue-50/60 dark:bg-blue-500/10'
+                        : 'text-foreground/80 hover:text-foreground hover:bg-foreground/5'
                     }`}
                 >
                   {label}
@@ -64,11 +65,12 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
         <Link
           key={href}
           href={href}
+          scroll={false}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors
             ${
               pathname === href
                 ? 'text-blue-600 dark:text-blue-400'
-                : 'text-gray-600 dark:text-stone-300 hover:text-gray-900 dark:hover:text-white'
+                : 'text-foreground/75 hover:text-foreground'
             }`}
         >
           {label}

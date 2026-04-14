@@ -1,16 +1,11 @@
 'use client'
 
 import { Fragment, useState, useMemo } from 'react'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft, ExternalLink, Search } from 'lucide-react'
+import { ExternalLink, Search } from 'lucide-react'
 import Link from 'next/link'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
+import { RoutePageHeader } from '@/components/RoutePageHeader'
 
 export default function PageClientContent({ allMembers }: { allMembers: any[] }) {
   const [selectedMember, setSelectedMember] = useState<any>(null)
@@ -32,27 +27,21 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
 
   return (
     <main className="w-full bg-background min-h-screen">
-      <section className="w-full px-6 lg:px-46">
-        <div className="mx-auto md:border-x border-gray-200 dark:border-white/10 min-h-screen">
-          {/* 1. TOP BAR: Back Button */}
-          <div className="px-8 pt-10">
-            <Link href="/">
-              <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
-                <ArrowLeft className="h-4 w-4" /> Back to home
-              </Button>
-            </Link>
-          </div>
+      <section className="w-full page-gutter">
+        <div className="mx-auto md:border-x border-border min-h-screen">
+          <RoutePageHeader
+            title="Kepengurusan"
+            description="Telusuri tim editorial dan reviewer ARCES, lengkap dengan institusi serta profil singkat masing-masing anggota."
+          />
 
-          {/* 2. SEARCH SECTION - Search Bar Diperbesar (h-12) */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between px-8 py-8 border-b border-gray-200 dark:border-white/10 gap-4 mt-4 relative">
-            <h1 className="text-4xl font-extrabold tracking-tight">Kepengurusan</h1>
-
-            <div className="relative w-full max-w-xs">
+          {/* 2. SEARCH SECTION */}
+          <div className="flex justify-start px-8 py-6 border-b border-border relative">
+            <div className="relative w-full">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
+                <input
                   placeholder="Cari nama kepengurusan..."
-                  className="pl-12 h-12 rounded-lg border-gray-200 focus-visible:ring-blue-500 text-base"
+                  className="w-full rounded-full border border-border bg-white/70 dark:bg-zinc-900/70 pl-12 pr-4 h-14 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
@@ -62,17 +51,17 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
 
               {/* Hasil Search Dropdown */}
               {isSearchFocused && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-24 z-50 overflow-hidden max-h-[350px] overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 bg-white dark:bg-zinc-900 border border-border z-100 shadow-2xl max-h-87.5 overflow-y-auto">
                   {searchResults.map((result) => (
                     <div
                       key={result.id}
-                      className="flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border-b last:border-0 border-gray-100 dark:border-white/5"
+                      className="flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border-b last:border-0 border-border/70"
                       onClick={() => {
                         setSelectedMember(result)
                         setSearchQuery('')
                       }}
                     >
-                      <div className="h-12 w-12 rounded-full overflow-hidden border border-gray-100">
+                      <div className="h-12 w-12 rounded-full overflow-hidden border border-border/70">
                         <img src={result.image} className="h-full w-full object-cover" alt="" />
                       </div>
                       <div className="flex flex-col">
@@ -93,7 +82,7 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
             {/* SEKSI EDITORIAL TEAM */}
             <section>
               {/* Judul dengan Border Atas & Bawah melintang penuh */}
-              <div className="px-8 py-6 border-b border-gray-200 dark:border-white/10 bg-zinc-50/30 dark:bg-zinc-900/10">
+              <div className="px-8 py-6 border-b border-border bg-zinc-50/30 dark:bg-zinc-900/10">
                 <h2 className="text-2xl font-bold text-blue-500">Editorial Team</h2>
               </div>
 
@@ -107,9 +96,9 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
             </section>
 
             {/* SEKSI REVIEWER */}
-            <section className="border-t border-gray-200 dark:border-white/10">
+            <section className="border-t border-border">
               {/* Judul dengan Border Bawah melintang penuh */}
-              <div className="px-8 py-6 border-b border-gray-200 dark:border-white/10 bg-zinc-50/30 dark:bg-zinc-900/10">
+              <div className="px-8 py-6 border-b border-border bg-zinc-50/30 dark:bg-zinc-900/10">
                 <h2 className="text-2xl font-bold text-blue-500">Reviewers</h2>
               </div>
 
@@ -169,7 +158,7 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
           {/* Baris Atas: Foto & Info Utama */}
           <div className="flex gap-6 items-start w-full">
             {/* Foto Profil: Inset Rounded */}
-            <div className="w-32 h-32 shrink-0 bg-gray-100 rounded-2xl overflow-hidden border border-gray-100 dark:border-white/5">
+            <div className="w-32 h-32 shrink-0 bg-gray-100 rounded-2xl overflow-hidden border border-border/70">
               <img src={member.image} className="w-full h-full object-cover" alt={member.name} />
             </div>
 
@@ -216,3 +205,5 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
     </Dialog>
   )
 }
+
+

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import type { Media as PayloadMedia } from '@/payload-types'
 import { Media } from '@/components/Media'
+import { RoutePageHeader } from '@/components/RoutePageHeader'
 import {
   Pagination,
   PaginationContent,
@@ -58,28 +59,22 @@ export default function GalleryPage() {
   }, [currentPage, galleryItems])
 
   return (
-    <main className="w-full bg-background min-h-screen">
-      <section className="w-full px-6 lg:px-46">
-        <div className="mx-auto md:border-x min-h-screen">
-          {/* 1 & 2. HEADER SECTION: Center Aligned (No Back Button) */}
-          <div className="px-8 py-16 border-b border-gray-200 dark:border-white/10 text-center flex flex-col items-center justify-center">
-            <h1 className="text-4xl md:text-6xl font-serif tracking-tighter uppercase mb-4">
-              ARCES GALLERY
-            </h1>
-            <p className="max-w-2xl text-muted-foreground leading-relaxed">
-              Were a team of engineers, marketers, designers, all passionate about video and the
-              work we create together. Welcome to our blog about video.
-            </p>
-          </div>
+    <main className="w-full bg-background">
+      <section className="w-full page-gutter">
+        <div className="mx-auto md:border-x">
+          <RoutePageHeader
+            title="Arces — Gallery"
+            description="We're a team of engineers, marketers, designers, all passionate about video and the work we create together. Welcome to our blog about video."
+          />
 
           {/* 3. GALLERY GRID: Full-Bleed (Mepet Border) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {loading ? (
-              <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-gray-200 dark:border-white/10">
+              <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-border">
                 Loading gallery...
               </div>
             ) : currentItems.length === 0 ? (
-              <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-gray-200 dark:border-white/10">
+              <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-border">
                 No media found in gallery folder.
               </div>
             ) : (
@@ -92,13 +87,13 @@ export default function GalleryPage() {
                 return (
                   <div
                     key={item.id}
-                    className={`flex flex-col border-gray-200 dark:border-white/10
+                    className={`flex flex-col border-border
                       ${!isLastRow ? 'border-b' : ''} 
                       ${(index + 1) % 3 !== 0 ? 'lg:border-r' : ''} 
                       hover:bg-gray-50/50 dark:hover:bg-white/5 transition-all group`}
                   >
                     {/* Image: Full-Bleed (Hapus Padding p-8) */}
-                    <div className="relative w-full aspect-[4/3] bg-gray-100 dark:bg-zinc-900 overflow-hidden">
+                    <div className="relative w-full aspect-4/3 bg-gray-100 dark:bg-zinc-900 overflow-hidden">
                       <Media
                         resource={item}
                         fill
@@ -110,7 +105,7 @@ export default function GalleryPage() {
                     </div>
 
                     {/* Caption: Berada di bawah garis border gambar */}
-                    <div className="p-6 border-t border-gray-200 dark:border-white/10">
+                    <div className="p-6 border-t border-border">
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {item.alt ||
                           item.filename ||
@@ -124,7 +119,7 @@ export default function GalleryPage() {
           </div>
 
           {/* 4. PAGINATION */}
-          <div className="md:border-t border-gray-200 dark:border-white/10 py-8 flex justify-center bg-zinc-50/30 dark:bg-transparent">
+          <div className="md:border-t border-border py-8 flex justify-center bg-zinc-50/30 dark:bg-transparent">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
@@ -178,3 +173,5 @@ export default function GalleryPage() {
     </main>
   )
 }
+
+

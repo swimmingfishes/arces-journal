@@ -52,30 +52,30 @@ export function LandingGallery() {
   const sideImages = useMemo(() => galleryImages.slice(1, 7), [galleryImages])
 
   return (
-    <section className="w-full px-6 lg:px-46 bg-background">
-      <div className="mx-auto md:border-x border-gray-200 dark:border-white/10">
+    <section className="w-full page-gutter bg-background">
+      <div className="mx-auto md:border-x border-border">
         {/* Header Section */}
-        <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+        <div className="px-8 py-10 border-b border-border">
           <h2 className="text-2xl font-bold text-blue-500">Media & Galery</h2>
         </div>
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {loading && (
-            <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+            <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-border">
               Loading gallery...
             </div>
           )}
 
           {!loading && !mainImage && (
-            <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+            <div className="col-span-full px-8 py-10 text-sm text-muted-foreground border-b border-l border-r md:border-l-0 md:border-r-0 border-border">
               No media found in gallery folder.
             </div>
           )}
 
           {/* LEFT: Featured Image & Description */}
           {mainImage && (
-            <div className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-gray-200 dark:border-white/10 group">
+            <div className="flex flex-col border-b lg:border-b-0 border-l border-r md:border-l-0 lg:border-r border-border group">
               <div className="relative w-full aspect-video bg-gray-200 dark:bg-zinc-900 overflow-hidden">
                 <Media
                   resource={mainImage}
@@ -95,11 +95,11 @@ export function LandingGallery() {
           )}
 
           {/* RIGHT: 6 Small Images Grid (3x2) */}
-          <div className="grid grid-cols-2 lg:grid-cols-2 border-l border-r md:border-l-0 md:border-r-0 border-gray-200 dark:border-white/10">
+          <div className="grid grid-cols-2 lg:grid-cols-2 border-l border-r md:border-l-0 md:border-r-0 border-border">
             {sideImages.map((img, index) => (
               <div
                 key={img.id}
-                className={`aspect-video bg-gray-300 overflow-hidden border-b border-gray-200 dark:border-white/10 
+                className={`aspect-video bg-gray-300 overflow-hidden border-b border-border 
                 ${index % 2 === 0 ? 'border-r' : ''} 
                 hover:opacity-80 transition-opacity cursor-pointer`}
               >
@@ -119,3 +119,5 @@ export function LandingGallery() {
     </section>
   )
 }
+
+

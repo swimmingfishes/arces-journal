@@ -26,14 +26,14 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
 
   return (
     <header
-      className={`w-full sticky top-0 z-50 transition-all duration-500 px-6 lg:px-46
-        ${scrolled ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md' : 'bg-transparent backdrop-blur-none'}`}
+      className={`w-full sticky top-0 z-50 transition-all duration-500 page-gutter
+        ${scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-background/70 backdrop-blur-sm'}`}
       {...(theme ? { 'data-theme': theme } : {})}
     >
-      <div className="relative py-3 flex items-center md:border-x md:border-b px-8">
+      <div className="relative py-3 flex items-center md:border-x md:border-b border-border px-8">
         {/* Left: Logo */}
-        <Link href="/">
-          <p className="font-mono font-bold text-gray-600 dark:text-stone-200 text-2xl">ARCES</p>
+        <Link href="/" scroll={false}>
+          <p className="font-mono font-bold text-foreground text-2xl">ARCES</p>
         </Link>
 
         {/* Center: Nav (desktop) */}

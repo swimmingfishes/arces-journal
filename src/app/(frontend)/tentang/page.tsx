@@ -1,9 +1,7 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
 import RichText from '@/components/RichText'
+import { RoutePageHeader } from '@/components/RoutePageHeader'
 import type { Media, Tentang } from '@/payload-types'
 
 function isMediaObject(value: number | Media | null | undefined): value is Media {
@@ -27,24 +25,15 @@ export default async function TentangPage() {
 
     return (
       <main className="w-full bg-background min-h-screen">
-        <section className="w-full px-6 lg:px-46">
-          <div className="mx-auto md:border-x border-gray-200 dark:border-white/10 min-h-screen">
-            {/* TOP BAR */}
-            <div className="px-8 pt-10">
-              <Link href="/">
-                <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
-                  <ArrowLeft className="h-4 w-4" /> Back to home
-                </Button>
-              </Link>
-            </div>
-
-            {/* HEADER */}
-            <div className="px-8 py-8 border-b border-gray-200 dark:border-white/10 mt-4">
-              <h1 className="text-4xl font-extrabold tracking-tight">Tentang</h1>
-            </div>
+        <section className="w-full page-gutter">
+          <div className="mx-auto md:border-x border-border min-h-screen">
+            <RoutePageHeader
+              title="Tentang"
+              description="Mengenal ARCES lebih dekat: sejarah, visi misi, serta peran strategis kami dalam pengembangan publikasi ilmiah."
+            />
 
             {/* SEJARAH */}
-            <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+            <div className="px-8 py-10 border-b border-border">
               <h2 className="text-2xl font-bold text-blue-500">Sejarah</h2>
             </div>
             <div className="border-b">
@@ -75,11 +64,11 @@ export default async function TentangPage() {
             </div>
 
             {/* VISI MISI */}
-            <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+            <div className="px-8 py-10 border-b border-border">
               <h2 className="text-2xl font-bold text-blue-500">Visi & Misi</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 border-b">
-              <div className="flex flex-col md:border-r border-gray-200 dark:border-white/10">
+              <div className="flex flex-col md:border-r border-border">
                 <div className="py-8 pb-0 md:pb-8 space-y-6">
                   <h2 className="text-2xl font-bold text-blue-500">Visi</h2>
                   {tentangData.visiMisi.visi && <RichText data={tentangData.visiMisi.visi} />}
@@ -107,7 +96,7 @@ export default async function TentangPage() {
             </div>
 
             {/* PERAN STRATEGIS */}
-            <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+            <div className="px-8 py-10 border-b border-border">
               <h2 className="text-2xl font-bold text-blue-500">Peran Strategis Arces</h2>
             </div>
 
@@ -133,17 +122,17 @@ export default async function TentangPage() {
             </div>
 
             {/* WEBSITE ADDRESS */}
-            <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+            <div className="px-8 py-10 border-b border-border">
               <h2 className="text-2xl font-bold text-blue-500">Alamat lengkap website arces</h2>
             </div>
-            <div className="py-10 border-b border-gray-200 dark:border-white/10 bg-zinc-50/5 dark:bg-transparent">
+            <div className="py-10 border-b border-border bg-zinc-50/5 dark:bg-transparent">
               <div className="max-w-none space-y-6">
                 <RichText data={tentangData.website.content} />
               </div>
             </div>
 
             {/* PHYSICAL ADDRESS */}
-            <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+            <div className="px-8 py-10 border-b border-border">
               <h2 className="text-2xl font-bold text-blue-500">Alamat lokasi fisik arces</h2>
             </div>
 
@@ -154,12 +143,12 @@ export default async function TentangPage() {
             </div>
 
             {/* MAPS SECTION */}
-            <div className="px-8 py-10 border-b border-gray-200 dark:border-white/10">
+            <div className="px-8 py-10 border-b border-border">
               <h2 className="text-2xl font-bold text-blue-500">Alamat via google maps</h2>
             </div>
 
             <div className="flex flex-col">
-              <div className="p-8 border-b border-gray-200 dark:border-white/10 pb-8 lg:pb-12">
+              <div className="p-8 border-b border-border pb-8 lg:pb-12">
                 <div className="w-full h-96 md:h-125 overflow-hidden relative group rounded-lg">
                   {tentangData.physicalAddress.mapsEmbedUrl ? (
                     <iframe
@@ -193,9 +182,11 @@ export default async function TentangPage() {
 
 function GridTextCard({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="p-8 border-b border-r border-gray-200 dark:border-white/10 flex flex-col gap-4 hover:bg-zinc-50/50 dark:hover:bg-white/5 transition-colors">
+    <div className="p-8 border-b border-r border-border flex flex-col gap-4 hover:bg-zinc-50/50 dark:hover:bg-white/5 transition-colors">
       <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed text-justify">{desc}</p>
     </div>
   )
 }
+
+

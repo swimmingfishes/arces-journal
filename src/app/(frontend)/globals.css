@@ -1,3 +1,4 @@
+@import '@fontsource/mozilla-headline';
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'tw-animate-css';
@@ -56,10 +57,19 @@
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono);
+  --font-serif: 'Mozilla Headline', serif;
   --font-sans: var(--font-public-sans);
 }
 
 @layer utilities {
+  .page-gutter {
+    padding-inline: 2rem;
+  }
+
+  .page-gutter-narrow {
+    padding-inline: 2rem;
+  }
+
   .container {
     width: 100%;
     margin-inline: auto;
@@ -73,6 +83,14 @@
   }
 
   @variant md {
+    .page-gutter {
+      padding-inline: 4rem;
+    }
+
+    .page-gutter-narrow {
+      padding-inline: 3.5rem;
+    }
+
     .container {
       max-width: var(--breakpoint-md);
       padding-inline: 2rem;
@@ -80,18 +98,42 @@
   }
 
   @variant lg {
+    .page-gutter {
+      padding-inline: 8rem;
+    }
+
+    .page-gutter-narrow {
+      padding-inline: 7rem;
+    }
+
     .container {
       max-width: var(--breakpoint-lg);
     }
   }
 
   @variant xl {
+    .page-gutter {
+      padding-inline: 12rem;
+    }
+
+    .page-gutter-narrow {
+      padding-inline: 10rem;
+    }
+
     .container {
       max-width: var(--breakpoint-xl);
     }
   }
 
   @variant 2xl {
+    .page-gutter {
+      padding-inline: 20rem;
+    }
+
+    .page-gutter-narrow {
+      padding-inline: 18rem;
+    }
+
     .container {
       max-width: var(--breakpoint-2xl);
     }
@@ -113,8 +155,8 @@
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(57.7% 0.245 27.325deg);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --border: oklch(90.2% 0.018 68deg);
+  --input: oklch(90.2% 0.018 68deg);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
@@ -133,7 +175,7 @@
   --success: oklch(78% 0.08 200deg);
   --warning: oklch(89% 0.1 75deg);
   --error: oklch(75% 0.15 25deg);
-  --background: oklch(1 0 0);
+  --background: oklch(97.8% 0.01 68deg);
   --foreground: oklch(0.145 0 0);
 }
 
@@ -154,8 +196,8 @@
   --accent-foreground: oklch(98.5% 0 0deg);
   --destructive: oklch(39.6% 0.141 25.723deg);
   --destructive-foreground: oklch(63.7% 0.237 25.331deg);
-  --border: oklch(26.9% 0 0deg);
-  --input: oklch(26.9% 0 0deg);
+  --border: oklch(30% 0.01 95deg);
+  --input: oklch(30% 0.01 95deg);
   --ring: oklch(43.9% 0 0deg);
   --chart-1: oklch(48.8% 0.243 264.376deg);
   --chart-2: oklch(69.6% 0.17 162.48deg);
@@ -215,6 +257,7 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
+  --font-serif: 'Mozilla Headline', serif;
   --font-sans: var(--font-public-sans);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);

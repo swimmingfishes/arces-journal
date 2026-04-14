@@ -1,42 +1,33 @@
 'use client'
-// import React, { useEffect, useState } from 'react'
 import { ParticlesBackground } from '@/components/ParticlesBackground'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 
 export function LandingHero() {
-  // const [scrolled, setScrolled] = useState(false)
-
-  // useEffect(() => {
-  //   const handleScroll = () => setScrolled(window.scrollY > 10)
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [])
-
   return (
-    <section className="w-full relative overflow-hidden bg-background">
-      <div className="relative z-10 mx-auto px-6 lg:px-46">
-        <div className="relative md:border-x md:border-b border-gray-200 dark:border-white/10 px-8">
+    <section className="relative w-full overflow-hidden bg-background">
+      <div className="relative z-10 mx-auto page-gutter">
+        <div className="relative border-border md:border-x md:border-b px-8">
           {/* particles */}
-          <div className="absolute inset-0 -z-1">
+          <div className="absolute inset-0 -z-10">
             <ParticlesBackground />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-            <div className="flex flex-col justify-center space-y-6 pt-8 lg:pt-32 mb-16">
+          <div className="py-12 md:py-16 lg:py-24">
+            <div className="mx-auto flex max-w-4xl flex-col items-center space-y-6 text-center">
               <p className="text-base text-gray-600 dark:text-gray-300">By arces.journals.id</p>
-              <h1 className="text-xl md:text-2xl lg:text-6xl text-center md:text-left font-extrabold leading-tight text-gray-900 dark:text-white">
+              <h1 className="font-serif text-3xl md:text-5xl lg:text-7xl font-bold leading-18 text-gray-900 dark:text-white text-balance">
                 Serving the global research Community
               </h1>
-              <p className="text-base leading-relaxed max-w-lg text-gray-600 dark:text-gray-300 text-center md:text-left">
+              <p className="max-w-2xl text-base leading-relaxed text-gray-600 dark:text-gray-300">
                 Menyediakan akses terbuka (Open Access) ke jurnal-jurnal unggulan hasil penelitian
                 sejawat (peer-reviewed) dan pengabdian masyarakat di bidang komputasi, rekayasa,
                 serta bisnis digital.
               </p>
 
-              <div className="flex justify-center md:justify-start mt-14">
-                <Button size="lg">
-                  Explore journals <ArrowRight></ArrowRight>
+              <div className="flex justify-center pt-4 md:pt-6">
+                <Button size="lg" className="gap-2">
+                  Explore journals <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -46,3 +37,5 @@ export function LandingHero() {
     </section>
   )
 }
+
+

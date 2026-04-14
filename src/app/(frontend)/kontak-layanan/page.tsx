@@ -1,17 +1,8 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { Button } from '@/components/ui/button'
-import {
-  ArrowLeft,
-  Mail,
-  MapPin,
-  Phone,
-  Zap,
-  MessageSquare,
-  ShieldCheck,
-} from 'lucide-react'
-import Link from 'next/link'
+import { Mail, MapPin, Phone, Zap, MessageSquare, ShieldCheck } from 'lucide-react'
 import RichText from '@/components/RichText'
+import { RoutePageHeader } from '@/components/RoutePageHeader'
 
 const iconMap = {
   Zap: <Zap className="h-6 w-6 text-blue-500" />,
@@ -34,28 +25,12 @@ export default async function ContactServicePage() {
 
     return (
       <main className="w-full bg-background min-h-screen">
-        <section className="w-full px-6 lg:px-46">
-          <div className="mx-auto md:border-x border-gray-200 dark:border-white/10 min-h-screen">
-            {/* 1. TOP BAR */}
-            <div className="px-8 pt-10">
-              <Link href="/">
-                <Button variant="ghost" size="lg" className="flex items-center pl-0 gap-2">
-                  <ArrowLeft className="h-4 w-4" /> Back to home
-                </Button>
-              </Link>
-            </div>
-
-            {/* 2. HEADER */}
-            <div className="px-8 py-8 border-b mt-4">
-              <h1 className="text-4xl font-extrabold tracking-tight">
-                {kontakLayanan.header?.title || 'Kontak & Layanan'}
-              </h1>
-              {kontakLayanan.header?.description && (
-                <div className="text-muted-foreground mt-2 prose dark:prose-invert max-w-none">
-                  <RichText data={kontakLayanan.header.description} />
-                </div>
-              )}
-            </div>
+        <section className="w-full page-gutter">
+          <div className="mx-auto md:border-x border-border min-h-screen">
+            <RoutePageHeader
+              title="Kontak & Layanan"
+              description="Hubungi tim ARCES untuk kebutuhan layanan, informasi editorial, dan kolaborasi akademik."
+            />
 
             {/* 3. SECTION LAYANAN (Grid Cards) */}
             <section>
@@ -79,14 +54,14 @@ export default async function ContactServicePage() {
             </section>
 
             {/* 4. SECTION KONTAK (Split Layout) */}
-            <section className="border-t border-gray-200 dark:border-white/10 ">
+            <section className="border-t border-border ">
               <div className="px-8 py-6 border-b  bg-zinc-50/30 dark:bg-zinc-900/10">
                 <h2 className="text-2xl font-bold text-blue-500">
                   {kontakLayanan.kontak?.title || 'Contact Information'}
                 </h2>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="flex-1 p-8 space-y-10 lg:border-r border-gray-200 dark:border-white/10">
+                <div className="flex-1 p-8 space-y-10 lg:border-r border-border">
                   <div className="space-y-8">
                     {kontakLayanan.kontak?.email && (
                       <ContactItem
@@ -113,7 +88,7 @@ export default async function ContactServicePage() {
                 </div>
                 <div className="p-8 pt-4 lg:pt-8 flex flex-col space-y-6 bg-zinc-50/10">
                   {(kontakLayanan.kontak as any)?.mapsEmbedUrl ? (
-                    <div className="w-full h-96 rounded-lg overflow-hidden border border-gray-200 dark:border-white/10">
+                    <div className="w-full h-96 rounded-lg overflow-hidden border border-border">
                       <iframe
                         src={(kontakLayanan.kontak as any).mapsEmbedUrl}
                         width="100%"
@@ -164,7 +139,7 @@ function ServiceCard({
 }) {
   return (
     <div
-      className={`p-8 lg:p-10 flex flex-col gap-4 border-b md:border-b-0 ${!isLast ? 'md:border-r border-gray-200 dark:border-white/10' : ''}`}
+      className={`p-8 lg:p-10 flex flex-col gap-4 border-b md:border-b-0 ${!isLast ? 'md:border-r border-border' : ''}`}
     >
       <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center">
         {icon}
@@ -186,3 +161,5 @@ function ContactItem({ icon, label, value }: { icon: any; label: string; value: 
     </div>
   )
 }
+
+

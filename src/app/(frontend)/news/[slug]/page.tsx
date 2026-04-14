@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button'
-import { ArrowLeft, Calendar } from 'lucide-react'
-import Link from 'next/link'
+import { Calendar } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -73,19 +71,10 @@ export default async function NewsDetailPage({ params }: Props) {
       {/* Decorative Background */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-125 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.1),transparent_60%)]" />
 
-      <section className="w-full px-6 lg:px-46">
+      <section className="w-full page-gutter">
         {/* Border Luar (Sejajar Navbar/Footer) */}
-        <div className="mx-auto min-h-screen flex flex-col md:border-x border-gray-200 dark:border-white/10">
+        <div className="mx-auto min-h-screen flex flex-col md:border-x border-border">
           <article className="relative grow lg:mx-36 px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
-            <Link href="/news">
-              <Button
-                variant="ghost"
-                className="mb-8 flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors px-0 hover:bg-transparent"
-              >
-                <ArrowLeft className="h-4 w-4" /> Back to News
-              </Button>
-            </Link>
-
             {/* Header Title & Meta */}
             <header className="mb-10 text-center sm:text-left">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white text-balance mb-6 leading-tight">
@@ -101,11 +90,10 @@ export default async function NewsDetailPage({ params }: Props) {
                   {publishDate || 'No date'}
                 </span>
               </div>
-
             </header>
 
             {/* Hero Image */}
-            <div className="relative w-full aspect-video sm:aspect-21/9 rounded-2xl sm:rounded-3xl overflow-hidden mb-12 sm:mb-16 border border-gray-200/80 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/40 bg-gray-100 dark:bg-zinc-900">
+            <div className="relative w-full aspect-video sm:aspect-21/9 rounded-2xl sm:rounded-3xl overflow-hidden mb-12 sm:mb-16 border border-border/80  shadow-xl shadow-black/5 dark:shadow-black/40 bg-gray-100 dark:bg-zinc-900">
               {heroImage ? (
                 <Media
                   resource={heroImage}
@@ -130,7 +118,7 @@ export default async function NewsDetailPage({ params }: Props) {
               [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_h3]:mt-12 [&_h3]:mb-4 [&_h3]:font-semibold
               [&_blockquote]:border-l-4 [&_blockquote]:border-blue-500 [&_blockquote]:bg-blue-50/50 dark:[&_blockquote]:bg-blue-500/10 [&_blockquote]:py-3 [&_blockquote]:px-6 [&_blockquote]:rounded-r-2xl [&_blockquote]:not-italic [&_blockquote]:text-gray-800 dark:[&_blockquote]:text-gray-200
               [&_ul]:my-8 [&_ol]:my-8 [&_li]:mb-2
-              [&_img]:rounded-2xl [&_img]:border [&_img]:border-gray-200 dark:[&_img]:border-white/10 [&_img]:shadow-md"
+              [&_img]:rounded-2xl [&_img]:border [&_img]:border-border dark:[&_img]:border-white/10 [&_img]:shadow-md"
             >
               {newsItem.content && <RichText data={newsItem.content} enableGutter={false} />}
             </div>
@@ -181,3 +169,6 @@ const queryNewsBySlug = cache(async ({ slug, draft }: { slug: string; draft: boo
 
   return result.docs?.[0] || null
 })
+
+
+
