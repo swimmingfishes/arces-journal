@@ -145,7 +145,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
             {/* Content */}
             <div
-              className="mx-auto max-w-3xl lg:mx-36 px-4 sm:px-6 lg:px-8 prose prose-lg dark:prose-invert
+              className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 prose prose-lg dark:prose-invert
               [&_p]:leading-loose [&_p]:text-gray-700 dark:[&_p]:text-gray-300 [&_p]:mb-8
               [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h2]:mt-16 [&_h2]:mb-6 [&_h2]:font-bold [&_h2]:tracking-tight
               [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_h3]:mt-12 [&_h3]:mb-4 [&_h3]:font-semibold

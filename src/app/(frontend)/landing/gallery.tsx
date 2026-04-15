@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Media } from '@/components/Media'
 import type { Media as PayloadMedia } from '@/payload-types'
+import { SectionDivider } from '@/components/SectionDivider'
 
 type MediaResponse = {
   docs?: PayloadMedia[]
@@ -55,9 +56,10 @@ export function LandingGallery() {
     <section className="w-full page-gutter bg-background">
       <div className="mx-auto md:border-x border-border">
         {/* Header Section */}
-        <div className="px-8 py-10 border-b border-border">
-          <h2 className="text-2xl font-bold text-blue-500">Media & Galery</h2>
-        </div>
+        <SectionDivider
+          title="Media & Galery"
+          containerClassName="px-8 py-10 border-b border-border bg-transparent dark:bg-transparent"
+        />
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -119,5 +121,3 @@ export function LandingGallery() {
     </section>
   )
 }
-
-

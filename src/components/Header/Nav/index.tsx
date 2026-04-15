@@ -43,7 +43,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
                   className={`py-2 px-3 rounded-md text-sm font-medium transition-colors
                     ${
                       pathname === href
-                        ? 'text-blue-600 bg-blue-50/60 dark:bg-blue-500/10'
+                        ? 'text-primary bg-primary/10'
                         : 'text-foreground/80 hover:text-foreground hover:bg-foreground/5'
                     }`}
                 >
@@ -65,11 +65,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
           key={href}
           href={href}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors
-            ${
-              pathname === href
-                ? 'text-blue-600 dark:text-blue-400'
-                : 'text-foreground/75 hover:text-foreground'
-            }`}
+            ${pathname === href ? 'text-primary' : 'text-foreground/75 hover:text-foreground'}`}
         >
           {label}
         </Link>

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { RoutePageHeader } from '@/components/RoutePageHeader'
+import { SectionDivider } from '@/components/SectionDivider'
 
 export default function PageClientContent({ allMembers }: { allMembers: any[] }) {
   const [selectedMember, setSelectedMember] = useState<any>(null)
@@ -38,10 +39,10 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
           <div className="flex justify-start px-8 py-6 border-b border-border relative">
             <div className="relative w-full">
               <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                 <input
                   placeholder="Cari nama kepengurusan..."
-                  className="w-full rounded-full border border-border bg-white/70 dark:bg-zinc-900/70 pl-12 pr-4 h-14 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                  className="w-full rounded-full border border-border bg-white/70 dark:bg-zinc-900/70 pl-12 pr-4 h-14 text-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
@@ -66,7 +67,7 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
                       </div>
                       <div className="flex flex-col">
                         <span className="text-sm font-bold">{result.name}</span>
-                        <span className="text-[10px] text-blue-500 font-black uppercase tracking-wider">
+                        <span className="text-[10px] text-primary font-black uppercase tracking-wider">
                           {result.role}
                         </span>
                       </div>
@@ -82,9 +83,7 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
             {/* SEKSI EDITORIAL TEAM */}
             <section>
               {/* Judul dengan Border Atas & Bawah melintang penuh */}
-              <div className="px-8 py-6 border-b border-border bg-zinc-50/30 dark:bg-zinc-900/10">
-                <h2 className="text-2xl font-bold text-blue-500">Editorial Team</h2>
-              </div>
+              <SectionDivider title="Editorial Team" />
 
               <div className="p-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
@@ -98,9 +97,7 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
             {/* SEKSI REVIEWER */}
             <section className="border-t border-border">
               {/* Judul dengan Border Bawah melintang penuh */}
-              <div className="px-8 py-6 border-b border-border bg-zinc-50/30 dark:bg-zinc-900/10">
-                <h2 className="text-2xl font-bold text-blue-500">Reviewers</h2>
-              </div>
+              <SectionDivider title="Reviewers" />
 
               <div className="p-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12 pb-20">
@@ -186,7 +183,7 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
                     <Link
                       href={link.url}
                       target="_blank"
-                      className="text-sm font-semibold text-blue-500 hover:text-blue-600 flex items-center gap-1.5 transition-colors"
+                      className="text-sm font-semibold text-primary hover:text-primary/80 flex items-center gap-1.5 transition-colors"
                     >
                       {link.label} <ArrowSquareOutIcon className="h-3.5 w-3.5" />
                     </Link>

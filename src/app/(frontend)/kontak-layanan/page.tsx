@@ -10,11 +10,12 @@ import {
 } from '@phosphor-icons/react/dist/ssr'
 import RichText from '@/components/RichText'
 import { RoutePageHeader } from '@/components/RoutePageHeader'
+import { SectionDivider } from '@/components/SectionDivider'
 
 const iconMap = {
-  Zap: <LightningIcon className="h-6 w-6 text-blue-500" />,
-  ShieldCheck: <ShieldCheckIcon className="h-6 w-6 text-blue-500" />,
-  MessageSquare: <ChatCircleTextIcon className="h-6 w-6 text-blue-500" />,
+  Zap: <LightningIcon className="h-6 w-6 text-primary" />,
+  ShieldCheck: <ShieldCheckIcon className="h-6 w-6 text-primary" />,
+  MessageSquare: <ChatCircleTextIcon className="h-6 w-6 text-primary" />,
 }
 
 export default async function ContactServicePage() {
@@ -41,11 +42,7 @@ export default async function ContactServicePage() {
 
             {/* 3. SECTION LAYANAN (Grid Cards) */}
             <section>
-              <div className="px-8 py-6 border-b  bg-zinc-50/30 dark:bg-zinc-900/10">
-                <h2 className="text-2xl font-bold text-blue-500">
-                  {kontakLayanan.layanan?.title || 'Our Services'}
-                </h2>
-              </div>
+              <SectionDivider title={kontakLayanan.layanan?.title || 'Our Services'} />
 
               <div className="grid grid-cols-1 md:grid-cols-3">
                 {kontakLayanan.layanan?.services?.map((service, index) => (
@@ -62,11 +59,7 @@ export default async function ContactServicePage() {
 
             {/* 4. SECTION KONTAK (Split Layout) */}
             <section className="border-t border-border ">
-              <div className="px-8 py-6 border-b  bg-zinc-50/30 dark:bg-zinc-900/10">
-                <h2 className="text-2xl font-bold text-blue-500">
-                  {kontakLayanan.kontak?.title || 'Contact Information'}
-                </h2>
-              </div>
+              <SectionDivider title={kontakLayanan.kontak?.title || 'Contact Information'} />
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="flex-1 p-8 space-y-10 lg:border-r border-border">
                   <div className="space-y-8">
@@ -148,7 +141,7 @@ function ServiceCard({
     <div
       className={`p-8 lg:p-10 flex flex-col gap-4 border-b md:border-b-0 ${!isLast ? 'md:border-r border-border' : ''}`}
     >
-      <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center">
+      <div className="w-12 h-12 rounded-2xl bg-primary/10 dark:bg-primary/10 flex items-center justify-center">
         {icon}
       </div>
       <h3 className="text-xl font-bold">{title}</h3>
@@ -160,7 +153,7 @@ function ServiceCard({
 function ContactItem({ icon, label, value }: { icon: any; label: string; value: string }) {
   return (
     <div className="flex items-start gap-4">
-      <div className="mt-1 text-blue-500">{icon}</div>
+      <div className="mt-1 text-primary">{icon}</div>
       <div>
         <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">{label}</p>
         <p className="font-medium">{value}</p>

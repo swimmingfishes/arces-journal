@@ -52,7 +52,7 @@ export default function NewsPageClient({ initialNews }: { initialNews: any[] }) 
       {/* --- SEARCH & SORT SECTION --- */}
       <div className="border-b border-border relative md:flex">
         <div className="relative flex items-center px-8 py-6 md:flex-1 md:border-r border-border group">
-          <MagnifyingGlassIcon className="absolute left-12 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
+          <MagnifyingGlassIcon className="absolute left-12 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <input
             type="text"
             placeholder="Cari berita atau aktivitas..."

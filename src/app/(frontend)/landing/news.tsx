@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import type { News } from '@/payload-types'
 import { Media } from '@/components/Media'
+import { SectionDivider } from '@/components/SectionDivider'
 
 type NewsResponse = {
   docs?: News[]
@@ -68,9 +69,10 @@ export function LandingNews() {
       {/* Container utama sejajar dengan Cards */}
       <div className="mx-auto md:border-x border-b border-border">
         {/* Header Section */}
-        <div className="px-8 py-10 border-b border-border">
-          <h2 className="text-2xl font-bold text-blue-500">Berita dan Aktifitas</h2>
-        </div>
+        <SectionDivider
+          title="Berita dan Aktifitas"
+          containerClassName="px-8 py-10 border-b border-border bg-transparent dark:bg-transparent"
+        />
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -111,7 +113,7 @@ export function LandingNews() {
 
               <div className="p-8 space-y-4">
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold leading-tight group-hover:text-blue-500 transition-colors">
+                  <h3 className="text-2xl font-bold leading-tight group-hover:text-primary transition-colors">
                     {mainNews.title}
                   </h3>
                   <p className="text-sm text-gray-500">{formatDate(mainNews.createdAt)}</p>
@@ -132,7 +134,7 @@ export function LandingNews() {
                 // md:border-r-0 dipasang agar tidak double dengan border container utama di desktop
                 className="p-8 space-y-2 group cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b border-l border-r md:border-l-0 md:border-r-0 border-border"
               >
-                <h4 className="text-lg font-bold leading-snug group-hover:text-blue-500 transition-colors">
+                <h4 className="text-lg font-bold leading-snug group-hover:text-primary transition-colors">
                   {news.title}
                 </h4>
                 <p className="text-sm text-gray-500">{formatDate(news.createdAt)}</p>

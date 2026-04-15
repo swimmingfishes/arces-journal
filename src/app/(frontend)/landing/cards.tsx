@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import type { Journal } from '@/payload-types'
+import { SectionDivider } from '@/components/SectionDivider'
 
 type JournalsResponse = {
   docs?: Journal[]
@@ -63,9 +64,10 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
       {/* Container utama dengan border-x sejajar navbar/hero */}
       <div className="mx-auto md:border-x">
         {/* Judul Section (Dokumen dan Publikasi) */}
-        <div className="px-8 py-10 border-b">
-          <h2 className="text-2xl font-bold text-blue-500">Dokumen dan Publikasi</h2>
-        </div>
+        <SectionDivider
+          title="Dokumen dan Publikasi"
+          containerClassName="px-8 py-10 border-b bg-transparent dark:bg-transparent"
+        />
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -130,7 +132,7 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
 
                     {/* Content */}
                     <div className="p-6 flex flex-col grow space-y-4">
-                      <h3 className="text-xl font-semibold leading-snug transition-colors text-balance group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      <h3 className="text-xl font-bold leading-snug text-balance text-neutral-950 transition-colors group-hover:text-primary dark:text-white dark:group-hover:text-primary">
                         {card.title}
                       </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">

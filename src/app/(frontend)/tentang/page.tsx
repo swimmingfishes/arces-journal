@@ -2,6 +2,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import RichText from '@/components/RichText'
 import { RoutePageHeader } from '@/components/RoutePageHeader'
+import { SectionDivider } from '@/components/SectionDivider'
 import type { Media, Tentang } from '@/payload-types'
 
 function isMediaObject(value: number | Media | null | undefined): value is Media {
@@ -33,9 +34,7 @@ export default async function TentangPage() {
             />
 
             {/* SEJARAH */}
-            <div className="px-8 py-10 border-b border-border">
-              <h2 className="text-2xl font-bold text-blue-500">Sejarah</h2>
-            </div>
+            <SectionDivider title="Sejarah" />
             <div className="border-b">
               <div className="flex flex-col">
                 <div className="p-8 pb-0">
@@ -64,24 +63,22 @@ export default async function TentangPage() {
             </div>
 
             {/* VISI MISI */}
-            <div className="px-8 py-10 border-b border-border">
-              <h2 className="text-2xl font-bold text-blue-500">Visi & Misi</h2>
-            </div>
+            <SectionDivider title="Visi & Misi" />
             <div className="grid grid-cols-1 md:grid-cols-2 border-b">
               <div className="flex flex-col md:border-r border-border">
                 <div className="py-8 pb-0 md:pb-8 space-y-6">
-                  <h2 className="text-2xl font-bold text-blue-500">Visi</h2>
+                  <h3 className="text-2xl font-bold text-primary">Visi</h3>
                   {tentangData.visiMisi.visi && <RichText data={tentangData.visiMisi.visi} />}
                 </div>
               </div>
               <div className="p-8 pt-4 md:pt-8 flex flex-col space-y-6 bg-zinc-50/10">
                 <div className="prose dark:prose-invert max-w-none space-y-8 text-gray-700 dark:text-gray-300">
-                  <h2 className="text-2xl font-bold text-blue-500">Misi</h2>
+                  <h3 className="text-2xl font-bold text-primary">Misi</h3>
                   <ol className="list-none p-0 m-0 space-y-6">
                     {tentangData.visiMisi.misions?.map(
                       (misi: Tentang['visiMisi']['misions'][number], index: number) => (
                         <li key={index} className="flex gap-5 items-start">
-                          <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold text-sm border border-blue-100 dark:border-blue-900/30">
+                          <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/10 text-primary font-bold text-sm border border-primary/20 dark:border-primary/20">
                             {index + 1}
                           </span>
                           <p className="m-0 mt-0 leading-relaxed text-justify text-gray-700 dark:text-gray-300">
@@ -96,9 +93,7 @@ export default async function TentangPage() {
             </div>
 
             {/* PERAN STRATEGIS */}
-            <div className="px-8 py-10 border-b border-border">
-              <h2 className="text-2xl font-bold text-blue-500">Peran Strategis Arces</h2>
-            </div>
+            <SectionDivider title="Peran Strategis Arces" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {tentangData.peranStrategis.cards?.map(
@@ -122,9 +117,7 @@ export default async function TentangPage() {
             </div>
 
             {/* WEBSITE ADDRESS */}
-            <div className="px-8 py-10 border-b border-border">
-              <h2 className="text-2xl font-bold text-blue-500">Alamat lengkap website arces</h2>
-            </div>
+            <SectionDivider title="Alamat lengkap website arces" />
             <div className="py-10 border-b border-border bg-zinc-50/5 dark:bg-transparent">
               <div className="max-w-none space-y-6">
                 <RichText data={tentangData.website.content} />
@@ -132,9 +125,7 @@ export default async function TentangPage() {
             </div>
 
             {/* PHYSICAL ADDRESS */}
-            <div className="px-8 py-10 border-b border-border">
-              <h2 className="text-2xl font-bold text-blue-500">Alamat lokasi fisik arces</h2>
-            </div>
+            <SectionDivider title="Alamat lokasi fisik arces" />
 
             <div className="border-b">
               <div className="p-8 pb-0 md:pb-8 space-y-6">
@@ -143,9 +134,7 @@ export default async function TentangPage() {
             </div>
 
             {/* MAPS SECTION */}
-            <div className="px-8 py-10 border-b border-border">
-              <h2 className="text-2xl font-bold text-blue-500">Alamat via google maps</h2>
-            </div>
+            <SectionDivider title="Alamat via google maps" />
 
             <div className="flex flex-col">
               <div className="p-8 border-b border-border pb-8 lg:pb-12">
@@ -188,5 +177,3 @@ function GridTextCard({ title, desc }: { title: string; desc: string }) {
     </div>
   )
 }
-
-
