@@ -63,10 +63,10 @@ export const ParticlesBackground = memo(function ParticlesBackground() {
           vertical: { value: 1 },
         },
         color: {
-          value: '#3b82f6', // Warna biru shadcn/tailwind
+          value: '#328A10', // Warna biru shadcn/tailwind
         },
         links: {
-          color: { value: '#3b82f6' },
+          color: { value: '#328A10' },
           distance: 150,
           enable: true,
           frequency: 1,

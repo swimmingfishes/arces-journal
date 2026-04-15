@@ -95,7 +95,7 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
                 return (
                   <>
                     {/* Visual header powered by journal color palette */}
-                    <div className="relative w-full aspect-video overflow-hidden border-b border-border bg-background">
+                    <div className="relative w-full aspect-[calc(16/7)] overflow-hidden border-b border-border bg-background">
                       <div className="absolute inset-0 grid grid-cols-3">
                         <div style={{ backgroundColor: primary }} />
                         <div style={{ backgroundColor: secondary }} />
@@ -110,13 +110,21 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
                         }}
                       />
 
-                      {/* Foreground objects with blurred backdrop */}
-                      <div className="absolute inset-0 flex items-center justify-center gap-2 md:gap-3 px-5 md:px-7">
-                        <div className="h-34 w-20 border border-white/35 bg-white/28 backdrop-blur-md transition-all duration-700 ease-out will-change-transform group-hover:-translate-y-2 group-hover:-rotate-3 group-hover:scale-x-90 group-hover:scale-y-110" />
-                        <div className="h-34 w-14 rounded-full border border-white/35 bg-white/24 backdrop-blur-md transition-all duration-700 ease-out delay-75 will-change-transform group-hover:translate-y-2 group-hover:rotate-3 group-hover:scale-x-115 group-hover:scale-y-90" />
-                        <div className="h-34 w-20 border border-white/35 bg-white/20 backdrop-blur-md transition-all duration-700 ease-out delay-100 will-change-transform group-hover:-translate-y-2.5 group-hover:-rotate-2 group-hover:scale-x-110 group-hover:scale-y-90" />
-                        <div className="h-34 w-14 rounded-full border border-white/35 bg-white/24 backdrop-blur-md transition-all duration-700 ease-out delay-150 will-change-transform group-hover:translate-y-2 group-hover:-rotate-3 group-hover:scale-x-115 group-hover:scale-y-90" />
-                        <div className="h-34 w-20 border border-white/35 bg-white/30 backdrop-blur-md transition-all duration-700 ease-out delay-200 will-change-transform group-hover:-translate-y-2 group-hover:rotate-3 group-hover:scale-x-90 group-hover:scale-y-110" />
+                      <div className="absolute inset-0 flex items-center justify-center px-5 group">
+                        {/* Item 1 (Samping Luar Kiri - Tetap h-36) */}
+                        <div className="h-36 w-20 bg-white/28 backdrop-blur-xl transition-all duration-300 ease-out will-change-transform group-hover:opacity-80 group-hover:translate-x-2" />
+
+                        {/* Item 2 (Sebelah Tengah Kiri - Memendek sangat halus ke h-32) */}
+                        <div className="h-36 w-20 rounded-full bg-white/24 backdrop-blur-xl transition-all duration-300 ease-out delay-75 will-change-transform group-hover:h-32 group-hover:opacity-80 group-hover:translate-x-1" />
+
+                        {/* Item 3 (Tengah - Memendek halus ke h-28) */}
+                        <div className="h-36 w-20 bg-white/20 backdrop-blur-xl transition-all duration-300 ease-out delay-100 will-change-transform z-10 group-hover:h-28 group-hover:opacity-70 group-hover:-translate-y-1" />
+
+                        {/* Item 4 (Sebelah Tengah Kanan - Memendek sangat halus ke h-32) */}
+                        <div className="h-36 w-20 rounded-full bg-white/24 backdrop-blur-xl transition-all duration-300 ease-out delay-150 will-change-transform group-hover:h-32 group-hover:opacity-80 group-hover:-translate-x-1" />
+
+                        {/* Item 5 (Samping Luar Kanan - Tetap h-36) */}
+                        <div className="h-36 w-20 bg-white/30 backdrop-blur-xl transition-all duration-300 ease-out delay-200 will-change-transform group-hover:opacity-80 group-hover:-translate-x-2" />
                       </div>
                     </div>
 

@@ -27,7 +27,7 @@ export function RoutePageHeader({
         className,
       )}
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-orange-200/40 to-transparent dark:from-sky-500/15" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-yellow-600/20 to-transparent dark:from-sky-500/15" />
 
       <h1
         className={cn(

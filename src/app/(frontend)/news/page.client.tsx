@@ -116,8 +116,8 @@ export default function NewsPageClient({ initialNews }: { initialNews: any[] }) 
               </div>
 
               {/* KANAN: Konten Teks */}
-              <div className="flex flex-col justify-start grow space-y-4">
-                <p className="text-xs font-mono md:text-xs uppercase tracking-[0.15em] text-gray-500 dark:text-gray-400">
+              <div className="flex flex-col justify-start grow space-y-3">
+                <p className="text-xs font-mono md:text-xs uppercase tracking-wide text-yellow-800 dark:text-gray-400">
                   {formatDate(news.createdAt)}{' '}
                   {formatDate(news.createdAt) && formatRelativeTime(news.createdAt) ? ' - ' : ''}
                   {formatRelativeTime(news.createdAt)}
