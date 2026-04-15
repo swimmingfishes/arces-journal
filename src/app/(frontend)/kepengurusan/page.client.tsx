@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useState, useMemo } from 'react'
-import { ExternalLink, Search } from 'lucide-react'
+import { ArrowSquareOutIcon, MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
@@ -38,7 +38,7 @@ export default function PageClientContent({ allMembers }: { allMembers: any[] })
           <div className="flex justify-start px-8 py-6 border-b border-border relative">
             <div className="relative w-full">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
                 <input
                   placeholder="Cari nama kepengurusan..."
                   className="w-full rounded-full border border-border bg-white/70 dark:bg-zinc-900/70 pl-12 pr-4 h-14 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
@@ -188,7 +188,7 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
                       target="_blank"
                       className="text-sm font-semibold text-blue-500 hover:text-blue-600 flex items-center gap-1.5 transition-colors"
                     >
-                      {link.label} <ExternalLink className="h-3.5 w-3.5" />
+                      {link.label} <ArrowSquareOutIcon className="h-3.5 w-3.5" />
                     </Link>
 
                     {/* Separator Garis Vertikal */}
@@ -205,5 +205,3 @@ function MemberDialog({ member, onClose }: { member: any; onClose: any }) {
     </Dialog>
   )
 }
-
-

@@ -1,7 +1,7 @@
 'use client'
 import { ParticlesBackground } from '@/components/ParticlesBackground'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 
 export function LandingHero() {
   return (
@@ -27,7 +27,7 @@ export function LandingHero() {
 
               <div className="flex justify-center pt-4 md:pt-6">
                 <Button size="lg" className="gap-2">
-                  Explore journals <ArrowRight className="h-4 w-4" />
+                  Explore journals <ArrowRightIcon className="h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -37,5 +37,3 @@ export function LandingHero() {
     </section>
   )
 }
-
-

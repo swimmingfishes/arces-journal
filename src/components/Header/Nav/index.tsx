@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { Header as HeaderType } from '@/payload-types'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { Menu, X } from 'lucide-react'
+import { ListIcon, XIcon } from '@phosphor-icons/react/dist/ssr'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -28,7 +28,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
-          {open ? <X size={20} /> : <Menu size={20} />}
+          {open ? <XIcon size={20} /> : <ListIcon size={20} />}
         </button>
 
         {/* Mobile dropdown */}

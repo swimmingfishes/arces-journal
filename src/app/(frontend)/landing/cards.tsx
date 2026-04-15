@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import type { Journal } from '@/payload-types'
 
 type JournalsResponse = {
@@ -132,7 +132,7 @@ export function LandingCards({ searchQuery }: LandingCardsProps) {
                       <div className="pt-2">
                         <Button size="lg" className="gap-2 group/btn">
                           See more
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                          <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                         </Button>
                       </div>
                     </div>

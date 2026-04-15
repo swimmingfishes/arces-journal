@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import type { News } from '@/payload-types'
 import { Media } from '@/components/Media'
 
@@ -146,7 +146,7 @@ export function LandingNews() {
             <div className="p-8 pt-10 border-l border-r md:border-l-0 md:border-r-0 border-border">
               <Link href="/news">
                 <Button size="lg">
-                  See more news <ArrowRight className="ml-2 h-4 w-4" />
+                  See more news <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
@@ -156,5 +156,3 @@ export function LandingNews() {
     </section>
   )
 }
-
-

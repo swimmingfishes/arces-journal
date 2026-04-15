@@ -31,6 +31,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <InitTheme />
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wdth,wght@75..125,200..700&display=swap"
+          rel="stylesheet"
+        />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>

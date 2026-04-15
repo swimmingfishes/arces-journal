@@ -1,13 +1,20 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { Mail, MapPin, Phone, Zap, MessageSquare, ShieldCheck } from 'lucide-react'
+import {
+  ChatCircleTextIcon,
+  EnvelopeIcon,
+  LightningIcon,
+  MapPinIcon,
+  PhoneIcon,
+  ShieldCheckIcon,
+} from '@phosphor-icons/react/dist/ssr'
 import RichText from '@/components/RichText'
 import { RoutePageHeader } from '@/components/RoutePageHeader'
 
 const iconMap = {
-  Zap: <Zap className="h-6 w-6 text-blue-500" />,
-  ShieldCheck: <ShieldCheck className="h-6 w-6 text-blue-500" />,
-  MessageSquare: <MessageSquare className="h-6 w-6 text-blue-500" />,
+  Zap: <LightningIcon className="h-6 w-6 text-blue-500" />,
+  ShieldCheck: <ShieldCheckIcon className="h-6 w-6 text-blue-500" />,
+  MessageSquare: <ChatCircleTextIcon className="h-6 w-6 text-blue-500" />,
 }
 
 export default async function ContactServicePage() {
@@ -65,21 +72,21 @@ export default async function ContactServicePage() {
                   <div className="space-y-8">
                     {kontakLayanan.kontak?.email && (
                       <ContactItem
-                        icon={<Mail className="h-5 w-5" />}
+                        icon={<EnvelopeIcon className="h-5 w-5" />}
                         label={kontakLayanan.kontak.emailLabel || 'Email Editorial'}
                         value={kontakLayanan.kontak.email}
                       />
                     )}
                     {kontakLayanan.kontak?.address && (
                       <ContactItem
-                        icon={<MapPin className="h-5 w-5" />}
+                        icon={<MapPinIcon className="h-5 w-5" />}
                         label={kontakLayanan.kontak.addressLabel || 'Office Location'}
                         value={kontakLayanan.kontak.address}
                       />
                     )}
                     {kontakLayanan.kontak?.phone && (
                       <ContactItem
-                        icon={<Phone className="h-5 w-5" />}
+                        icon={<PhoneIcon className="h-5 w-5" />}
                         label={kontakLayanan.kontak.phoneLabel || 'WhatsApp Support'}
                         value={kontakLayanan.kontak.phone}
                       />
@@ -161,5 +168,3 @@ function ContactItem({ icon, label, value }: { icon: any; label: string; value: 
     </div>
   )
 }
-
-

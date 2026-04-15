@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Search } from 'lucide-react'
+import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
 import { InputGroup, InputGroupInput, InputGroupText } from '@/components/ui/input-group'
 
 interface LandingSearchProps {
@@ -21,7 +21,7 @@ export function LandingSearch({ searchQuery, onSearchChange }: LandingSearchProp
         <form onSubmit={(e) => e.preventDefault()}>
           <InputGroup className="h-10 md:h-20 backdrop-blur-md bg-white/40 dark:bg-white/5 border-0 border-b border-border/60  shadow-sm rounded-xl">
             <InputGroupText className="pl-2 md:pl-8 bg-transparent border-0">
-              <Search className="w-5 h-5 text-muted-foreground" />
+              <MagnifyingGlassIcon className="w-5 h-5 text-muted-foreground" />
             </InputGroupText>
             <InputGroupInput
               type="text"
@@ -36,5 +36,3 @@ export function LandingSearch({ searchQuery, onSearchChange }: LandingSearchProp
     </section>
   )
 }
-
-

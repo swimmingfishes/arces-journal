@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
-import { Search } from 'lucide-react'
+import { CaretDownIcon, MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 import { Media } from '@/components/Media'
 
@@ -52,7 +52,7 @@ export default function NewsPageClient({ initialNews }: { initialNews: any[] }) 
       {/* --- SEARCH & SORT SECTION --- */}
       <div className="border-b border-border relative md:flex">
         <div className="relative flex items-center px-8 py-6 md:flex-1 md:border-r border-border group">
-          <Search className="absolute left-12 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
+          <MagnifyingGlassIcon className="absolute left-12 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
           <input
             type="text"
             placeholder="Cari berita atau aktivitas..."
@@ -78,15 +78,21 @@ export default function NewsPageClient({ initialNews }: { initialNews: any[] }) 
         </div>
 
         <div className="flex items-center justify-start px-8 py-6 bg-zinc-50/30 dark:bg-zinc-900/10 md:w-80 md:shrink-0">
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value as 'newest' | 'oldest')}
-            className="h-14 w-full border border-border rounded-none bg-[#efd45c] text-gray-900 dark:bg-[#f3d562] dark:text-zinc-950 px-4 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 cursor-pointer"
-            aria-label="Sort news"
-          >
-            <option value="newest">Sort: Newest</option>
-            <option value="oldest">Sort: Oldest</option>
-          </select>
+          <div className="relative w-full">
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value as 'newest' | 'oldest')}
+              className="h-14 w-full appearance-none border border-border rounded-none bg-[#efd45c] text-gray-900 dark:bg-[#f3d562] dark:text-zinc-950 pl-4 pr-11 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 cursor-pointer"
+              aria-label="Sort news"
+            >
+              <option value="newest">Sort: Newest</option>
+              <option value="oldest">Sort: Oldest</option>
+            </select>
+            <CaretDownIcon
+              className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-900/80"
+              aria-hidden="true"
+            />
+          </div>
         </div>
       </div>
 
@@ -94,29 +100,32 @@ export default function NewsPageClient({ initialNews }: { initialNews: any[] }) 
       <div className="flex flex-col grow">
         {sortedNews.map((news) => (
           <Link key={news.id} href={`/news/${news.slug}`}>
-            <div className="group flex flex-col md:flex-row items-start gap-8 px-8 py-8 lg:py-10 border-b border-border hover:bg-zinc-50/50 dark:hover:bg-white/5 transition-all">
+            <div className="group flex flex-col md:flex-row items-start gap-8 px-8 py-8 lg:py-10 border-b border-border hover:bg-white dark:hover:bg-zinc-900/70 transition-colors duration-300 motion-reduce:transition-none">
               {/* KIRI: Gambar (Sejajar dengan teks) */}
               <div className="w-full md:w-64 lg:w-72 shrink-0">
                 <div className="relative aspect-video overflow-hidden border border-border bg-gray-100 dark:bg-zinc-900">
                   <Media
                     resource={news.heroImage}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="relative block h-full w-full"
+                    pictureClassName="block h-full w-full"
+                    imgClassName="object-cover transition-all duration-700 ease-out will-change-transform motion-reduce:transform-none motion-reduce:transition-none group-hover:scale-[1.04] group-hover:brightness-105"
                   />
+                  <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/10 via-black/0 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
               </div>
 
               {/* KANAN: Konten Teks */}
               <div className="flex flex-col justify-start grow space-y-4">
-                <p className="text-xs md:text-sm uppercase tracking-[0.15em] text-gray-500 dark:text-gray-400">
+                <p className="text-xs font-mono md:text-xs uppercase tracking-[0.15em] text-gray-500 dark:text-gray-400">
                   {formatDate(news.createdAt)}{' '}
                   {formatDate(news.createdAt) && formatRelativeTime(news.createdAt) ? ' - ' : ''}
                   {formatRelativeTime(news.createdAt)}
                 </p>
-                <h2 className="text-3xl md:text-4xl font-bold font-serif leading-tight text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h2 className="text-3xl md:text-3xl font-bold font-serif leading-tight text-gray-900 dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors duration-300 underline decoration-transparent underline-offset-6 group-hover:decoration-black dark:group-hover:decoration-white motion-reduce:decoration-transparent">
                   {news.title}
                 </h2>
-                <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed line-clamp-2">
+                <p className="text-base leading-normal text-gray-700 dark:text-gray-300 line-clamp-2">
                   {news.meta?.description || 'No description available'}
                 </p>
               </div>

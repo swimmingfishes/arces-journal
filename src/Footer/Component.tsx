@@ -10,9 +10,9 @@ export async function Footer() {
   return (
     <footer className="w-full page-gutter bg-background mt-auto">
       {/* Container Utama dengan Border Kiri-Kanan yang sejajar */}
-      <div className="mx-auto md:border-x border-gray-200 dark:border-white/10">
+      <div className="mx-auto md:border-x border-border">
         {/* Menggunakan Grid Cols 2 untuk membagi ruang sama rata (Equal) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 px-8 py-16 md:border-t border-gray-200 dark:border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 px-8 py-16 md:border-t border-border">
           {/* SISI KIRI: ARCES & Deskripsi (50% lebar) */}
           <div className="flex flex-col gap-6 pr-8 lg:pr-20">
             <h2 className="font-sans font-bold text-gray-600 dark:text-stone-200 text-2xl">
@@ -76,7 +76,7 @@ export async function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Legal */}
-        <div className="bg-stone-50 dark:bg-background/50 border-t border-gray-200 dark:border-white/10 px-8 py-2 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="bg-stone-50 dark:bg-background/50 border-t border-border px-8 py-2 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
             ©{new Date().getFullYear()} Arces. All rights reserved
           </p>
@@ -112,5 +112,3 @@ export async function Footer() {
     </footer>
   )
 }
-
-

@@ -30,14 +30,14 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
         ${scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-background/70 backdrop-blur-sm'}`}
       {...(theme ? { 'data-theme': theme } : {})}
     >
-      <div className="relative py-3 flex items-center md:border-x md:border-b border-border px-8">
+      <div className="relative h-20 flex items-center md:border-x md:border-b border-border px-8">
         {/* Left: Logo */}
-        <Link href="/" scroll={false}>
+        <Link href="/" scroll={false} className="h-full flex items-center">
           <p className="font-mono font-bold text-foreground text-2xl">ARCES</p>
         </Link>
 
         {/* Center: Nav (desktop) */}
-        <div className="hidden md:flex flex-1 justify-center">
+        <div className="hidden md:flex flex-1 justify-center h-full items-stretch">
           <HeaderNav data={data} />
         </div>
 
