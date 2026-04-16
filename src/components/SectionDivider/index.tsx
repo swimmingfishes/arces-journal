@@ -2,10 +2,11 @@ import React from 'react'
 import { cn } from '@/components/lib/utils'
 
 interface SectionDividerProps {
-  title: string | React.ReactNode
+  title?: string | React.ReactNode
   className?: string
   containerClassName?: string
   titleClassName?: string
+  children?: React.ReactNode
 }
 
 export function SectionDivider({
@@ -13,26 +14,32 @@ export function SectionDivider({
   className,
   containerClassName,
   titleClassName,
+  children,
 }: SectionDividerProps) {
+  const hasTitle = Boolean(title)
+
   return (
-    <div
+    <section
       className={cn(
-        // Border atas-bawah (border-y) dan gradasi background (putih ke abu-abu muda)
-        'w-full px-8 py-5 border-b bg-linear-to-r from-transparent to-yellow-600/5',
-        // Styling untuk Dark Mode
-        'dark:border-zinc-800 dark:from-transparent dark:to-sky-500/10',
-        containerClassName,
+        'relative w-full',
+
+        'bg-linear-to-r from-transparent to-yellow-600/5 dark:from-transparent dark:to-sky-500/10',
+
         className,
       )}
     >
-      <h2
-        className={cn(
-          'text-3xl font-serif [font-variation-settings:"wdth"_80] font-semibold text-black dark:text-white',
-          titleClassName,
-        )}
-      >
-        {title}
-      </h2>
-    </div>
+      {hasTitle && (
+        <h2
+          className={cn(
+            'px-8 py-8 text-4xl font-serif [font-variation-settings:"wdth"_85] font-semibold text-black dark:text-white',
+            titleClassName,
+          )}
+        >
+          {title}
+        </h2>
+      )}
+
+      {children}
+    </section>
   )
 }

@@ -60,8 +60,8 @@ export default function GalleryPage() {
 
   return (
     <main className="w-full bg-background">
-      <section className="w-full page-gutter">
-        <div className="mx-auto md:border-x">
+      <section className="w-full">
+        <div className="mx-auto">
           <RoutePageHeader
             title="Arces — Gallery"
             description="We're a team of engineers, marketers, designers, all passionate about video and the work we create together. Welcome to our blog about video."
@@ -173,5 +173,3 @@ export default function GalleryPage() {
     </main>
   )
 }
-
-

@@ -1,20 +1,20 @@
 'use client'
-import React, { useState } from 'react'
-import { LandingHero } from './hero'
-// import { LandingSearch } from './search'
-import { LandingCards } from './cards'
-import { LandingNews } from './news'
-import { LandingGallery } from './gallery'
-import { LandingCTA } from './cta'
+import { SectionDivider } from '@/components/SectionDivider'
+import { LandingHero } from './components/hero'
+import { LandingCards } from './components/cards'
+import { LandingNews } from './components/news'
+import { LandingGallery } from './components/gallery'
+import { LandingCTA } from './components/cta'
 
 export default function LandingPage() {
-  const [searchQuery, setSearchQuery] = useState('')
   return (
-    <main className="w-full">
+    <main className="w-full h-auto divide-y">
       <LandingHero />
-      {/* <LandingSearch searchQuery={searchQuery} onSearchChange={setSearchQuery} /> */}
-      <LandingCards searchQuery={searchQuery} />
+      <SectionDivider title="Dokumen dan Publikasi" />
+      <LandingCards />
+      <SectionDivider title="Berita dan Aktivitas" />
       <LandingNews />
+      <SectionDivider title="Berita dan Aktivitas" />
       <LandingGallery />
       <LandingCTA />
     </main>

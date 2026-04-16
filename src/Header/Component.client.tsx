@@ -26,7 +26,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
 
   return (
     <header
-      className={`w-full sticky top-0 z-50 transition-all duration-500 page-gutter
+      className={`w-full sticky top-0 z-50 transition-all duration-500
         ${scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-background/70 backdrop-blur-sm'}`}
       {...(theme ? { 'data-theme': theme } : {})}
     >

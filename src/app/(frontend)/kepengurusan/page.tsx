@@ -1,8 +1,10 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import PageClientContent from './page.client'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
+
+import PageClientContent from './page.client'
+import type { Member } from './types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 countries.registerLocale(enLocale)
@@ -26,7 +28,7 @@ export default async function KepengurusanPage() {
       },
     })
 
-    const allMembers = (response.docs || []).map((person: any) => ({
+    const allMembers: Member[] = (response.docs || []).map((person: any) => ({
       id: person.id,
       name: person.name,
       university: person.instation,

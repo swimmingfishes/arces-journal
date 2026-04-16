@@ -26,11 +26,13 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
 
   return (
     <header
-      className={`w-full sticky top-0 z-50 transition-all duration-500 page-gutter
+      className={`w-full sticky top-0 z-50 transition-all duration-300
         ${scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-background/70 backdrop-blur-sm'}`}
-      {...(theme ? { 'data-theme': theme } : {})}
     >
-      <div className="relative py-3 flex items-center md:border-x md:border-b border-border px-8">
+      <div
+        className="relative py-3 flex items-center md:border-x md:border-b border-border px-8"
+        {...(theme ? { 'data-theme': theme } : {})}
+      >
         {/* Left: Logo */}
         <Link href="/" scroll={false}>
           <p className="font-mono font-bold text-foreground text-2xl">ARCES</p>

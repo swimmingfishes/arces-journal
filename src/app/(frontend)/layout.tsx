@@ -42,15 +42,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-
-          <Header />
-          {children}
-          <Footer />
+          <AdminBar adminBarProps={{ preview: isEnabled }} />
+          <div className="page-gutter flex flex-col min-h-screen">
+            <Header />
+            <div className="flex-1 border-x border-border">{children}</div>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

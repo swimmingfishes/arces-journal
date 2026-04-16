@@ -22,7 +22,7 @@ export function RoutePageHeader({
   return (
     <div
       className={cn(
-        'relative isolate overflow-hidden px-8 py-16 min-h-60 border-b border-border',
+        'relative isolate overflow-hidden px-8 py-16 min-h-60',
         centered && 'text-center flex flex-col items-center justify-center',
         className,
       )}

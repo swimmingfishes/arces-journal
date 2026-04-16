@@ -61,12 +61,19 @@
 }
 
 @layer utilities {
+  .transition-theme {
+    transition:
+      background-color 300ms ease-in-out,
+      color 300ms ease-in-out,
+      border-color 300ms ease-in-out;
+  }
+
   .page-gutter {
-    padding-inline: 2rem;
+    padding-inline: 1rem;
   }
 
   .page-gutter-narrow {
-    padding-inline: 2rem;
+    padding-inline: 1rem;
   }
 
   .container {
@@ -269,6 +276,10 @@
   }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    transition:
+      background-color 300ms ease-in-out,
+      color 300ms ease-in-out,
+      border-color 300ms ease-in-out;
   }
 }
 
@@ -279,6 +290,9 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+  transition:
+    background-color 300ms ease-in-out,
+    color 300ms ease-in-out;
 }
 
 .dark {

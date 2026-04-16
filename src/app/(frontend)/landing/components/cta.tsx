@@ -3,13 +3,17 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
+import { ParticlesBackground } from '@/components/ParticlesBackground'
 
 export function LandingCTA() {
   return (
-    <section className="w-full page-gutter bg-background">
-      <div className="mx-auto md:border-x border-border">
-        {/* Konten CTA dengan border-t untuk memisahkan dari Gallery */}
-        <div className="flex flex-col items-center justify-center py-24 md:py-32 space-y-8 border-t border-border text-center px-6">
+    <section className="relative w-full overflow-hidden bg-background border-b border-border">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <ParticlesBackground />
+      </div>
+
+      <div className="relative z-10 px-8 py-16 md:py-20">
+        <div className="space-y-8 flex flex-col items-center justify-center text-center">
           <div className="space-y-4 max-w-3xl">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
               Start publish with us

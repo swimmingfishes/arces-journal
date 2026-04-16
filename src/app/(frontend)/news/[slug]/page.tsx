@@ -72,9 +72,9 @@ export default async function NewsDetailPage({ params }: Props) {
     <main className="min-h-screen bg-gray-50/30 dark:bg-zinc-950">
       {draft && <LivePreviewListener />}
 
-      <section className="w-full page-gutter">
+      <section className="w-full">
         {/* Border Luar (Sejajar Navbar/Footer) */}
-        <div className="mx-auto min-h-screen flex flex-col md:border-x border-border">
+        <div className="mx-auto min-h-screen flex flex-col">
           <article className="relative grow py-8 lg:py-16">
             {/* Header Title & Meta */}
             <header className="mb-16 text-center lg:mx-36 px-4 sm:px-6 lg:px-8">
