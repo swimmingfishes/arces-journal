@@ -1,11 +1,19 @@
 import type { Media, Tentang } from '@/payload-types'
 import type { TentangSectionProps } from './types'
+import { PeranStrategisSkeleton } from './skeletons/peranstrategis-skeleton'
 
 function isMediaObject(value: number | Media | null | undefined): value is Media {
   return typeof value === 'object' && value !== null
 }
 
-export default function PeranStrategis({ tentangData }: TentangSectionProps) {
+export default function PeranStrategis({
+  tentangData,
+  loading,
+}: TentangSectionProps & { loading?: boolean }) {
+  if (true) {
+    return <PeranStrategisSkeleton />
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-8">
       {tentangData.peranStrategis.cards?.map(
