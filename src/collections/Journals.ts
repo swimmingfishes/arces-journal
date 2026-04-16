@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
+import { anyone } from '@/access/anyone'
+import { authenticated } from '@/access/authenticated'
+
 const validateHexColor = (value: string | null | undefined) => {
   if (!value) return 'Color is required'
   return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(value) || 'Use a valid HEX code, e.g. #FF5733'
@@ -7,6 +10,12 @@ const validateHexColor = (value: string | null | undefined) => {
 
 export const Journals: CollectionConfig = {
   slug: 'journals',
+  access: {
+    create: authenticated,
+    delete: authenticated,
+    read: anyone,
+    update: authenticated,
+  },
   fields: [
     {
       name: 'title',

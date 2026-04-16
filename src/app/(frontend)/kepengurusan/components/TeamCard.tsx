@@ -12,7 +12,7 @@ export function TeamCard({ member, onClick }: TeamCardProps) {
 
   return (
     <div className="group space-y-4" onClick={() => onClick(member)}>
-      <div className="w-full aspect-square overflow-hidden border bg-gray-100 cursor-pointer dark:bg-zinc-800">
+      <div className="w-full aspect-[calc(4/5)] overflow-hidden border bg-gray-100 cursor-pointer dark:bg-zinc-800">
         {imageUrl ? (
           <img
             src={imageUrl}

@@ -22,6 +22,12 @@ export function SearchMemberBar({
 }: SearchMemberBarProps) {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
 
+  const handleSelectResult = (member: Member) => {
+    onSelectMember(member)
+    onSearchQueryChange('')
+    setIsSearchFocused(false)
+  }
+
   const searchResults = useMemo(() => {
     if (searchQuery.length < 2) return []
 
@@ -56,10 +62,11 @@ export function SearchMemberBar({
                 <div
                   key={result.id}
                   className="flex cursor-pointer items-center gap-4 border-b border-border/70 p-4 transition-colors last:border-0 hover:bg-gray-50 dark:hover:bg-white/5"
-                  onClick={() => {
-                    onSelectMember(result)
-                    onSearchQueryChange('')
+                  onMouseDown={(e) => {
+                    e.preventDefault()
+                    handleSelectResult(result)
                   }}
+                  onClick={() => handleSelectResult(result)}
                 >
                   <div className="h-12 w-12 overflow-hidden rounded-full border border-border/70">
                     {imageUrl ? (

@@ -22,7 +22,7 @@ export default function Paginations({
         <PaginationContent className="gap-0 border-l">
           {/* Page indicator */}
           <PaginationItem>
-            <span className="text-sm font-mono tracking-widest text-muted-foreground uppercase px-4 pr-20">
+            <span className="text-sm font-mono tracking-widest text-muted-foreground uppercase px-4 pr-29">
               Page {currentPage} of {totalPages}
             </span>
           </PaginationItem>

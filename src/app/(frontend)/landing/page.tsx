@@ -12,9 +12,7 @@ export default function LandingPage() {
       <LandingHero />
       <SectionDivider title="Dokumen dan Publikasi" />
       <LandingCards />
-      <SectionDivider title="Berita dan Aktivitas" />
       <LandingNews />
-      <SectionDivider title="Gallery" />
       <LandingGallery />
       <LandingCTA />
     </main>

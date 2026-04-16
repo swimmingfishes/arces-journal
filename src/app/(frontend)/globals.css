@@ -119,11 +119,11 @@
 
   @variant xl {
     .page-gutter {
-      padding-inline: 12rem;
+      padding-inline: 13rem;
     }
 
     .page-gutter-narrow {
-      padding-inline: 10rem;
+      padding-inline: 11rem;
     }
 
     .container {
@@ -131,19 +131,19 @@
     }
   }
 
-  @variant 2xl {
+  /* @variant 2xl {
     .page-gutter {
-      padding-inline: 16rem;
+      padding-inline: 14rem;
     }
 
     .page-gutter-narrow {
-      padding-inline: 14rem;
+      padding-inline: 12rem;
     }
 
     .container {
       max-width: var(--breakpoint-2xl);
     }
-  }
+  } */
 }
 
 :root {

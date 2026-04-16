@@ -11,6 +11,7 @@ countries.registerLocale(enLocale)
 
 export default async function KepengurusanPage() {
   const payload = await getPayload({ config: configPromise })
+  const pinnedMemberName = 'eko hari rachmawanto'
 
   try {
     const response = await payload.find({
@@ -29,35 +30,43 @@ export default async function KepengurusanPage() {
       },
     })
 
-    const allMembers: Member[] = (response.docs || []).map((person: any) => {
-      const imageUrl =
-        person.image && typeof person.image === 'object' && person.image.url
-          ? getMediaUrl(person.image.url)
-          : person.image
+    const allMembers: Member[] = (response.docs || [])
+      .map((person: any) => {
+        const imageUrl =
+          person.image && typeof person.image === 'object' && person.image.url
+            ? getMediaUrl(person.image.url)
+            : person.image
 
-      const roles = Array.isArray(person.role)
-        ? person.role
-            .map((role: any) => {
-              if (!role) return null
-              return typeof role === 'object' ? role.slug : String(role)
-            })
-            .filter(Boolean)
-        : person.role
-          ? [typeof person.role === 'object' ? person.role.slug : String(person.role)]
-          : []
+        const roles = Array.isArray(person.role)
+          ? person.role
+              .map((role: any) => {
+                if (!role) return null
+                return typeof role === 'object' ? role.slug : String(role)
+              })
+              .filter(Boolean)
+          : person.role
+            ? [typeof person.role === 'object' ? person.role.slug : String(person.role)]
+            : []
 
-      return {
-        id: person.id,
-        name: person.name,
-        university: person.instation,
-        instation: person.instation,
-        country: countries.getName(person.country, 'en') || person.country,
-        image: imageUrl,
-        externalImageUrl: person.externalImageUrl,
-        roles,
-        links: person.links || [],
-      }
-    })
+        return {
+          id: person.id,
+          name: person.name,
+          university: person.instation,
+          instation: person.instation,
+          country: countries.getName(person.country, 'en') || person.country,
+          image: imageUrl,
+          externalImageUrl: person.externalImageUrl,
+          roles,
+          links: person.links || [],
+        }
+      })
+      .sort((a, b) => {
+        const aPinned = a.name?.trim().toLowerCase() === pinnedMemberName
+        const bPinned = b.name?.trim().toLowerCase() === pinnedMemberName
+
+        if (aPinned === bPinned) return 0
+        return aPinned ? -1 : 1
+      })
 
     return <PageClientContent allMembers={allMembers} />
   } catch (error) {

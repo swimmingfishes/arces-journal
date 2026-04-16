@@ -1,50 +1,23 @@
 'use client'
 
-import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import type { Header } from '@/payload-types'
 import { HeaderNav } from './Nav'
 
 export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
-  const [scrolled, setScrolled] = useState(false)
-
-  // Langsung gunakan headerTheme, tidak perlu buat state 'theme' baru
-  const { headerTheme, setHeaderTheme } = useHeaderTheme()
-  const pathname = usePathname()
-
-  // Reset theme ketika pindah halaman
-  useEffect(() => {
-    setHeaderTheme(null)
-  }, [pathname, setHeaderTheme])
-
-  // Handle scroll event
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-
-    // Panggil sekali saat pertama kali render (berjaga-jaga jika user refresh saat posisi di bawah)
-    handleScroll()
-
-    // Tambahkan passive: true untuk performa scroll yang lebih baik
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <header
-      className={`w-full sticky top-0 z-50 transition-all duration-500
-        ${scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-background/70 backdrop-blur-sm'}`}
-      // Langsung gunakan nilai dari Context di sini
-      {...(headerTheme ? { 'data-theme': headerTheme } : {})}
+      className="
+        w-full sticky top-0 z-50
+        bg-white/80 dark:bg-black/80
+        backdrop-blur-md border-gray-200 dark:border-gray-800
+      "
     >
-      <div className="relative h-20 flex items-center border-x border-b border-border px-8">
+      <div className="relative h-20 flex items-center px-8 border-x border-b border-border">
         {/* Left: Logo */}
-        <Link href="/" scroll={false} className="h-full flex items-center">
-          <p className="font-mono font-bold text-foreground text-2xl">ARCES</p>
+        <Link href="/" className="h-full flex items-center">
+          <p className="font-mono font-bold text-2xl text-black dark:text-white">ARCES</p>
         </Link>
 
         {/* Center: Nav (desktop) */}
@@ -52,7 +25,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
           <HeaderNav data={data} />
         </div>
 
-        {/* Right: Theme toggle + mobile menu */}
+        {/* Right: Mobile menu */}
         <div className="ml-auto md:ml-0 flex items-center">
           <HeaderNav data={data} mobileOnly />
         </div>

@@ -17,6 +17,6 @@ export type GalleryPaginationProps = {
   onPageChange: (page: number) => void
 }
 
-export const GALLERY_ITEMS_PER_PAGE = 15
+export const GALLERY_ITEMS_PER_PAGE = 6
 export const GALLERY_MEDIA_ENDPOINT =
   '/api/media?depth=1&limit=200&sort=-createdAt&where[folder.name][equals]=gallery'

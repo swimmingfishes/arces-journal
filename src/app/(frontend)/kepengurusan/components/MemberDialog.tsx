@@ -30,9 +30,9 @@ export function MemberDialog({ member, onClose }: MemberDialogProps) {
         </VisuallyHidden.Root>
 
         {/* Banner */}
-        <div className="relative h-20 border-b border-zinc-300/50 bg-linear-to-tr from-zinc-300 to-zinc-100 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-800">
+        <div className="relative h-24 border-b border-zinc-300/50 bg-linear-to-tr from-zinc-300 to-zinc-100 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-800">
           {/* Foto Profil: Kotak tegas dengan border sedikit lebih tipis agar elegan */}
-          <div className="absolute -bottom-10 left-6 h-24 w-24 overflow-hidden rounded-none border-4 border-white bg-zinc-200 dark:border-zinc-950">
+          <div className="absolute -bottom-10 left-6 h-24 w-20 overflow-hidden rounded-none border-4 border-white bg-zinc-200 dark:border-zinc-950">
             {imageUrl ? (
               <img src={imageUrl} className="h-full w-full object-cover" alt={member.name} />
             ) : (
@@ -62,15 +62,15 @@ export function MemberDialog({ member, onClose }: MemberDialogProps) {
         {member.links?.length ? (
           <div className="px-6">
             <div className="border-t border-zinc-200 pt-5 dark:border-zinc-800">
-              {/* Container flex w-full agar mengisi seluruh lebar */}
-              <div className="flex w-full gap-2">
+              {/* PERUBAHAN DI SINI: Tambahkan flex-wrap */}
+              <div className="flex flex-wrap w-full gap-2">
                 {member.links.map((link, i) => (
                   <Link
                     key={`${link.url}-${i}`}
                     href={link.url}
                     target="_blank"
-                    // Tambahkan flex-1 dan justify-center agar membagi rata lebar (mendatar full width)
-                    className="flex flex-1 items-center justify-between gap-1.5 rounded-none border border-zinc-300 px-3 py-2 text-[13px] font-semibold text-zinc-700 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+                    // PERUBAHAN DI SINI: Tambahkan min-w-[120px] agar link memiliki batas menyusut dan terdorong ke bawah
+                    className="flex flex-1 min-w-[120px] items-center justify-between gap-1.5 rounded-none border border-zinc-300 px-3 py-2 text-[13px] font-semibold text-zinc-700 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
                   >
                     <span className="truncate">{link.label}</span>
                     <ArrowSquareOutIcon className="h-3.5 w-3.5 shrink-0 opacity-60" />
