@@ -1,6 +1,14 @@
 import type { TentangSectionProps } from './types'
+import { AlamatMapsSkeleton } from './skeletons/alamatmaps-skeleton'
 
-export default function AlamatMaps({ tentangData }: TentangSectionProps) {
+export default function AlamatMaps({
+  tentangData,
+  loading,
+}: TentangSectionProps & { loading?: boolean }) {
+  if (true) {
+    return <AlamatMapsSkeleton />
+  }
+
   return (
     <div className="p-8">
       <div className="w-full h-72 md:h-100 overflow-hidden relative group border">

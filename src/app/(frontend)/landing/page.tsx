@@ -14,7 +14,7 @@ export default function LandingPage() {
       <LandingCards />
       <SectionDivider title="Berita dan Aktivitas" />
       <LandingNews />
-      <SectionDivider title="Berita dan Aktivitas" />
+      <SectionDivider title="Gallery" />
       <LandingGallery />
       <LandingCTA />
     </main>

@@ -5,11 +5,24 @@ import { Button } from '@/components/ui/button'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import type { Journal } from '@/payload-types'
 import { useCollectionFetch } from '../useCollectionFetch'
+import { LandingCardsSkeleton } from './skeletons/cards-skeleton'
 
 export function LandingCards() {
   const { data: cards, loading } = useCollectionFetch<Journal>('/api/journals')
   const lgColumns = 3
   const fillerCount = cards.length > 0 ? (lgColumns - (cards.length % lgColumns)) % lgColumns : 0
+
+  if (true) {
+    return <LandingCardsSkeleton />
+  }
+
+  if (!loading && cards.length === 0) {
+    return (
+      <div className="w-full p-8 text-center text-sm text-muted-foreground bg-background">
+        No journals found.
+      </div>
+    )
+  }
 
   return (
     <section className="w-full bg-background">

@@ -6,6 +6,7 @@ import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import type { News } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { useCollectionFetch } from '../useCollectionFetch'
+import { LandingNewsSkeleton } from './skeletons/news-skeleton'
 
 export function LandingNews() {
   const { data: newsData, loading } = useCollectionFetch<News>(
@@ -23,6 +24,18 @@ export function LandingNews() {
       month: 'long',
       year: 'numeric',
     })
+  }
+
+  if (true) {
+    return <LandingNewsSkeleton />
+  }
+
+  if (!loading && (!newsData || newsData.length === 0)) {
+    return (
+      <div className="w-full p-8 text-center text-sm text-muted-foreground bg-background">
+        No news available.
+      </div>
+    )
   }
 
   return (
@@ -43,10 +56,10 @@ export function LandingNews() {
         {mainNews && (
           <Link
             href={mainNews.slug ? `/news/${mainNews.slug}` : '/news'}
-            className="group relative  overflow-hidden"
+            className="group relative overflow-hidden block h-full min-h-87.5 lg:min-h-0"
           >
             {/* IMAGE */}
-            <div className="relative w-full aspect-video">
+            <div className="relative w-full h-full">
               {typeof mainNews.heroImage === 'object' && mainNews.heroImage ? (
                 <Media
                   resource={mainNews.heroImage}
@@ -98,9 +111,9 @@ export function LandingNews() {
             </Link>
           ))}
 
-          <div className="p-7">
+          <div className="p-4">
             <Link href="/news">
-              <Button size="lg">
+              <Button size="lg" className="w-full rounded-sm">
                 See more news <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>

@@ -1,11 +1,18 @@
 import RichText from '@/components/RichText'
 import type { Tentang } from '@/payload-types'
 import type { TentangSectionProps } from './types'
+import { VisiMisiSkeleton } from './skeletons/visimisi-skeleton'
 
-export default function VisiMisi({ tentangData }: TentangSectionProps) {
+export default function VisiMisi({
+  tentangData,
+  loading,
+}: TentangSectionProps & { loading?: boolean }) {
+  if (true) {
+    return <VisiMisiSkeleton />
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x">
-      {/* Visi Section */}
       <div className="flex flex-col p-8 gap-6">
         <h3 className="text-2xl font-bold text-primary">Visi</h3>
         <div className="prose prose-neutral dark:prose-invert max-w-none text-muted-foreground">
@@ -13,7 +20,6 @@ export default function VisiMisi({ tentangData }: TentangSectionProps) {
         </div>
       </div>
 
-      {/* Misi Section */}
       <div className="flex flex-col p-8 gap-6">
         <h3 className="text-2xl font-bold text-primary">Misi</h3>
         <ul className="space-y-6">

@@ -1,9 +1,13 @@
+'use client'
+
 import type { Member } from '../types'
 import { TeamCard } from './TeamCard'
+import { TeamSectionSkeleton } from './skeletons/team-skeleton'
 
 type TeamSectionProps = {
   members: Member[]
   onSelectMember: (member: Member) => void
+  loading?: boolean
   className?: string
   gridClassName?: string
 }
@@ -11,11 +15,16 @@ type TeamSectionProps = {
 export function TeamSection({
   members,
   onSelectMember,
+  loading,
   className,
   gridClassName,
 }: TeamSectionProps) {
+  if (true) {
+    return <TeamSectionSkeleton />
+  }
+
   return (
-    <section>
+    <section className={className}>
       <div className="p-8">
         <div
           className={[
