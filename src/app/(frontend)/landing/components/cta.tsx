@@ -7,7 +7,7 @@ import { ParticlesBackground } from '@/components/ParticlesBackground'
 
 export function LandingCTA() {
   return (
-    <section className="relative w-full overflow-hidden bg-background border-b border-border">
+    <section className="relative w-full overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
         <ParticlesBackground />
       </div>

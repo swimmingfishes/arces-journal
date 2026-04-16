@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react'
 import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
+import { UserCircleIcon } from '@phosphor-icons/react/dist/ssr'
 
 import type { Member } from '../types'
+import { getMemberImageUrl } from '../types'
 
 type SearchMemberBarProps = {
   allMembers: Member[]
@@ -47,26 +49,40 @@ export function SearchMemberBar({
 
         {isSearchFocused && searchResults.length > 0 ? (
           <div className="absolute top-full left-0 right-0 z-100 max-h-87.5 overflow-y-auto border border-border bg-white shadow-2xl dark:bg-zinc-900">
-            {searchResults.map((result) => (
-              <div
-                key={result.id}
-                className="flex cursor-pointer items-center gap-4 border-b border-border/70 p-4 transition-colors last:border-0 hover:bg-gray-50 dark:hover:bg-white/5"
-                onClick={() => {
-                  onSelectMember(result)
-                  onSearchQueryChange('')
-                }}
-              >
-                <div className="h-12 w-12 overflow-hidden rounded-full border border-border/70">
-                  <img src={result.image} className="h-full w-full object-cover" alt="" />
+            {searchResults.map((result) => {
+              const imageUrl = getMemberImageUrl(result)
+
+              return (
+                <div
+                  key={result.id}
+                  className="flex cursor-pointer items-center gap-4 border-b border-border/70 p-4 transition-colors last:border-0 hover:bg-gray-50 dark:hover:bg-white/5"
+                  onClick={() => {
+                    onSelectMember(result)
+                    onSearchQueryChange('')
+                  }}
+                >
+                  <div className="h-12 w-12 overflow-hidden rounded-full border border-border/70">
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        className="h-full w-full object-cover"
+                        alt={result.name}
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-zinc-400 dark:text-zinc-500">
+                        <UserCircleIcon className="h-8 w-8" aria-hidden="true" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold">{result.name}</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-primary">
+                      {result.roles.join(' / ')}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold">{result.name}</span>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-primary">
-                    {result.role}
-                  </span>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         ) : null}
       </div>

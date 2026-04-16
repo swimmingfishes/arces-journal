@@ -10,8 +10,18 @@ import { post2 as news2 } from './post-2'
 import { post3 as news3 } from './post-3'
 import { fetchFileByURL } from '../../db/utils'
 import { getKontakLayananSeedData, getTentangSeedData } from '../../db/data/tentang'
+import { getJurnalSeedData } from '../../db/data/jurnal'
+import { getKepengurusanSeedData, getRoleSeedData } from '../../db/data/kepengurusan'
 
-const collections: CollectionSlug[] = ['media', 'pages', 'news', 'search']
+const collections: CollectionSlug[] = [
+  'media',
+  'pages',
+  'news',
+  'search',
+  'journals',
+  'roles',
+  'peoples',
+]
 
 const globals: GlobalSlug[] = ['header', 'footer']
 
@@ -141,6 +151,63 @@ export const seed = async ({
     },
     data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
   })
+
+  payload.logger.info(`— Seeding journals...`)
+
+  const jurnalSeedData = getJurnalSeedData()
+  for (const jurnal of jurnalSeedData) {
+    await payload.create({
+      collection: 'journals',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: jurnal,
+    })
+  }
+
+  payload.logger.info(`— Seeding roles and peoples...`)
+
+  const roleSeedData = getRoleSeedData()
+  const roleIdBySlug = new Map<string, number | string>()
+
+  for (const role of roleSeedData) {
+    const roleDoc = await payload.create({
+      collection: 'roles',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: role,
+    })
+
+    roleIdBySlug.set(role.slug, roleDoc.id)
+  }
+
+  const peopleSeedData = getKepengurusanSeedData()
+  for (const person of peopleSeedData) {
+    const roleIds = person.roleSlugs
+      .map((slug) => roleIdBySlug.get(slug))
+      .filter((id): id is string | number => Boolean(id))
+
+    if (roleIds.length === 0) continue
+
+    await payload.create({
+      collection: 'peoples',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: {
+        name: person.name,
+        instation: person.instation,
+        country: person.country,
+        role: roleIds,
+        ...(person.externalImageUrl ? { externalImageUrl: person.externalImageUrl } : {}),
+        ...(person.links?.length ? { links: person.links } : {}),
+      },
+    })
+  }
 
   payload.logger.info(`— Seeding globals...`)
 

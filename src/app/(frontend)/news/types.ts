@@ -12,3 +12,8 @@ export type NewsItem = {
     description?: string | null
   }
 }
+
+export type NewsPaginationProps = {
+  currentPage: number
+  totalPages: number
+}

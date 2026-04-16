@@ -24,19 +24,40 @@ export default async function KepengurusanPage() {
         country: true,
         role: true,
         image: true,
+        externalImageUrl: true,
         links: true,
       },
     })
 
-    const allMembers: Member[] = (response.docs || []).map((person: any) => ({
-      id: person.id,
-      name: person.name,
-      university: person.instation,
-      country: countries.getName(person.country, 'en') || person.country,
-      image: typeof person.image === 'object' ? getMediaUrl(person.image.url) : '/placeholder.jpg',
-      role: typeof person.role === 'object' ? person.role.slug : person.role,
-      links: person.links || [],
-    }))
+    const allMembers: Member[] = (response.docs || []).map((person: any) => {
+      const imageUrl =
+        person.image && typeof person.image === 'object' && person.image.url
+          ? getMediaUrl(person.image.url)
+          : person.image
+
+      const roles = Array.isArray(person.role)
+        ? person.role
+            .map((role: any) => {
+              if (!role) return null
+              return typeof role === 'object' ? role.slug : String(role)
+            })
+            .filter(Boolean)
+        : person.role
+          ? [typeof person.role === 'object' ? person.role.slug : String(person.role)]
+          : []
+
+      return {
+        id: person.id,
+        name: person.name,
+        university: person.instation,
+        instation: person.instation,
+        country: countries.getName(person.country, 'en') || person.country,
+        image: imageUrl,
+        externalImageUrl: person.externalImageUrl,
+        roles,
+        links: person.links || [],
+      }
+    })
 
     return <PageClientContent allMembers={allMembers} />
   } catch (error) {

@@ -31,7 +31,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
 
         {/* Mobile dropdown */}
         {open && (
-          <div className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-lg md:hidden z-50">
+          <div className="absolute top-full left-0 right-0 bg-background border-y border-border shadow-lg md:hidden z-50">
             <nav className="flex flex-col px-8 py-4 gap-1">
               {navLinks.map(({ label, href }) => (
                 <Link

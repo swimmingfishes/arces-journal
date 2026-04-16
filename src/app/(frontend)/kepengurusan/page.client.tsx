@@ -18,11 +18,11 @@ export default function PageClientContent({ allMembers }: PageClientContentProps
   const [searchQuery, setSearchQuery] = useState('')
 
   const editorialTeam = useMemo(
-    () => allMembers.filter((member) => member.role === 'editorial'),
+    () => allMembers.filter((member) => member.roles.includes('editorial')),
     [allMembers],
   )
   const reviewerTeam = useMemo(
-    () => allMembers.filter((member) => member.role === 'reviewer'),
+    () => allMembers.filter((member) => member.roles.includes('reviewer')),
     [allMembers],
   )
 
@@ -41,7 +41,7 @@ export default function PageClientContent({ allMembers }: PageClientContentProps
         />
         <SectionDivider title="Editorial" />
         <TeamSection members={editorialTeam} onSelectMember={setSelectedMember} />
-        <SectionDivider title="Editorial" />
+        <SectionDivider title="Reviewer" />
         <TeamSection members={reviewerTeam} onSelectMember={setSelectedMember} />
       </div>
 

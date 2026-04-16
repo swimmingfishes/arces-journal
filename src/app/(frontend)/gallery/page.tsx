@@ -1,36 +1,27 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import type { Media as PayloadMedia } from '@/payload-types'
-import { Media } from '@/components/Media'
+import { SectionDivider } from '@/components/SectionDivider'
 import { RoutePageHeader } from '@/components/RoutePageHeader'
+import GalleryGrid from './components/gallerygrid'
+import Paginations from './components/paginations'
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination'
-
-type MediaResponse = {
-  docs?: PayloadMedia[]
-}
+  GALLERY_ITEMS_PER_PAGE,
+  GALLERY_MEDIA_ENDPOINT,
+  type GalleryItem,
+  type MediaResponse,
+} from './types'
 
 export default function GalleryPage() {
-  const [galleryItems, setGalleryItems] = useState<PayloadMedia[]>([])
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 15
 
   useEffect(() => {
     let active = true
     const fetchGalleryItems = async () => {
       try {
-        const response = await fetch(
-          '/api/media?depth=1&limit=200&sort=-createdAt&where[folder.name][equals]=gallery',
-        )
+        const response = await fetch(GALLERY_MEDIA_ENDPOINT)
         if (!response.ok) throw new Error('Failed to fetch gallery media')
         const data: MediaResponse = await response.json()
         if (active) setGalleryItems(data.docs ?? [])
@@ -46,130 +37,31 @@ export default function GalleryPage() {
     }
   }, [])
 
-  const totalPages = Math.max(1, Math.ceil(galleryItems.length / itemsPerPage))
+  const totalPages = Math.max(1, Math.ceil(galleryItems.length / GALLERY_ITEMS_PER_PAGE))
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages)
   }, [currentPage, totalPages])
 
   const currentItems = useMemo(() => {
-    const indexOfLastItem = currentPage * itemsPerPage
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage
+    const indexOfLastItem = currentPage * GALLERY_ITEMS_PER_PAGE
+    const indexOfFirstItem = indexOfLastItem - GALLERY_ITEMS_PER_PAGE
     return galleryItems.slice(indexOfFirstItem, indexOfLastItem)
   }, [currentPage, galleryItems])
 
   return (
-    <main className="w-full bg-background">
-      <section className="w-full">
-        <div className="mx-auto">
-          <RoutePageHeader
-            title="Arces — Gallery"
-            description="We're a team of engineers, marketers, designers, all passionate about video and the work we create together. Welcome to our blog about video."
-          />
-
-          {/* 3. GALLERY GRID: Full-Bleed (Mepet Border) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {loading ? (
-              <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-border">
-                Loading gallery...
-              </div>
-            ) : currentItems.length === 0 ? (
-              <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-border">
-                No media found in gallery folder.
-              </div>
-            ) : (
-              currentItems.map((item, index) => {
-                const totalInPage = currentItems.length
-                const remainder = totalInPage % 3
-                const itemsInLastRow = remainder === 0 ? 3 : remainder
-                const isLastRow = index >= totalInPage - itemsInLastRow
-
-                return (
-                  <div
-                    key={item.id}
-                    className={`flex flex-col border-border
-                      ${!isLastRow ? 'border-b' : ''} 
-                      ${(index + 1) % 3 !== 0 ? 'lg:border-r' : ''} 
-                      hover:bg-gray-50/50 dark:hover:bg-white/5 transition-all group`}
-                  >
-                    {/* Image: Full-Bleed (Hapus Padding p-8) */}
-                    <div className="relative w-full aspect-4/3 bg-gray-100 dark:bg-zinc-900 overflow-hidden">
-                      <Media
-                        resource={item}
-                        fill
-                        size="33vw"
-                        className="w-full h-full"
-                        pictureClassName="relative block w-full h-full"
-                        imgClassName="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-
-                    {/* Caption: Berada di bawah garis border gambar */}
-                    <div className="p-6 border-t border-border">
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {item.alt ||
-                          item.filename ||
-                          'Aktivitas penelitian atau pengabdian masyarakat.'}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })
-            )}
-          </div>
-
-          {/* 4. PAGINATION */}
-          <div className="md:border-t border-border py-8 flex justify-center bg-zinc-50/30 dark:bg-transparent">
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      if (currentPage > 1) setCurrentPage(currentPage - 1)
-                    }}
-                    className={
-                      currentPage === 1 ? 'pointer-events-none opacity-40' : 'cursor-pointer'
-                    }
-                  />
-                </PaginationItem>
-
-                {[...Array(totalPages)].map((_, i) => (
-                  <PaginationItem key={i}>
-                    <PaginationLink
-                      href="#"
-                      isActive={currentPage === i + 1}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        setCurrentPage(i + 1)
-                      }}
-                      className="cursor-pointer"
-                    >
-                      {i + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-
-                <PaginationItem>
-                  <PaginationNext
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      if (currentPage < totalPages) setCurrentPage(currentPage + 1)
-                    }}
-                    className={
-                      currentPage === totalPages
-                        ? 'pointer-events-none opacity-40'
-                        : 'cursor-pointer'
-                    }
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </div>
-        </div>
-      </section>
+    <main className="w-full divide-y">
+      <RoutePageHeader
+        title="Arces — Gallery"
+        description="We're a team of engineers, marketers, designers, all passionate about video and the work we create together. Welcome to our blog about video."
+      />
+      <SectionDivider title="Editorial" />
+      <GalleryGrid loading={loading} items={currentItems} />
+      <Paginations
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </main>
   )
 }

@@ -10,6 +10,14 @@ export const Peoples: CollectionConfig = {
       relationTo: 'media',
     },
     {
+      name: 'externalImageUrl',
+      type: 'text',
+      label: 'External Image URL',
+      admin: {
+        description: 'Paste Scholar.google atau URL gambar eksternal lainnya',
+      },
+    },
+    {
       name: 'name',
       type: 'text',
       required: true,
@@ -31,12 +39,13 @@ export const Peoples: CollectionConfig = {
       type: 'relationship',
       label: 'Posisi',
       relationTo: 'roles',
+      hasMany: true,
       required: true,
     },
     {
       name: 'links',
       type: 'array',
-      label: 'Links', 
+      label: 'Links',
       minRows: 1,
       fields: [
         {

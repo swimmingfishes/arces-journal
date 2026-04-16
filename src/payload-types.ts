@@ -541,6 +541,10 @@ export interface Role {
 export interface People {
   id: number;
   image?: (number | null) | Media;
+  /**
+   * Paste Scholar.google atau URL gambar eksternal lainnya
+   */
+  externalImageUrl?: string | null;
   name: string;
   instation: string;
   country:
@@ -794,7 +798,7 @@ export interface People {
     | 'SX'
     | 'SS'
     | 'XK';
-  role: number | Role;
+  role: (number | Role)[];
   links?:
     | {
         label: string;
@@ -1327,6 +1331,7 @@ export interface RolesSelect<T extends boolean = true> {
  */
 export interface PeoplesSelect<T extends boolean = true> {
   image?: T;
+  externalImageUrl?: T;
   name?: T;
   instation?: T;
   country?: T;

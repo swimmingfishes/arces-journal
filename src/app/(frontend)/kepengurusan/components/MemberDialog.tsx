@@ -1,10 +1,12 @@
 import { ArrowSquareOutIcon } from '@phosphor-icons/react/dist/ssr'
+import { UserCircleIcon } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 import type { Member } from '../types'
+import { getMemberImageUrl } from '../types'
 
 type MemberDialogProps = {
   member: Member | null
@@ -14,50 +16,64 @@ type MemberDialogProps = {
 export function MemberDialog({ member, onClose }: MemberDialogProps) {
   if (!member) return null
 
+  const imageUrl = getMemberImageUrl(member)
+
   return (
     <Dialog open={!!member} onOpenChange={onClose}>
       <DialogContent
-        className="sm:max-w-sm p-0 overflow-hidden border-none rounded-2xl bg-white dark:bg-zinc-950"
+        // Menambahkan border tipis agar modal lebih tegas
+        className="sm:max-w-sm p-0 overflow-hidden rounded-none border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950"
         showCloseButton={false}
       >
         <VisuallyHidden.Root asChild>
           <DialogTitle>Profil {member.name}</DialogTitle>
         </VisuallyHidden.Root>
 
-        <div className="relative h-28 border-b border-zinc-400/50 bg-linear-to-tr from-zinc-300 to-zinc-200 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-950">
-          <div className="absolute -bottom-12 left-7 h-28 w-28 overflow-hidden rounded-full border-5 border-white bg-zinc-200 dark:border-zinc-950">
-            <img src={member.image} className="h-full w-full object-cover" alt={member.name} />
+        {/* Banner */}
+        <div className="relative h-20 border-b border-zinc-300/50 bg-linear-to-tr from-zinc-300 to-zinc-100 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-800">
+          {/* Foto Profil: Kotak tegas dengan border sedikit lebih tipis agar elegan */}
+          <div className="absolute -bottom-10 left-6 h-24 w-24 overflow-hidden rounded-none border-4 border-white bg-zinc-200 dark:border-zinc-950">
+            {imageUrl ? (
+              <img src={imageUrl} className="h-full w-full object-cover" alt={member.name} />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-zinc-500 dark:text-zinc-400">
+                <UserCircleIcon className="h-14 w-14" aria-hidden="true" />
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="px-7 pt-12 pb-0">
+        {/* Info Konten */}
+        <div className="px-6 pt-10">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h4 className="mb-2 text-xl font-semibold leading-tight text-gray-900 dark:text-white">
+              <h4 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
                 {member.name}
               </h4>
-              <p className="mt-0.5 text-base text-gray-500">{member.university}</p>
-              <p className="text-base text-gray-400">{member.country}</p>
+              <p className="mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                {member.university}
+              </p>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">{member.country}</p>
             </div>
           </div>
         </div>
 
+        {/* Links */}
         {member.links?.length ? (
-          <div className="px-7 pt-5">
-            <div className="border-t border-border pt-4">
-              <p className="mb-2.5 text-[11px] font-medium uppercase tracking-widest text-gray-400">
-                Links
-              </p>
-              <div className="flex flex-wrap gap-2">
+          <div className="px-6">
+            <div className="border-t border-zinc-200 pt-5 dark:border-zinc-800">
+              {/* Container flex w-full agar mengisi seluruh lebar */}
+              <div className="flex w-full gap-2">
                 {member.links.map((link, i) => (
                   <Link
                     key={`${link.url}-${i}`}
                     href={link.url}
                     target="_blank"
-                    className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-[13px] font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5"
+                    // Tambahkan flex-1 dan justify-center agar membagi rata lebar (mendatar full width)
+                    className="flex flex-1 items-center justify-between gap-1.5 rounded-none border border-zinc-300 px-3 py-2 text-[13px] font-semibold text-zinc-700 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
                   >
-                    {link.label}
-                    <ArrowSquareOutIcon className="h-3 w-3 opacity-50" />
+                    <span className="truncate">{link.label}</span>
+                    <ArrowSquareOutIcon className="h-3.5 w-3.5 shrink-0 opacity-60" />
                   </Link>
                 ))}
               </div>
@@ -65,10 +81,12 @@ export function MemberDialog({ member, onClose }: MemberDialogProps) {
           </div>
         ) : null}
 
-        <div className="flex justify-end px-7 py-5">
+        {/* Tombol Tutup */}
+        <div className="mt-2 flex justify-end px-6 py-6">
           <button
             onClick={onClose}
-            className="rounded-md border border-border px-4 py-1.5 text-[13px] text-gray-500 transition-colors hover:bg-gray-50 dark:hover:bg-white/5"
+            // rounded-none dan gaya uppercase agar lebih senada dengan tema "sharp"
+            className="rounded-none border border-zinc-300 bg-white px-5 py-2 text-xs font-bold uppercase tracking-wider text-zinc-600 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
           >
             Tutup
           </button>

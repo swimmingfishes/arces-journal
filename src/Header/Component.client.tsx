@@ -1,4 +1,5 @@
 'use client'
+
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -7,20 +8,29 @@ import type { Header } from '@/payload-types'
 import { HeaderNav } from './Nav'
 
 export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
-  const [theme, setTheme] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
+
+  // Langsung gunakan headerTheme, tidak perlu buat state 'theme' baru
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
+  // Reset theme ketika pindah halaman
   useEffect(() => {
     setHeaderTheme(null)
-  }, [pathname])
+  }, [pathname, setHeaderTheme])
+
+  // Handle scroll event
   useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-  }, [headerTheme])
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+
+    // Panggil sekali saat pertama kali render (berjaga-jaga jika user refresh saat posisi di bawah)
+    handleScroll()
+
+    // Tambahkan passive: true untuk performa scroll yang lebih baik
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -28,9 +38,10 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
     <header
       className={`w-full sticky top-0 z-50 transition-all duration-500
         ${scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-background/70 backdrop-blur-sm'}`}
-      {...(theme ? { 'data-theme': theme } : {})}
+      // Langsung gunakan nilai dari Context di sini
+      {...(headerTheme ? { 'data-theme': headerTheme } : {})}
     >
-      <div className="relative h-20 flex items-center md:border-x md:border-b border-border px-8">
+      <div className="relative h-20 flex items-center border-x border-b border-border px-8">
         {/* Left: Logo */}
         <Link href="/" scroll={false} className="h-full flex items-center">
           <p className="font-mono font-bold text-foreground text-2xl">ARCES</p>
