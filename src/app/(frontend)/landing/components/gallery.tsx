@@ -15,7 +15,7 @@ export function LandingGallery() {
   const mainImage = galleryImages[0]
   const sideImage = galleryImages[1]
 
-  if (true) {
+  if (loading) {
     return <LandingGallerySkeleton />
   }
 

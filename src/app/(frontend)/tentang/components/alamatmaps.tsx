@@ -5,7 +5,7 @@ export default function AlamatMaps({
   tentangData,
   loading,
 }: TentangSectionProps & { loading?: boolean }) {
-  if (true) {
+  if (loading) {
     return <AlamatMapsSkeleton />
   }
 

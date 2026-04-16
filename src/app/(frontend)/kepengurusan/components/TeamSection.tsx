@@ -19,7 +19,7 @@ export function TeamSection({
   className,
   gridClassName,
 }: TeamSectionProps) {
-  if (true) {
+  if (loading) {
     return <TeamSectionSkeleton />
   }
 

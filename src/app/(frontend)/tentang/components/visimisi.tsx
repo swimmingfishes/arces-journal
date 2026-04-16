@@ -7,7 +7,7 @@ export default function VisiMisi({
   tentangData,
   loading,
 }: TentangSectionProps & { loading?: boolean }) {
-  if (true) {
+  if (loading) {
     return <VisiMisiSkeleton />
   }
 

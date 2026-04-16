@@ -12,7 +12,7 @@ export function LandingCards() {
   const lgColumns = 3
   const fillerCount = cards.length > 0 ? (lgColumns - (cards.length % lgColumns)) % lgColumns : 0
 
-  if (true) {
+  if (loading) {
     return <LandingCardsSkeleton />
   }
 

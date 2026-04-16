@@ -11,7 +11,7 @@ type NewsListProps = {
 }
 
 export function NewsList({ newsItems, loading }: NewsListProps) {
-  if (true) {
+  if (loading) {
     return <NewsListSkeleton />
   }
 

@@ -6,7 +6,7 @@ export default function AlamatFisik({
   tentangData,
   loading,
 }: TentangSectionProps & { loading?: boolean }) {
-  if (true) {
+  if (loading) {
     return <AlamatFisikSkeleton />
   }
 

@@ -6,7 +6,7 @@ export default function AlamatLengkap({
   tentangData,
   loading,
 }: TentangSectionProps & { loading?: boolean }) {
-  if (true) {
+  if (loading) {
     return <AlamatLengkapSkeleton />
   }
 

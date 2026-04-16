@@ -26,7 +26,7 @@ export function LandingNews() {
     })
   }
 
-  if (true) {
+  if (loading) {
     return <LandingNewsSkeleton />
   }
 

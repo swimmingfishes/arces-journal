@@ -10,7 +10,7 @@ export default function PeranStrategis({
   tentangData,
   loading,
 }: TentangSectionProps & { loading?: boolean }) {
-  if (true) {
+  if (loading) {
     return <PeranStrategisSkeleton />
   }
 

@@ -55,7 +55,7 @@ export default function GalleryPage() {
         title="Arces — Gallery"
         description="We're a team of engineers, marketers, designers, all passionate about video and the work we create together. Welcome to our blog about video."
       />
-      <SectionDivider title="Editorial" />
+      <SectionDivider title="Gallery" />
       <GalleryGrid loading={loading} items={currentItems} />
       <Paginations
         currentPage={currentPage}

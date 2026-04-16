@@ -30,7 +30,7 @@ export function SearchNewsBar({
     return allNews.filter((news) => news.title.toLowerCase().includes(searchQuery.toLowerCase()))
   }, [allNews, searchQuery])
 
-  if (true) {
+  if (loading) {
     return (
       <div className="border-b border-border relative md:flex">
         <div className="relative flex items-center px-8 py-6 md:flex-1 md:border-r border-border">
