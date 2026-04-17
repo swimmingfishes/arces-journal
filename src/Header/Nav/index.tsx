@@ -14,8 +14,8 @@ import {
   LinkSimpleIcon,
   UsersThreeIcon,
   XIcon,
-} from '@phosphor-icons/react/dist/ssr'
-import * as PhosphorIcons from '@phosphor-icons/react/dist/ssr'
+} from '@phosphor-icons/react'
+import * as PhosphorIcons from '@phosphor-icons/react'
 
 const iconMap = {
   house: HouseIcon,
@@ -30,14 +30,18 @@ const iconMap = {
 type HeaderNavItem = NonNullable<HeaderType['navItems']>[number]
 type IconComponent = typeof LinkSimpleIcon
 
+const isRenderableIcon = (value: unknown): value is IconComponent => {
+  return Boolean(value) && (typeof value === 'function' || typeof value === 'object')
+}
+
 const resolveIcon = (item: HeaderNavItem): IconComponent => {
   const manualIconName = item.iconName?.trim()
 
   if (manualIconName) {
     const maybeIcon = (PhosphorIcons as Record<string, unknown>)[manualIconName]
 
-    if (typeof maybeIcon === 'function') {
-      return maybeIcon as IconComponent
+    if (isRenderableIcon(maybeIcon)) {
+      return maybeIcon
     }
   }
 
@@ -156,7 +160,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
           title={label}
         >
           <span className="inline-flex items-center gap-2 whitespace-nowrap">
-            <Icon className="size-5 lg:size-4" weight="fill" />
+            <Icon className="size-5 lg:size-4 mb-0.5" weight="fill" />
             <span className="hidden 2xl:inline">{label}</span>
           </span>
         </Link>

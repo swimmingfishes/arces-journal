@@ -9,7 +9,7 @@ import { Page, News } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<News | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? `${doc.title} | Arces News` : 'Arces News '
 }
 
 const generateURL: GenerateURL<News | Page> = ({ doc }) => {
