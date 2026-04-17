@@ -3,6 +3,7 @@ import { cn } from '@/components/lib/utils'
 
 interface SectionDividerProps {
   title?: string | React.ReactNode
+  id?: string
   className?: string
   containerClassName?: string
   titleClassName?: string
@@ -11,6 +12,7 @@ interface SectionDividerProps {
 
 export function SectionDivider({
   title,
+  id,
   className,
   containerClassName,
   titleClassName,
@@ -20,6 +22,7 @@ export function SectionDivider({
 
   return (
     <section
+      id={id}
       className={cn(
         'relative w-full',
 

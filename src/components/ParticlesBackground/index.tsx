@@ -3,23 +3,35 @@ import { useCallback, useEffect, useState } from 'react'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
 import { memo } from 'react'
+import { useTheme } from 'next-themes'
 
 export const ParticlesBackground = memo(function ParticlesBackground() {
   const [init, setInit] = useState(false)
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     initParticlesEngine(async (engine) => {
       await loadSlim(engine)
     }).then(() => setInit(true))
   }, [])
 
-  const options = useCallback(
-    () => ({
+  const options = useCallback(() => {
+    // Tentukan warna berdasarkan theme
+    // Dark mode: Biru (#3B82F6 atau #60A5FA), Light mode: Abu-abu (#6B7280 atau #9CA3AF)
+    const particleColor = resolvedTheme === 'dark' ? '#60A5FA' : '#6B7280'
+    const linkColor = resolvedTheme === 'dark' ? '#60A5FA' : '#6B7280'
+    const linkOpacity = resolvedTheme === 'dark' ? 0.3 : 0.2
+    const particleOpacity =
+      resolvedTheme === 'dark' ? { min: 0.2, max: 0.6 } : { min: 0.15, max: 0.4 }
+
+    return {
       autoPlay: true,
       background: {
-        color: { value: 'transparent' }, // Biar ikut tema website
+        color: { value: 'transparent' },
       },
-      fullScreen: { enable: false }, // Penting: Biar gak nutupin seluruh page
+      fullScreen: { enable: false },
       detectRetina: true,
       fpsLimit: 120,
       interactivity: {
@@ -31,7 +43,7 @@ export const ParticlesBackground = memo(function ParticlesBackground() {
           },
           onHover: {
             enable: true,
-            mode: 'grab', // Efek narik garis saat kursor mendekat
+            mode: 'grab',
             parallax: {
               enable: true,
               force: 60,
@@ -63,21 +75,21 @@ export const ParticlesBackground = memo(function ParticlesBackground() {
           vertical: { value: 1 },
         },
         color: {
-          value: '#328A10', // Warna biru shadcn/tailwind
+          value: particleColor,
         },
         links: {
-          color: { value: '#328A10' },
+          color: { value: linkColor },
           distance: 150,
           enable: true,
           frequency: 1,
-          opacity: 0.4,
+          opacity: linkOpacity,
           width: 1,
         },
         move: {
           enable: true,
           speed: 1.5,
           direction: 'none' as const,
-          outModes: { default: 'bounce' as const }, // Biar mantul di border kotak hero
+          outModes: { default: 'bounce' as const },
         },
         number: {
           density: {
@@ -88,7 +100,7 @@ export const ParticlesBackground = memo(function ParticlesBackground() {
           value: 100,
         },
         opacity: {
-          value: { min: 0.1, max: 0.5 },
+          value: particleOpacity,
           animation: {
             enable: true,
             speed: 3,
@@ -108,11 +120,11 @@ export const ParticlesBackground = memo(function ParticlesBackground() {
       pauseOnBlur: true,
       pauseOnOutsideViewport: true,
       zLayers: 1,
-    }),
-    [],
-  )
+    }
+  }, [resolvedTheme])
 
-  if (!init) return null
+  // Prevent hydration mismatch
+  if (!init || !mounted) return null
 
   return (
     <Particles

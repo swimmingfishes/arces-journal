@@ -1,15 +1,14 @@
 'use client'
 
 import { Media } from '@/components/Media'
+import { GalleryGridSkeleton } from './skeleton/grid-skeleton'
 import type { GalleryGridProps } from '../types'
 
 export default function GalleryGrid({ loading, items }: GalleryGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {loading ? (
-        <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-border">
-          Loading gallery...
-        </div>
+        <GalleryGridSkeleton />
       ) : items.length === 0 ? (
         <div className="col-span-full px-8 py-10 text-center text-sm text-muted-foreground border-b border-border">
           No media found in gallery folder.

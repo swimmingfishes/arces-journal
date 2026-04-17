@@ -115,13 +115,17 @@ export function LandingNews() {
               </Link>
             ))}
 
-            <div className="p-4">
-              <Link href="/news">
-                <Button size="lg" className="w-full rounded-sm">
-                  See more news <ArrowRightIcon className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
+            <Link
+              href="/news"
+              className="group relative flex flex-row items-center justify-left gap-3 bg-muted/20 hover:bg-muted/50 transition-colors w-full h-full p-8"
+            >
+              <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform border border-primary/20">
+                <ArrowRightIcon className="w-6 h-6" />
+              </div>
+              <span className="font-semibold text-xs uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors text-center">
+                Lihat Semua
+              </span>
+            </Link>
           </div>
         </div>
       </section>

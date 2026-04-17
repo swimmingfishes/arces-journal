@@ -1,21 +1,32 @@
 'use client'
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { Header as HeaderType } from '@/payload-types'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { ListIcon, XIcon } from '@phosphor-icons/react/dist/ssr'
+import {
+  HouseIcon,
+  ImagesIcon,
+  InfoIcon,
+  ListIcon,
+  MailboxIcon,
+  NewspaperIcon,
+  UsersThreeIcon,
+  XIcon,
+} from '@phosphor-icons/react/dist/ssr'
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Tentang', href: '/tentang' },
-  { label: 'Kepengurusan', href: '/kepengurusan' },
-  { label: 'News', href: '/news' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'Kontak dan layanan', href: '/kontak-layanan' },
+  { label: 'Home', href: '/', icon: HouseIcon },
+  { label: 'Tentang', href: '/tentang', icon: InfoIcon },
+  { label: 'Kepengurusan', href: '/kepengurusan', icon: UsersThreeIcon },
+  { label: 'News', href: '/news', icon: NewspaperIcon },
+  { label: 'Gallery', href: '/gallery', icon: ImagesIcon },
+  { label: 'Kontak dan layanan', href: '/kontak-layanan', icon: MailboxIcon },
 ]
 
 export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = ({ mobileOnly }) => {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   if (mobileOnly) {
     return (
@@ -39,7 +50,11 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
                   href={href}
                   scroll={false}
                   onClick={() => setOpen(false)}
-                  className="py-6 px-3 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
+                  className={`py-6 px-3 text-sm font-medium transition-colors ${
+                    pathname === href
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground/80 hover:text-foreground hover:bg-foreground/5'
+                  }`}
                 >
                   {label}
                 </Link>
@@ -53,15 +68,22 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
 
   // Desktop nav
   return (
-    <nav className="flex items-stretch gap-1 h-full">
-      {navLinks.map(({ label, href }) => (
+    <nav className="flex items-stretch h-full divide-x border-x">
+      {navLinks.map(({ label, href, icon: Icon }) => (
         <Link
           key={href}
           href={href}
           scroll={false}
-          className="relative isolate inline-flex h-full items-center px-4 text-[15px] font-medium text-foreground/80 hover:text-foreground transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:bg-foreground/12 before:opacity-0 before:scale-95 before:transition-all before:duration-300 hover:before:opacity-100 hover:before:scale-100"
+          className={`relative isolate inline-flex h-full items-center justify-center px-6 lg:px-7 text-[15px] font-medium transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:bg-foreground/12 before:opacity-0 before:scale-95 before:transition-all before:duration-300 hover:before:opacity-100 hover:before:scale-100 ${
+            pathname === href ? 'text-primary' : 'text-foreground/80 hover:text-foreground'
+          }`}
+          aria-label={label}
+          title={label}
         >
-          {label}
+          <span className="inline-flex items-center gap-2 whitespace-nowrap">
+            <Icon className="size-5 lg:size-4" weight="fill" />
+            <span className="hidden 2xl:inline">{label}</span>
+          </span>
         </Link>
       ))}
     </nav>

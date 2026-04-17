@@ -14,7 +14,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
         backdrop-blur-md border-gray-200 dark:border-gray-800
       "
     >
-      <div className="relative h-20 flex items-center px-8 border-x border-b border-border">
+      <div className="relative h-18 flex items-center px-8 border-x border-b border-border">
         {/* Left: Logo */}
         <Link href="/" className="h-full flex items-center">
           <p className="font-mono font-bold text-2xl text-black dark:text-white">ARCES</p>

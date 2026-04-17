@@ -69,11 +69,15 @@
   }
 
   .page-gutter {
-    padding-inline: 1rem;
+    --gutter-min: 1rem;
+    --content-max: var(--breakpoint-2xl);
+    padding-inline: max(var(--gutter-min), calc((100vw - var(--content-max)) / 2));
   }
 
   .page-gutter-narrow {
-    padding-inline: 1rem;
+    --gutter-min: 1rem;
+    --content-max: var(--breakpoint-xl);
+    padding-inline: max(var(--gutter-min), calc((100vw - var(--content-max)) / 2));
   }
 
   .container {
@@ -90,11 +94,11 @@
 
   @variant md {
     .page-gutter {
-      padding-inline: 4rem;
+      --gutter-min: 2rem;
     }
 
     .page-gutter-narrow {
-      padding-inline: 3.5rem;
+      --gutter-min: 1.5rem;
     }
 
     .container {
@@ -105,11 +109,11 @@
 
   @variant lg {
     .page-gutter {
-      padding-inline: 8rem;
+      --gutter-min: 3rem;
     }
 
     .page-gutter-narrow {
-      padding-inline: 7rem;
+      --gutter-min: 2.5rem;
     }
 
     .container {
@@ -118,32 +122,16 @@
   }
 
   @variant xl {
-    .page-gutter {
-      padding-inline: 13rem;
-    }
-
-    .page-gutter-narrow {
-      padding-inline: 11rem;
-    }
-
     .container {
       max-width: var(--breakpoint-xl);
     }
   }
 
-  /* @variant 2xl {
-    .page-gutter {
-      padding-inline: 14rem;
-    }
-
-    .page-gutter-narrow {
-      padding-inline: 12rem;
-    }
-
+  @variant 2xl {
     .container {
       max-width: var(--breakpoint-2xl);
     }
-  } */
+  }
 }
 
 :root {

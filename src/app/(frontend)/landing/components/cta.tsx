@@ -12,7 +12,7 @@ export function LandingCTA() {
         <ParticlesBackground />
       </div>
 
-      <div className="relative z-10 px-8 py-16 md:py-20">
+      <div className="relative z-10 px-8 py-16 md:py-30">
         <div className="space-y-8 flex flex-col items-center justify-center text-center">
           <div className="space-y-4 max-w-3xl">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">

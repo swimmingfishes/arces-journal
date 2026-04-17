@@ -10,10 +10,11 @@ export default function LandingPage() {
   return (
     <main className="w-full h-auto divide-y">
       <LandingHero />
-      <SectionDivider title="Dokumen dan Publikasi" />
+      <SectionDivider id="dokumen-publikasi" title="Dokumen dan Publikasi" />
       <LandingCards />
       <LandingNews />
       <LandingGallery />
+      <div className="p-8" />
       <LandingCTA />
     </main>
   )

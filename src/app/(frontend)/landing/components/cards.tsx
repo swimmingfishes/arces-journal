@@ -98,7 +98,7 @@ export function LandingCards() {
                     <div className="mt-auto pt-4">
                       <Button
                         size="lg"
-                        className="w-full rounded-none gap-2 group/btn justify-between"
+                        className="w-full rounded-none gap-2 group/btn justify-between h-15 hover:bg-none shadow-none hover:shadow-md"
                       >
                         See more
                         <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />

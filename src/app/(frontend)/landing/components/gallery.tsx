@@ -34,9 +34,9 @@ export function LandingGallery() {
       <SectionDivider title="Gallery" />
       <section className="w-full bg-background p-8">
         <div className="border border-border">
-          <div className="grid grid-cols-1 lg:grid-cols-2 -m-[0.5px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-y-0 divide-x-0 lg:divide-x divide-y">
             {mainImage && (
-              <div className="group relative border border-border -m-[0.5px] overflow-hidden">
+              <div className="group relative overflow-hidden">
                 <div className="relative w-full aspect-video">
                   <Media
                     resource={mainImage}
@@ -56,9 +56,9 @@ export function LandingGallery() {
               </div>
             )}
 
-            <div className={`grid ${sideImage ? 'grid-cols-2' : 'grid-cols-1'} -m-[0.5px]`}>
+            <div className={`grid divide-x ${sideImage ? 'grid-cols-2' : 'grid-cols-1 '} `}>
               {sideImage && (
-                <div className="group relative border border-border -m-[0.5px] overflow-hidden cursor-pointer">
+                <div className="group relative overflow-hidden cursor-pointer">
                   <div className="absolute inset-0">
                     <Media
                       resource={sideImage}
@@ -75,12 +75,12 @@ export function LandingGallery() {
 
               <Link
                 href="/gallery"
-                className="group relative border border-border -m-[0.5px] flex flex-col items-center justify-center gap-3 bg-muted/20 hover:bg-muted/50 transition-colors w-full h-full min-h-50"
+                className="group relative flex flex-col items-center justify-center gap-3 bg-muted/20 hover:bg-muted/50 transition-colors w-full h-full min-h-50"
               >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform border border-primary/20">
                   <ArrowRightIcon className="w-6 h-6" />
                 </div>
-                <span className="font-semibold text-sm uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors text-center">
+                <span className="font-semibold text-xs uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors text-center">
                   Lihat Semua
                 </span>
               </Link>
