@@ -83,6 +83,7 @@ export default buildConfig({
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || '',
+      authToken: process.env.DATABASE_AUTH_TOKEN || '',
     },
   }),
   collections: [Pages, News, Media, Roles, Peoples, Journals, Users],
