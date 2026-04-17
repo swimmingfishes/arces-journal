@@ -10,14 +10,57 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      name: 'brandName',
+      type: 'text',
+      defaultValue: 'ARCES',
+      admin: {
+        description: 'Brand text shown on the left side of the header.',
+      },
+    },
+    {
       name: 'navItems',
       type: 'array',
       fields: [
         link({
           appearances: false,
         }),
+        {
+          name: 'icon',
+          type: 'select',
+          defaultValue: 'link',
+          options: [
+            {
+              label: 'Home',
+              value: 'house',
+            },
+            {
+              label: 'Info',
+              value: 'info',
+            },
+            {
+              label: 'Team',
+              value: 'users',
+            },
+            {
+              label: 'News',
+              value: 'news',
+            },
+            {
+              label: 'Gallery',
+              value: 'images',
+            },
+            {
+              label: 'Contact',
+              value: 'mailbox',
+            },
+            {
+              label: 'Default Link',
+              value: 'link',
+            },
+          ],
+        },
       ],
-      maxRows: 6,
+      maxRows: 12,
       admin: {
         initCollapsed: true,
         components: {

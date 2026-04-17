@@ -11,22 +11,80 @@ import {
   ListIcon,
   MailboxIcon,
   NewspaperIcon,
+  LinkSimpleIcon,
   UsersThreeIcon,
   XIcon,
 } from '@phosphor-icons/react/dist/ssr'
 
-const navLinks = [
-  { label: 'Home', href: '/', icon: HouseIcon },
-  { label: 'Tentang', href: '/tentang', icon: InfoIcon },
-  { label: 'Kepengurusan', href: '/kepengurusan', icon: UsersThreeIcon },
-  { label: 'News', href: '/news', icon: NewspaperIcon },
-  { label: 'Gallery', href: '/gallery', icon: ImagesIcon },
-  { label: 'Kontak dan layanan', href: '/kontak-layanan', icon: MailboxIcon },
-]
+const iconMap = {
+  house: HouseIcon,
+  images: ImagesIcon,
+  info: InfoIcon,
+  mailbox: MailboxIcon,
+  news: NewspaperIcon,
+  users: UsersThreeIcon,
+  link: LinkSimpleIcon,
+} as const
 
-export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = ({ mobileOnly }) => {
+type HeaderNavItem = NonNullable<HeaderType['navItems']>[number]
+
+const resolveHref = (item: HeaderNavItem) => {
+  const link = item.link
+
+  if (!link) return null
+  if (link.type === 'custom') return link.url || null
+
+  if (
+    link.type === 'reference' &&
+    link.reference &&
+    typeof link.reference.value === 'object' &&
+    'slug' in link.reference.value
+  ) {
+    const slug = link.reference.value.slug
+    if (!slug) return null
+
+    if (link.reference.relationTo === 'pages') {
+      return slug === 'home' ? '/' : `/${slug}`
+    }
+
+    return `/${link.reference.relationTo}/${slug}`
+  }
+
+  return null
+}
+
+const normalizePath = (path: string) => {
+  if (!path) return '/'
+  return path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
+}
+
+const buildNavLinks = (data: HeaderType) => {
+  return (data.navItems || [])
+    .map((item) => {
+      const href = resolveHref(item)
+      const label = item.link?.label
+
+      if (!href || !label) return null
+
+      return {
+        href,
+        label,
+        icon: iconMap[item.icon || 'link'] || LinkSimpleIcon,
+      }
+    })
+    .filter((item): item is { href: string; label: string; icon: typeof LinkSimpleIcon } =>
+      Boolean(item),
+    )
+}
+
+export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = ({
+  data,
+  mobileOnly,
+}) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const navLinks = buildNavLinks(data)
+  const currentPath = normalizePath(pathname)
 
   if (mobileOnly) {
     return (
@@ -51,7 +109,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
                   scroll={false}
                   onClick={() => setOpen(false)}
                   className={`py-6 px-3 text-sm font-medium transition-colors ${
-                    pathname === href
+                    currentPath === normalizePath(href)
                       ? 'text-primary bg-primary/10'
                       : 'text-foreground/80 hover:text-foreground hover:bg-foreground/5'
                   }`}
@@ -75,7 +133,9 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = (
           href={href}
           scroll={false}
           className={`relative isolate inline-flex h-full items-center justify-center px-6 lg:px-7 text-[15px] font-medium transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:bg-foreground/12 before:opacity-0 before:scale-95 before:transition-all before:duration-300 hover:before:opacity-100 hover:before:scale-100 ${
-            pathname === href ? 'text-primary' : 'text-foreground/80 hover:text-foreground'
+            currentPath === normalizePath(href)
+              ? 'text-primary'
+              : 'text-foreground/80 hover:text-foreground'
           }`}
           aria-label={label}
           title={label}

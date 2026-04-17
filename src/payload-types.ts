@@ -1494,6 +1494,10 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
+  /**
+   * Brand text shown on the left side of the header.
+   */
+  brandName?: string | null;
   navItems?:
     | {
         link: {
@@ -1511,6 +1515,7 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        icon?: ('house' | 'info' | 'users' | 'news' | 'images' | 'mailbox' | 'link') | null;
         id?: string | null;
       }[]
     | null;
@@ -1523,7 +1528,37 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
+  brandName?: string | null;
+  description?: string | null;
+  linkGroups?:
+    | {
+        title: string;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'news';
+                      value: number | News;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  newsletterTitle?: string | null;
+  newsletterDescription?: string | null;
+  bottomLinks?:
     | {
         link: {
           type?: ('reference' | 'custom') | null;
@@ -1543,6 +1578,10 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Use {year} placeholder to render the current year automatically.
+   */
+  copyrightText?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1712,6 +1751,7 @@ export interface KontakLayanan {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  brandName?: T;
   navItems?:
     | T
     | {
@@ -1724,6 +1764,7 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        icon?: T;
         id?: T;
       };
   updatedAt?: T;
@@ -1735,7 +1776,31 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  brandName?: T;
+  description?: T;
+  linkGroups?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  newsletterTitle?: T;
+  newsletterDescription?: T;
+  bottomLinks?:
     | T
     | {
         link?:
@@ -1749,6 +1814,7 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  copyrightText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

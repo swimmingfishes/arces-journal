@@ -12,6 +12,8 @@ import { fetchFileByURL } from '../../db/utils'
 import { getKontakLayananSeedData, getTentangSeedData } from '../../db/data/tentang'
 import { getJurnalSeedData } from '../../db/data/jurnal'
 import { getKepengurusanSeedData, getRoleSeedData } from '../../db/data/kepengurusan'
+import { getHeaderSeedData } from '../../db/data/header'
+import { getFooterSeedData } from '../../db/data/footer'
 
 const collections: CollectionSlug[] = [
   'media',
@@ -49,9 +51,21 @@ export const seed = async ({
     globals.map((global) =>
       payload.updateGlobal({
         slug: global,
-        data: {
-          navItems: [],
-        } as any,
+        data:
+          global === 'header'
+            ? ({
+                brandName: '',
+                navItems: [],
+              } as any)
+            : ({
+                brandName: '',
+                description: '',
+                linkGroups: [],
+                newsletterTitle: '',
+                newsletterDescription: '',
+                bottomLinks: [],
+                copyrightText: '',
+              } as any),
         depth: 0,
         context: {
           disableRevalidate: true,
@@ -217,50 +231,14 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'News',
-              url: '/news',
-            },
-          },
-        ],
-      },
+      data: getHeaderSeedData() as any,
     }),
     payload.updateGlobal({
       slug: 'footer',
       context: {
         disableRevalidate: true,
       },
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Admin',
-              url: '/admin',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
-            },
-          },
-        ],
-      },
+      data: getFooterSeedData() as any,
     }),
   ])
 
