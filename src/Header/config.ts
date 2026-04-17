@@ -28,6 +28,9 @@ export const Header: GlobalConfig = {
           name: 'icon',
           type: 'select',
           defaultValue: 'link',
+          admin: {
+            description: 'Fallback icon if iconName is empty or invalid.',
+          },
           options: [
             {
               label: 'Home',
@@ -58,6 +61,15 @@ export const Header: GlobalConfig = {
               value: 'link',
             },
           ],
+        },
+        {
+          name: 'iconName',
+          type: 'text',
+          admin: {
+            description:
+              'Optional manual Phosphor icon name, e.g. UsersThreeIcon. If valid, this overrides Icon dropdown.',
+            placeholder: 'UsersThreeIcon',
+          },
         },
       ],
       maxRows: 12,

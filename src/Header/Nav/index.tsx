@@ -15,6 +15,7 @@ import {
   UsersThreeIcon,
   XIcon,
 } from '@phosphor-icons/react/dist/ssr'
+import * as PhosphorIcons from '@phosphor-icons/react/dist/ssr'
 
 const iconMap = {
   house: HouseIcon,
@@ -27,6 +28,22 @@ const iconMap = {
 } as const
 
 type HeaderNavItem = NonNullable<HeaderType['navItems']>[number]
+type IconComponent = typeof LinkSimpleIcon
+
+const resolveIcon = (item: HeaderNavItem): IconComponent => {
+  const manualIconName = item.iconName?.trim()
+
+  if (manualIconName) {
+    const maybeIcon = (PhosphorIcons as Record<string, unknown>)[manualIconName]
+
+    if (typeof maybeIcon === 'function') {
+      return maybeIcon as IconComponent
+    }
+  }
+
+  const fallbackIcon = item.icon || 'link'
+  return (iconMap[fallbackIcon] || LinkSimpleIcon) as IconComponent
+}
 
 const resolveHref = (item: HeaderNavItem) => {
   const link = item.link
@@ -69,12 +86,10 @@ const buildNavLinks = (data: HeaderType) => {
       return {
         href,
         label,
-        icon: iconMap[item.icon || 'link'] || LinkSimpleIcon,
+        icon: resolveIcon(item),
       }
     })
-    .filter((item): item is { href: string; label: string; icon: typeof LinkSimpleIcon } =>
-      Boolean(item),
-    )
+    .filter((item): item is { href: string; label: string; icon: IconComponent } => Boolean(item))
 }
 
 export const HeaderNav: React.FC<{ data: HeaderType; mobileOnly?: boolean }> = ({

@@ -1515,7 +1515,14 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        /**
+         * Fallback icon if iconName is empty or invalid.
+         */
         icon?: ('house' | 'info' | 'users' | 'news' | 'images' | 'mailbox' | 'link') | null;
+        /**
+         * Optional manual Phosphor icon name, e.g. UsersThreeIcon. If valid, this overrides Icon dropdown.
+         */
+        iconName?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1765,6 +1772,7 @@ export interface HeaderSelect<T extends boolean = true> {
               label?: T;
             };
         icon?: T;
+        iconName?: T;
         id?: T;
       };
   updatedAt?: T;
