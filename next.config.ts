@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
         pathname: '/api/media/file/**',
       },
     ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'scholar.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '0.academia-photos.com',
+      },
+    ],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
