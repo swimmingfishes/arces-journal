@@ -21,16 +21,31 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
 
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<News> | null
+  collection?: 'pages' | 'news'
 }): Promise<Metadata> => {
-  const { doc } = args
+  const { doc, collection } = args
 
   const ogImage = getImageURL(doc?.meta?.image)
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+  const title = doc?.meta?.title || 'Arces Journal'
+
+  const slugPath = (() => {
+    if (Array.isArray(doc?.slug)) return doc.slug.join('/')
+    if (typeof doc?.slug !== 'string' || !doc.slug) return ''
+
+    if (collection === 'news') {
+      return `news/${doc.slug}`
+    }
+
+    return doc.slug === 'home' ? '' : doc.slug
+  })()
+
+  const canonicalPath = slugPath ? `/${slugPath}` : '/'
 
   return {
+    alternates: {
+      canonical: canonicalPath,
+    },
     description: doc?.meta?.description,
     openGraph: mergeOpenGraph({
       description: doc?.meta?.description || '',
@@ -42,7 +57,7 @@ export const generateMeta = async (args: {
           ]
         : undefined,
       title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      url: canonicalPath,
     }),
     title,
   }

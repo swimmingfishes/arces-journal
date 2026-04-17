@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { NewspaperIcon } from '@phosphor-icons/react'
 import { Media } from '@/components/Media'
 import type { NewsItem } from '../types'
 import { NewsListSkeleton } from './skeletons/news-list-skeleton'
@@ -42,13 +43,19 @@ export function NewsList({ newsItems, loading }: NewsListProps) {
           <div className="group flex flex-col md:flex-row items-start gap-8 px-8 py-8 lg:py-10 hover:bg-white dark:hover:bg-zinc-900/70 transition-colors duration-300">
             <div className="w-full md:w-64 lg:w-72 shrink-0">
               <div className="relative aspect-video overflow-hidden border border-border bg-gray-100 dark:bg-zinc-900">
-                <Media
-                  resource={news.heroImage}
-                  fill
-                  className="relative block h-full w-full"
-                  pictureClassName="block h-full w-full"
-                  imgClassName="object-cover transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:brightness-105"
-                />
+                {news.heroImage ? (
+                  <Media
+                    resource={news.heroImage}
+                    fill
+                    className="relative block h-full w-full"
+                    pictureClassName="block h-full w-full"
+                    imgClassName="object-cover transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:brightness-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-gray-50 text-gray-400 dark:bg-zinc-900 dark:text-zinc-500">
+                    <NewspaperIcon size={44} weight="duotone" aria-hidden="true" />
+                  </div>
+                )}
               </div>
             </div>
 

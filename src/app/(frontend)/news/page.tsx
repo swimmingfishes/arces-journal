@@ -1,6 +1,15 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import NewsPageClient from './page.client'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Berita',
+  description: 'Kumpulan berita dan aktivitas terbaru dari ARCES Journal.',
+  alternates: {
+    canonical: '/news',
+  },
+}
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -12,7 +21,7 @@ export default async function NewsPage({
 }) {
   const { page = '1' } = await searchParams
   const currentPage = Math.max(1, parseInt(page) || 1)
-  const itemsPerPage = 10
+  const itemsPerPage = 6
   const payload = await getPayload({ config: configPromise })
   const newsResponse = await payload.find({
     collection: 'news',

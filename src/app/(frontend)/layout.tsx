@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       className={cn(publicSans.variable, GeistMono.variable)}
-      lang="en"
+      lang="id"
       suppressHydrationWarning
     >
       <head>
@@ -56,9 +56,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title: {
+    default: 'Arces Journal',
+    template: '%s | Arces Journal',
+  },
+  description: 'Platform jurnal dan berita akademik dari ARCES untuk komunitas riset Indonesia.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
   },
 }

@@ -12,8 +12,11 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const journal = getJournalById(Number(id))
   if (!journal) return { title: 'Jurnal tidak ditemukan' }
   return {
-    title: `${journal.title} | Arces Journal`,
+    title: journal.title,
     description: journal.shortDescription,
+    alternates: {
+      canonical: `/jurnal/${journal.id}`,
+    },
   }
 }
 
