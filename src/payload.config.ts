@@ -1,4 +1,3 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 
 // import { id } from '@payloadcms/translations/languages/id'

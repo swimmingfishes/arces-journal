@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
 import { UserCircleIcon } from '@phosphor-icons/react/dist/ssr'
+import Image from 'next/image'
 
 import type { Member } from '../types'
 import { getMemberImageUrl } from '../types'
@@ -70,10 +71,12 @@ export function SearchMemberBar({
                 >
                   <div className="h-12 w-12 overflow-hidden rounded-full border border-border/70">
                     {imageUrl ? (
-                      <img
+                      <Image
                         src={imageUrl}
                         className="h-full w-full object-cover"
                         alt={result.name}
+                        width={48}
+                        height={48}
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-zinc-400 dark:text-zinc-500">

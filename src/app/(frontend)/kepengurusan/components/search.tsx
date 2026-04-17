@@ -2,9 +2,17 @@
 
 import { useState, useMemo } from 'react'
 import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
+import Image from 'next/image'
 
-export default async function SearchButton({ allMembers }: { allMembers: any[] }) {
-  const [selectedMember, setSelectedMember] = useState<any>(null)
+type SearchMember = {
+  id: number | string
+  name: string
+  university: string
+  role?: string | string[]
+  image?: string
+}
+
+export default function SearchButton({ allMembers }: { allMembers: SearchMember[] }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearchFocused, setIsSearchFocused] = useState(false)
 
@@ -36,26 +44,39 @@ export default async function SearchButton({ allMembers }: { allMembers: any[] }
         {/* Hasil Search Dropdown */}
         {isSearchFocused && searchResults.length > 0 && (
           <div className="absolute top-full left-0 right-0 bg-white dark:bg-zinc-900 border border-border z-100 shadow-2xl max-h-87.5 overflow-y-auto">
-            {searchResults.map((result) => (
-              <div
-                key={result.id}
-                className="flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border-b last:border-0 border-border/70"
-                onClick={() => {
-                  setSelectedMember(result)
-                  setSearchQuery('')
-                }}
-              >
-                <div className="h-12 w-12 rounded-full overflow-hidden border border-border/70">
-                  <img src={result.image} className="h-full w-full object-cover" alt="" />
+            {searchResults.map((result) => {
+              const roleText = Array.isArray(result.role)
+                ? result.role.join(' / ')
+                : (result.role ?? '')
+
+              return (
+                <div
+                  key={result.id}
+                  className="flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border-b last:border-0 border-border/70"
+                  onClick={() => {
+                    setSearchQuery('')
+                  }}
+                >
+                  <div className="h-12 w-12 rounded-full overflow-hidden border border-border/70">
+                    {result.image ? (
+                      <Image
+                        src={result.image}
+                        className="h-full w-full object-cover"
+                        alt={result.name}
+                        width={48}
+                        height={48}
+                      />
+                    ) : null}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold">{result.name}</span>
+                    <span className="text-[10px] text-primary font-black uppercase tracking-wider">
+                      {roleText}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold">{result.name}</span>
-                  <span className="text-[10px] text-primary font-black uppercase tracking-wider">
-                    {result.role}
-                  </span>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </div>

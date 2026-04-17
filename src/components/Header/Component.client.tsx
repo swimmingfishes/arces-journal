@@ -14,10 +14,10 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
 
   useEffect(() => {
     setHeaderTheme(null)
-  }, [pathname])
+  }, [pathname, setHeaderTheme])
   useEffect(() => {
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-  }, [headerTheme])
+  }, [headerTheme, theme])
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll)

@@ -1,10 +1,6 @@
-import type { Media, Tentang } from '@/payload-types'
+import type { Tentang } from '@/payload-types'
 import type { TentangSectionProps } from './types'
 import { PeranStrategisSkeleton } from './skeletons/peranstrategis-skeleton'
-
-function isMediaObject(value: number | Media | null | undefined): value is Media {
-  return typeof value === 'object' && value !== null
-}
 
 export default function PeranStrategis({
   tentangData,

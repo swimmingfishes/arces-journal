@@ -1,6 +1,5 @@
 'use client'
 import { useMemo } from 'react'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ArrowRightIcon, NewspaperIcon } from '@phosphor-icons/react/dist/ssr'
 import type { News } from '@/payload-types'
