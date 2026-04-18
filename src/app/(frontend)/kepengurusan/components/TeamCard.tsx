@@ -15,12 +15,11 @@ export function TeamCard({ member, onClick }: TeamCardProps) {
     <div className="group space-y-4" onClick={() => onClick(member)}>
       <div className="w-full aspect-[calc(4/5)] overflow-hidden border bg-gray-100 cursor-pointer dark:bg-zinc-800">
         {imageUrl ? (
-          <Image
+          <img
             src={imageUrl}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             alt={member.name}
-            width={500}
-            height={625}
+            loading="lazy"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-zinc-400 dark:text-zinc-500">
