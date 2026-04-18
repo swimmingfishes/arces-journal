@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
         hostname: '0.academia-photos.com',
       },
       {
+        protocol: 'https',
+        hostname: '**.public.blob.vercel-storage.com',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
         port: '3000',
