@@ -1,8 +1,7 @@
 'use client'
 import { useMemo } from 'react'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
+import { ArrowRightIcon, NewspaperIcon } from '@phosphor-icons/react/dist/ssr'
 import type { News } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { useCollectionFetch } from '../useCollectionFetch'
@@ -74,8 +73,8 @@ export function LandingNews() {
                     imgClassName="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-sm text-muted-foreground bg-background">
-                    No image
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground bg-background">
+                    <NewspaperIcon size={52} weight="duotone" aria-hidden="true" />
                   </div>
                 )}
 

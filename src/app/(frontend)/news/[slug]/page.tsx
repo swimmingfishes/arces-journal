@@ -167,7 +167,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const decodedSlug = decodeURIComponent(slug)
   const newsItem = await queryNewsBySlug({ slug: decodedSlug, draft: false })
 
-  return generateMeta({ doc: newsItem })
+  return generateMeta({ doc: newsItem, collection: 'news' })
 }
 
 const queryNewsBySlug = cache(async ({ slug, draft }: { slug: string; draft: boolean }) => {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1291d1fa-496e-4a68-aa23-3500b81fe680" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/app/(frontend)/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(frontend)/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(frontend)/kepengurusan/components/search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(frontend)/kepengurusan/components/search.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/ferdi/Development/INTERNSHIP/arces-journal" value="3D1DCwBLts5j5gplFA2If452iCJ" />
+    </persistenceIdMap>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="3D1DCwBLts5j5gplFA2If452iCJ" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/ferdi/Development/INTERNSHIP/arces-journal"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1291d1fa-496e-4a68-aa23-3500b81fe680" name="Changes" comment="" />
+      <created>1777440564655</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777440564655</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

@@ -81,6 +81,14 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Search`,
+    title: 'Pencarian',
+    description: 'Cari berita, halaman, dan konten ARCES Journal.',
+    alternates: {
+      canonical: '/search',
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
   }
 }

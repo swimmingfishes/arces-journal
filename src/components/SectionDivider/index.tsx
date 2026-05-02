@@ -14,7 +14,7 @@ export function SectionDivider({
   title,
   id,
   className,
-  containerClassName,
+  containerClassName: _containerClassName,
   titleClassName,
   children,
 }: SectionDividerProps) {

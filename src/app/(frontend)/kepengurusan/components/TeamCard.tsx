@@ -1,6 +1,7 @@
 import type { Member } from '../types'
 import { getMemberImageUrl } from '../types'
 import { UserCircleIcon } from '@phosphor-icons/react/dist/ssr'
+import Image from 'next/image'
 
 type TeamCardProps = {
   member: Member
@@ -18,6 +19,7 @@ export function TeamCard({ member, onClick }: TeamCardProps) {
             src={imageUrl}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             alt={member.name}
+            loading="lazy"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-zinc-400 dark:text-zinc-500">

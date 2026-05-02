@@ -6,6 +6,8 @@ import type { Header } from '@/payload-types'
 import { HeaderNav } from './Nav'
 
 export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
+  const brandName = data.brandName || 'ARCES'
+
   return (
     <header
       className="
@@ -17,7 +19,7 @@ export const HeaderClient: React.FC<{ data: Header }> = ({ data }) => {
       <div className="relative h-18 flex items-center px-8 border-x border-b border-border">
         {/* Left: Logo */}
         <Link href="/" className="h-full flex items-center">
-          <p className="font-mono font-bold text-2xl text-black dark:text-white">ARCES</p>
+          <p className="font-mono font-bold text-2xl text-black dark:text-white">{brandName}</p>
         </Link>
 
         {/* Center: Nav (desktop) */}

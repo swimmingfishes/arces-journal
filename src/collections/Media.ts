@@ -44,10 +44,6 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(dirname, '../../public/media'),
     adminThumbnail: 'thumbnail',
     focalPoint: true,
-    bulkUploadOptions: {
-      // Enable URL import from external sources
-      disableMultipart: false,
-    },
     imageSizes: [
       {
         name: 'thumbnail',

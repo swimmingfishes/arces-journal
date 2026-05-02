@@ -6,6 +6,7 @@ import enLocale from 'i18n-iso-countries/langs/en.json'
 import PageClientContent from './page.client'
 import type { Member } from './types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import type { People, Role } from '@/payload-types'
 
 countries.registerLocale(enLocale)
 
@@ -31,22 +32,18 @@ export default async function KepengurusanPage() {
     })
 
     const allMembers: Member[] = (response.docs || [])
-      .map((person: any) => {
+      .map((person: People) => {
         const imageUrl =
           person.image && typeof person.image === 'object' && person.image.url
             ? getMediaUrl(person.image.url)
             : person.image
 
-        const roles = Array.isArray(person.role)
-          ? person.role
-              .map((role: any) => {
-                if (!role) return null
-                return typeof role === 'object' ? role.slug : String(role)
-              })
-              .filter(Boolean)
-          : person.role
-            ? [typeof person.role === 'object' ? person.role.slug : String(person.role)]
-            : []
+        const roles: string[] = Array.isArray(person.role)
+          ? person.role.flatMap((role: number | Role) => {
+              if (!role) return []
+              return [typeof role === 'object' ? role.slug : String(role)]
+            })
+          : []
 
         return {
           id: person.id,

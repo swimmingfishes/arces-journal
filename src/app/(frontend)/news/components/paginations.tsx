@@ -15,11 +15,13 @@ function pageHref(pageNumber: number): string {
 }
 
 export default function Paginations({ currentPage, totalPages }: NewsPaginationProps) {
-  const prevHref = currentPage > 1 ? pageHref(currentPage - 1) : '#'
-  const nextHref = currentPage < totalPages ? pageHref(currentPage + 1) : '#'
+  const isPrevDisabled = currentPage === 1
+  const isNextDisabled = currentPage === totalPages
+  const prevHref = isPrevDisabled ? pageHref(1) : pageHref(currentPage - 1)
+  const nextHref = isNextDisabled ? pageHref(totalPages) : pageHref(currentPage + 1)
 
   return (
-    <div className="flex justify-end items-center">
+    <div className="mt-auto flex items-center justify-end">
       <Pagination className="mx-0 w-auto">
         <PaginationContent className="gap-0 border-l">
           <PaginationItem>
@@ -31,11 +33,12 @@ export default function Paginations({ currentPage, totalPages }: NewsPaginationP
           <PaginationItem>
             <PaginationPrevious
               href={prevHref}
-              aria-disabled={currentPage === 1}
+              aria-disabled={isPrevDisabled}
+              tabIndex={isPrevDisabled ? -1 : undefined}
               className={`
 								w-12 h-12 flex items-center justify-center rounded-none
 								bg-foreground text-background [&>span]:hidden [&>svg]:text-background
-								${currentPage === 1 ? 'pointer-events-none opacity-30' : 'cursor-pointer hover:bg-foreground/80 hover:text-background'}
+							${isPrevDisabled ? 'pointer-events-none opacity-30' : 'cursor-pointer hover:bg-foreground/80 hover:text-background'}
 							`}
             />
           </PaginationItem>
@@ -43,11 +46,12 @@ export default function Paginations({ currentPage, totalPages }: NewsPaginationP
           <PaginationItem>
             <PaginationNext
               href={nextHref}
-              aria-disabled={currentPage === totalPages}
+              aria-disabled={isNextDisabled}
+              tabIndex={isNextDisabled ? -1 : undefined}
               className={`
 								w-12 h-12 flex items-center justify-center rounded-none
 								bg-foreground text-background [&>span]:hidden [&>svg]:text-background
-								${currentPage === totalPages ? 'pointer-events-none opacity-30' : 'cursor-pointer hover:bg-foreground/80 hover:text-background'}
+							${isNextDisabled ? 'pointer-events-none opacity-30' : 'cursor-pointer hover:bg-foreground/80 hover:text-background'}
 							`}
             />
           </PaginationItem>

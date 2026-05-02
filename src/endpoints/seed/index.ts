@@ -12,6 +12,9 @@ import { fetchFileByURL } from '../../db/utils'
 import { getKontakLayananSeedData, getTentangSeedData } from '../../db/data/tentang'
 import { getJurnalSeedData } from '../../db/data/jurnal'
 import { getKepengurusanSeedData, getRoleSeedData } from '../../db/data/kepengurusan'
+import { getHeaderSeedData } from '../../db/data/header'
+import { getFooterSeedData } from '../../db/data/footer'
+import type { People } from '@/payload-types'
 
 const collections: CollectionSlug[] = [
   'media',
@@ -24,6 +27,10 @@ const collections: CollectionSlug[] = [
 ]
 
 const globals: GlobalSlug[] = ['header', 'footer']
+type GlobalSeedData = {
+  updatedAt?: string | null
+  createdAt?: string | null
+}
 
 // Next.js revalidation errors are normal when seeding the database without a server running
 // i.e. running `yarn seed` locally instead of using the admin UI within an active app
@@ -49,9 +56,21 @@ export const seed = async ({
     globals.map((global) =>
       payload.updateGlobal({
         slug: global,
-        data: {
-          navItems: [],
-        } as any,
+        data:
+          global === 'header'
+            ? ({
+                brandName: '',
+                navItems: [],
+              } as GlobalSeedData)
+            : ({
+                brandName: '',
+                description: '',
+                linkGroups: [],
+                newsletterTitle: '',
+                newsletterDescription: '',
+                bottomLinks: [],
+                copyrightText: '',
+              } as GlobalSeedData),
         depth: 0,
         context: {
           disableRevalidate: true,
@@ -169,7 +188,7 @@ export const seed = async ({
   payload.logger.info(`— Seeding roles and peoples...`)
 
   const roleSeedData = getRoleSeedData()
-  const roleIdBySlug = new Map<string, number | string>()
+  const roleIdBySlug = new Map<string, number>()
 
   for (const role of roleSeedData) {
     const roleDoc = await payload.create({
@@ -181,14 +200,16 @@ export const seed = async ({
       data: role,
     })
 
-    roleIdBySlug.set(role.slug, roleDoc.id)
+    if (typeof roleDoc.id === 'number') {
+      roleIdBySlug.set(role.slug, roleDoc.id)
+    }
   }
 
   const peopleSeedData = getKepengurusanSeedData()
   for (const person of peopleSeedData) {
-    const roleIds = person.roleSlugs
+    const roleIds: number[] = person.roleSlugs
       .map((slug) => roleIdBySlug.get(slug))
-      .filter((id): id is string | number => Boolean(id))
+      .filter((id): id is number => typeof id === 'number')
 
     if (roleIds.length === 0) continue
 
@@ -201,7 +222,7 @@ export const seed = async ({
       data: {
         name: person.name,
         instation: person.instation,
-        country: person.country,
+        country: person.country as People['country'],
         role: roleIds,
         ...(person.externalImageUrl ? { externalImageUrl: person.externalImageUrl } : {}),
         ...(person.links?.length ? { links: person.links } : {}),
@@ -217,57 +238,21 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'News',
-              url: '/news',
-            },
-          },
-        ],
-      },
+      data: getHeaderSeedData() as GlobalSeedData,
     }),
     payload.updateGlobal({
       slug: 'footer',
       context: {
         disableRevalidate: true,
       },
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Admin',
-              url: '/admin',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
-            },
-          },
-        ],
-      },
+      data: getFooterSeedData() as GlobalSeedData,
     }),
   ])
 
   // Seed tentang (about) global with comprehensive content
   await payload.updateGlobal({
     slug: 'tentang',
-    data: getTentangSeedData() as any,
+    data: getTentangSeedData() as GlobalSeedData,
     depth: 0,
     context: {
       disableRevalidate: true,
@@ -277,7 +262,7 @@ export const seed = async ({
   // Seed kontak & layanan (contact & services) global
   await payload.updateGlobal({
     slug: 'kontakLayanan',
-    data: getKontakLayananSeedData() as any,
+    data: getKontakLayananSeedData() as GlobalSeedData,
     depth: 0,
     context: {
       disableRevalidate: true,

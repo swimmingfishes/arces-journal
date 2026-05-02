@@ -1,5 +1,43 @@
 import data from './tentang.json'
 
+type TentangSeedSource = {
+  sejarah: {
+    content?: string
+    leftParagraph1?: string
+    leftParagraph2?: string
+    rightParagraph1?: string
+    rightParagraph2?: string
+    rightParagraph3?: string
+  }
+  website: {
+    content?: string
+    paragraph1?: string
+    paragraph2?: string
+    paragraph3?: string
+  }
+  physicalAddress: {
+    content?: string
+    leftParagraph1?: string
+    leftParagraph2?: string
+    rightParagraph1?: string
+    rightParagraph2?: string
+    mapLeftParagraph1?: string
+    mapLeftParagraph2?: string
+    mapLeftParagraph3?: string
+    mapRightParagraph1?: string
+    mapRightParagraph2?: string
+    mapRightParagraph3?: string
+    mapsEmbedUrl?: string
+  }
+  visiMisi: {
+    visi: string
+    misions: unknown[]
+  }
+  peranStrategis: {
+    cards: unknown[]
+  }
+}
+
 const textToLexicalState = (text: string) => ({
   root: {
     type: 'root',
@@ -80,7 +118,7 @@ const joinTextParts = (...parts: Array<string | undefined>) =>
     .join('\n\n')
 
 export const getTentangSeedData = () => {
-  const tentang = data.tentang as any
+  const tentang = data.tentang as TentangSeedSource
   const sejarahContent =
     tentang.sejarah.content ||
     joinTextParts(

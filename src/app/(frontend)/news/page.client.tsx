@@ -30,7 +30,7 @@ export default function NewsPageClient({
   }, [initialNews, sortOrder])
 
   return (
-    <div className="flex flex-col grow divide-y">
+    <div className="flex min-h-screen flex-col divide-y">
       <RoutePageHeader
         title="Arces — News"
         description="Temukan informasi terbaru seputar publikasi ilmiah, kegiatan penelitian, dan berbagai agenda akademik."

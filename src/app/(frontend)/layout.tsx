@@ -26,13 +26,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       className={cn(publicSans.variable, GeistMono.variable)}
-      lang="en"
+      lang="id"
       suppressHydrationWarning
     >
       <head>
         <InitTheme />
         <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wdth,wght@75..125,200..700&display=swap"
           rel="stylesheet"
@@ -56,9 +57,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title: {
+    default: 'Arces Journal',
+    template: '%s | Arces Journal',
+  },
+  description: 'Platform jurnal dan berita akademik dari ARCES untuk komunitas riset Indonesia.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
   },
 }
