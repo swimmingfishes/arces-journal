@@ -35,6 +35,7 @@
     "@payloadcms/db-sqlite": "^3.82.1",
     "@payloadcms/live-preview-react": "3.82.1",
     "@payloadcms/next": "3.82.1",
+    "@payloadcms/plugin-cloud-storage": "^3.82.1",
     "@payloadcms/plugin-form-builder": "3.82.1",
     "@payloadcms/plugin-nested-docs": "3.82.1",
     "@payloadcms/plugin-redirects": "3.82.1",
