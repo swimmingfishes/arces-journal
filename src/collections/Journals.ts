@@ -16,6 +16,10 @@ export const Journals: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  admin: {
+    defaultColumns: ['title', 'description', 'colors', 'link'],
+    useAsTitle: 'title', // this is the key
+  },
   fields: [
     {
       name: 'title',

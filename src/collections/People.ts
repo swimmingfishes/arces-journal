@@ -3,6 +3,10 @@ import { COUNTRIES } from '@/lib/countries'
 
 export const Peoples: CollectionConfig = {
   slug: 'peoples',
+  admin: {
+    defaultColumns: ['name', 'instanstion', 'country', 'role'],
+    useAsTitle: 'name', // this is the key
+  },
   fields: [
     {
       name: 'image',

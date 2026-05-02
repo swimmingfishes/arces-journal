@@ -89,9 +89,11 @@ export function LandingNews() {
 
                   <p className="text-sm text-white/70 mt-1">{formatDate(mainNews.createdAt)}</p>
 
-                  <p className="text-sm text-white/80 mt-2 line-clamp-2">
-                    {mainNews.meta?.description || 'No description available'}
-                  </p>
+                  {mainNews.meta?.description && (
+                    <p className="text-sm text-white/80 mt-2 line-clamp-2">
+                      {mainNews.meta.description}
+                    </p>
+                  )}
                 </div>
               </div>
             </Link>
