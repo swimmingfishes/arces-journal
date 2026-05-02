@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr'
 
-export default async function SearchButton({ allMembers }: { allMembers: any[] }) {
+export default function SearchButton({ allMembers }: { allMembers: any[] }) {
   const [selectedMember, setSelectedMember] = useState<any>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearchFocused, setIsSearchFocused] = useState(false)

@@ -47,7 +47,7 @@ export default function NotFound() {
               Page Not Found
             </h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto">
-              The page you're looking for doesn't exist or has been moved to another URL.
+              The page you&apos;re looking for doesn&apos;t exist or has been moved to another URL.
             </p>
           </div>
           {/* Action Buttons */}
