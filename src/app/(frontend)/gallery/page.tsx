@@ -19,6 +19,7 @@ export default async function GalleryPage() {
           equals: 'gallery',
         },
       },
+      trash: false,
     })
 
     galleryItems = (response.docs ?? []) as GalleryItem[]

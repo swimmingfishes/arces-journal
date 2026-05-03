@@ -29,6 +29,7 @@ export default async function KepengurusanPage() {
         externalImageUrl: true,
         links: true,
       },
+      trash: false,
     })
 
     const allMembers: Member[] = (response.docs || [])
