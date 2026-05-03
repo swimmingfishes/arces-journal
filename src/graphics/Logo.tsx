@@ -1,9 +1,12 @@
 import React from 'react'
-import './logo.scss'
 
 const Logo = () => (
-  <div className="admin-logo">
-    <img src="/favicon.svg" alt="Arces Logo" />
+  <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <img
+      src="/favicon.svg"
+      alt="Arces Logo"
+      style={{ display: 'block', width: 140, height: 'auto' }}
+    />
   </div>
 )
 
