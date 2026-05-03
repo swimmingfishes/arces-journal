@@ -29,13 +29,18 @@ export default buildConfig({
   admin: {
     meta: {
       description: 'The best admin panel in the world',
-      // icons: [
-      //   {
-      //     rel: 'icon',
-      //     type: 'image/png',
-      //     url: '/favicon.png',
-      //   },
-      // ],
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          url: '/favicon.svg',
+        },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          url: '/favicon.ico',
+        },
+      ],
       titleSuffix: '- Arces',
     },
     components: {
