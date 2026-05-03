@@ -1,9 +1,10 @@
 import type { GlobalConfig } from 'payload'
+import { anyone } from '../access/anyone'
 
 export const KontakLayanan: GlobalConfig = {
   slug: 'kontakLayanan',
   access: {
-    read: () => true,
+    read: anyone,
   },
   fields: [
     {
