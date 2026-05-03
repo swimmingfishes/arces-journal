@@ -22,9 +22,6 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
-import Logo from './graphics/Logo'
-import Icon from './graphics/Icon'
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -48,8 +45,8 @@ export default buildConfig({
     },
     components: {
       graphics: {
-        Logo,
-        Icon,
+        Logo: '/graphics/Logo',
+        Icon: '/graphics/Icon',
       },
     },
     importMap: {
