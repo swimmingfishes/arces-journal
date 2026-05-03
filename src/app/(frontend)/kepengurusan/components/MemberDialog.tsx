@@ -35,9 +35,14 @@ export function MemberDialog({ member, onClose }: MemberDialogProps) {
           {/* Foto Profil: Kotak tegas dengan border sedikit lebih tipis agar elegan */}
           <div className="absolute -bottom-10 left-6 h-24 w-20 overflow-hidden rounded-none border-4 border-white bg-zinc-200 dark:border-zinc-950">
             {imageUrl ? (
-              <img src={imageUrl} className="object-cover" alt={member.name} sizes="80px" />
+              <img
+                src={imageUrl}
+                className="w-full h-full object-cover"
+                alt={member.name}
+                sizes="80px"
+              />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-zinc-500 dark:text-zinc-400">
+              <div className="flex gh-full w-full object-contain items-center justify-center text-zinc-500 dark:text-zinc-400">
                 <UserCircleIcon className="h-14 w-14" aria-hidden="true" />
               </div>
             )}
