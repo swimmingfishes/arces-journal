@@ -15,7 +15,7 @@ export default function VisiMisi({
     <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x">
       <div className="flex flex-col p-8 gap-6">
         <h3 className="text-2xl font-bold text-primary">Visi</h3>
-        <div className="prose prose-neutral dark:prose-invert max-w-none text-muted-foreground">
+        <div className="prose prose-neutral dark:prose-invert max-w-none text-muted-foreground text-justify">
           {tentangData.visiMisi.visi && <RichText data={tentangData.visiMisi.visi} />}
         </div>
       </div>
@@ -29,7 +29,7 @@ export default function VisiMisi({
                 <span className="shrink-0 mt-1 flex items-center justify-center w-11 h-11 bg-primary/10 text-primary font-mono border border-primary/20">
                   {String(index + 1)}
                 </span>
-                <p className="leading-relaxed text-foreground/90">{misi.text}</p>
+                <p className="leading-relaxed text-foreground/90 text-justify">{misi.text}</p>
               </li>
             ),
           )}
