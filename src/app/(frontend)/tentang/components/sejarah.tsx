@@ -13,7 +13,7 @@ export default function Sejarah({
   return (
     <section className="w-full p-8 flex flex-col">
       <div className="columns-1 md:columns-2 gap-16 divide-x">
-        <RichText data={tentangData.sejarah.content} />
+        <RichText data={tentangData.sejarah.content} className="text-justify" />
       </div>
     </section>
   )

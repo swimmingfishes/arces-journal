@@ -12,7 +12,7 @@ export default function AlamatLengkap({
 
   return (
     <div className="p-8 space-y-6">
-      <RichText data={tentangData.physicalAddress.content} />
+      <RichText data={tentangData.physicalAddress.content} className="text-justify" />
     </div>
   )
 }

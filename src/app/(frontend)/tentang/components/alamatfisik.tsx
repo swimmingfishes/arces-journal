@@ -12,7 +12,7 @@ export default function AlamatFisik({
 
   return (
     <div className="p-8">
-      <RichText data={tentangData.website.content} />
+      <RichText data={tentangData.website.content} className="text-justify" />
     </div>
   )
 }

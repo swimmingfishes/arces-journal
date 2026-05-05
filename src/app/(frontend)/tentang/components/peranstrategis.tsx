@@ -25,7 +25,7 @@ function GridTextCard({ title, desc }: { title: string; desc: string }) {
   return (
     <div className="p-5 border flex flex-col gap-4 hover:bg-zinc-50/50 dark:hover:bg-white/5 transition-colors">
       <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+      <p className="text-sm text-muted-foreground leading-relaxed text-justify">{desc}</p>
     </div>
   )
 }
